@@ -1,0 +1,67 @@
+# Environment variables (IMPORTANT - ne jamais commit)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Outputs générés (ne pas versionner)
+outputs/screenshots/*.png
+outputs/screenshots/*.jpg
+outputs/pdfs/*.pdf
+outputs/reports/*.txt
+outputs/reports/*.csv
+
+# Données prospects (contiennent des infos personnelles)
+data/prospects/*.csv
+data/prospects/*.json
+data/*.db
+
+# Fichiers temporaires
+temp/
+*.tmp
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright
+.playwright/
+
+# Exceptions : garder les fichiers README dans les dossiers vides
+!outputs/screenshots/.gitkeep
+!outputs/pdfs/.gitkeep
+!outputs/reports/.gitkeep
+!data/prospects/.gitkeep
+!temp/.gitkeep

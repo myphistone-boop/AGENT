@@ -1,0 +1,30 @@
+# Web Scraping
+playwright==1.40.0
+beautifulsoup4==4.12.2
+requests==2.31.0
+lxml==5.1.0
+
+# Traitement d'images
+Pillow==10.1.0
+colorthief==0.2.1
+
+# Génération PDF
+reportlab==4.0.7
+
+# Email
+sendgrid==6.11.0
+
+# Configuration
+python-dotenv==1.0.0
+
+# IA (optionnel - seulement pour clients sans site)
+anthropic==0.7.8
+
+# Base de données
+# sqlite3 est inclus dans Python standard library
+
+# Utilitaires
+pandas==2.1.4
+python-dateutil==2.8.2
+colorama==0.4.6
+tqdm==4.66.1

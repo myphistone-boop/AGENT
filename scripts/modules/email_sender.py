@@ -1,14 +1,13 @@
 """
-Module d'envoi d'emails via SendGrid
+Module d'envoi d'emails via Gmail SMTP
 """
-import base64
+import smtplib
 import time
 from pathlib import Path
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import (
-    Mail, Email, To, Content, Attachment, FileContent,
-    FileName, FileType, Disposition
-)
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 from scripts.utils.logger import setup_logger
 from config import settings
 
@@ -16,15 +15,19 @@ logger = setup_logger("email_sender")
 
 
 class EmailSender:
-    """Envoyeur d'emails via SendGrid"""
+    """Envoyeur d'emails via Gmail SMTP"""
 
     def __init__(self):
-        if not settings.SENDGRID_API_KEY:
-            logger.error("❌ SENDGRID_API_KEY manquante")
-            self.client = None
+        # Vérifier la configuration Gmail
+        if not settings.GMAIL_ADDRESS:
+            logger.error("❌ GMAIL_ADDRESS manquante dans .env")
+            self.configured = False
+        elif not settings.GMAIL_APP_PASSWORD:
+            logger.error("❌ GMAIL_APP_PASSWORD manquante dans .env")
+            self.configured = False
         else:
-            self.client = SendGridAPIClient(settings.SENDGRID_API_KEY)
-            logger.info("✅ SendGrid initialisé")
+            self.configured = True
+            logger.info(f"✅ Gmail initialisé ({settings.GMAIL_ADDRESS})")
 
     def send_proposal(self, to_email, business_data, pdf_path, screenshot_path=None, has_website=True):
         """
@@ -40,43 +43,55 @@ class EmailSender:
         Returns:
             bool: True si envoyé avec succès
         """
-        if not self.client:
-            logger.error("❌ Client SendGrid non initialisé")
+        if not self.configured:
+            logger.error("❌ Gmail non configuré")
             return False
 
         logger.info(f"📧 Envoi email à: {to_email}")
 
         try:
-            # Sujet
-            subject = self._generate_subject(business_data, has_website)
+            # Créer le message
+            msg = MIMEMultipart('alternative')
+            msg['From'] = f"{settings.FROM_NAME} <{settings.GMAIL_ADDRESS}>"
+            msg['To'] = to_email
+            msg['Subject'] = self._generate_subject(business_data, has_website)
 
             # Corps HTML
             html_content = self._generate_html_body(business_data, has_website)
-
-            # Créer le mail
-            message = Mail(
-                from_email=Email(settings.FROM_EMAIL, settings.FROM_NAME),
-                to_emails=To(to_email),
-                subject=subject,
-                html_content=Content("text/html", html_content)
-            )
+            html_part = MIMEText(html_content, 'html', 'utf-8')
+            msg.attach(html_part)
 
             # Attacher le PDF
-            self._attach_pdf(message, pdf_path, business_data['name'])
+            self._attach_pdf(msg, pdf_path, business_data['name'])
 
-            # Envoyer
-            response = self.client.send(message)
+            # Se connecter au serveur Gmail
+            logger.debug("📡 Connexion au serveur Gmail...")
 
-            if response.status_code in [200, 202]:
-                logger.info(f"✅ Email envoyé avec succès (status: {response.status_code})")
+            with smtplib.SMTP('smtp.gmail.com', 587) as server:
+                server.starttls()  # Sécuriser la connexion
 
-                # Délai pour éviter rate limiting
-                time.sleep(settings.DELAY_BETWEEN_EMAILS)
+                # Connexion avec mot de passe d'application
+                server.login(settings.GMAIL_ADDRESS, settings.GMAIL_APP_PASSWORD)
 
-                return True
-            else:
-                logger.error(f"❌ Erreur envoi (status: {response.status_code})")
-                return False
+                # Envoyer
+                server.send_message(msg)
+
+            logger.info(f"✅ Email envoyé avec succès via Gmail")
+
+            # Délai pour éviter rate limiting
+            time.sleep(settings.DELAY_BETWEEN_EMAILS)
+
+            return True
+
+        except smtplib.SMTPAuthenticationError as e:
+            logger.error(f"❌ Erreur d'authentification Gmail: {str(e)}")
+            logger.error("💡 Vérifiez que vous utilisez un 'Mot de passe d'application' et non votre mot de passe Gmail")
+            logger.error("💡 Guide: https://support.google.com/accounts/answer/185833")
+            return False
+
+        except smtplib.SMTPException as e:
+            logger.error(f"❌ Erreur SMTP: {str(e)}")
+            return False
 
         except Exception as e:
             logger.error(f"❌ Erreur envoi email: {str(e)}")
@@ -150,7 +165,7 @@ class EmailSender:
 
         <p>Bien à vous,</p>
         <p><strong>{settings.FROM_NAME}</strong><br>
-        {settings.FROM_EMAIL}</p>
+        {settings.GMAIL_ADDRESS}</p>
 
         <div class="footer">
             <p><em>P.S. : Aucune obligation, c'était juste un exercice créatif
@@ -233,7 +248,7 @@ class EmailSender:
 
         <p>Bien à vous,</p>
         <p><strong>{settings.FROM_NAME}</strong><br>
-        {settings.FROM_EMAIL}</p>
+        {settings.GMAIL_ADDRESS}</p>
 
         <div class="footer">
             <p><em>P.S. : Aucune obligation, juste une opportunité à saisir
@@ -258,29 +273,29 @@ class EmailSender:
         with open(pdf_path, 'rb') as f:
             pdf_data = f.read()
 
-        # Encoder en base64
-        encoded = base64.b64encode(pdf_data).decode()
-
         # Créer l'attachment
-        attachment = Attachment()
-        attachment.file_content = FileContent(encoded)
-        attachment.file_type = FileType('application/pdf')
+        part = MIMEBase('application', 'pdf')
+        part.set_payload(pdf_data)
+        encoders.encode_base64(part)
 
         # Nom de fichier propre
         safe_name = "".join(c for c in business_name if c.isalnum() or c in (' ', '-', '_'))
-        attachment.file_name = FileName(f"{safe_name}_nouveau_site.pdf")
-        attachment.disposition = Disposition('attachment')
+        filename = f"{safe_name}_nouveau_site.pdf"
 
-        message.attachment = attachment
+        part.add_header(
+            'Content-Disposition',
+            f'attachment; filename= {filename}'
+        )
 
-        logger.debug(f"📎 PDF attaché: {pdf_path.name}")
+        message.attach(part)
+        logger.debug(f"📎 PDF attaché: {filename}")
 
 
 def main():
     """Test de l'envoyeur d'email"""
     import argparse
 
-    parser = argparse.ArgumentParser(description='Test envoi email')
+    parser = argparse.ArgumentParser(description='Test envoi email via Gmail')
     parser.add_argument('--to', type=str, required=True, help='Email destinataire')
     parser.add_argument('--pdf', type=str, required=True, help='Chemin vers PDF')
     parser.add_argument('--name', type=str, default='Entreprise Test', help='Nom entreprise')

@@ -11,8 +11,8 @@ colorthief==0.2.1
 # Génération PDF
 reportlab==4.0.7
 
-# Email
-sendgrid==6.11.0
+# Email (SMTP Gmail intégré dans Python standard library)
+# Pas de dépendance externe nécessaire
 
 # Configuration
 python-dotenv==1.0.0

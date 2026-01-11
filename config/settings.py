@@ -15,9 +15,9 @@ OUTPUT_PATH = BASE_DIR / "outputs"
 TEMP_PATH = BASE_DIR / "temp"
 DATA_PATH = BASE_DIR / "data"
 
-# ===== CONFIGURATION EMAIL =====
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY', '')
-FROM_EMAIL = os.getenv('FROM_EMAIL', '')
+# ===== CONFIGURATION EMAIL (GMAIL) =====
+GMAIL_ADDRESS = os.getenv('GMAIL_ADDRESS', '')
+GMAIL_APP_PASSWORD = os.getenv('GMAIL_APP_PASSWORD', '')
 FROM_NAME = os.getenv('FROM_NAME', '')
 
 # ===== CONFIGURATION IA =====
@@ -117,11 +117,11 @@ def validate_config():
     """Valide que la configuration minimale est présente"""
     errors = []
 
-    if not SENDGRID_API_KEY:
-        errors.append("❌ SENDGRID_API_KEY manquante dans .env")
+    if not GMAIL_ADDRESS:
+        errors.append("❌ GMAIL_ADDRESS manquante dans .env")
 
-    if not FROM_EMAIL:
-        errors.append("❌ FROM_EMAIL manquante dans .env")
+    if not GMAIL_APP_PASSWORD:
+        errors.append("❌ GMAIL_APP_PASSWORD manquante dans .env")
 
     if not FROM_NAME:
         errors.append("❌ FROM_NAME manquant dans .env")
@@ -140,7 +140,7 @@ if __name__ == "__main__":
         print("\n".join(errors))
     else:
         print("✅ Configuration valide !")
-        print(f"📧 Email: {FROM_EMAIL}")
+        print(f"📧 Gmail: {GMAIL_ADDRESS}")
         print(f"🎯 Max prospects/jour: {MAX_PROSPECTS_PER_DAY}")
         print(f"🤖 IA activée: {USE_AI_FOR_NO_SITE}")
         print(f"🌐 Proxy configuré: {'Oui' if PROXIES else 'Non'}")

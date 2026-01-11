@@ -385,7 +385,7 @@
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -404,9 +404,13 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .benefit-icon {
+        .benefit-number {
+            font-family: 'Lora', serif;
             font-size: 3.5rem;
+            color: var(--sage);
             margin-bottom: 1.5rem;
+            font-weight: 300;
+            opacity: 0.7;
         }
 
         .benefit-title {
@@ -430,7 +434,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2.5rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -450,10 +454,12 @@
             border-left-color: var(--sage);
         }
 
-        .service-icon {
-            font-size: 3.5rem;
+        .service-symbol {
+            font-size: 2.5rem;
+            color: var(--sage);
             margin-bottom: 2rem;
             display: block;
+            font-weight: 300;
         }
 
         .service-title {
@@ -1027,34 +1033,26 @@
 
         <div class="benefits-grid">
             <div class="benefit-card">
-                <div class="benefit-icon">🌿</div>
-                <h3 class="benefit-title">Formation complète</h3>
+                <div class="benefit-number">I</div>
+                <h3 class="benefit-title">Formation complète reconnue</h3>
                 <p class="benefit-description">
-                    Diplômée en naturopathie (FENA), réflexologie plantaire et massages bien-être par des écoles reconnues.
+                    Diplômée en naturopathie FENA avec formations complémentaires en réflexologie plantaire thaïlandaise et massages ayurvédiques. Plus de 2000 heures de formation auprès d'écoles reconnues pour vous offrir un accompagnement professionnel et sécurisé.
                 </p>
             </div>
 
             <div class="benefit-card">
-                <div class="benefit-icon">🤲</div>
-                <h3 class="benefit-title">Approche holistique</h3>
+                <div class="benefit-number">II</div>
+                <h3 class="benefit-title">Approche holistique personnalisée</h3>
                 <p class="benefit-description">
-                    Vision globale de votre santé intégrant alimentation, gestion du stress et hygiène de vie personnalisée.
+                    Vision globale de votre santé intégrant alimentation vivante, gestion du stress, sommeil et hygiène de vie. Chaque consultation est adaptée à votre constitution unique et vos objectifs de santé spécifiques.
                 </p>
             </div>
 
             <div class="benefit-card">
-                <div class="benefit-icon">💚</div>
-                <h3 class="benefit-title">Écoute bienveillante</h3>
+                <div class="benefit-number">III</div>
+                <h3 class="benefit-title">Résultats mesurables et durables</h3>
                 <p class="benefit-description">
-                    Prise en charge empathique dans un espace sécurisant où vous êtes libre d'exprimer vos besoins profonds.
-                </p>
-            </div>
-
-            <div class="benefit-card">
-                <div class="benefit-icon">🌱</div>
-                <h3 class="benefit-title">Solutions naturelles</h3>
-                <p class="benefit-description">
-                    Conseils en phytothérapie, aromathérapie et nutrition pour stimuler vos ressources naturelles de guérison.
+                    Suivi régulier avec bilans de vitalité pour mesurer vos progrès. Ma priorité est votre autonomie : je vous transmets les clés pour devenir acteur de votre santé à long terme, pas seulement le temps d'une consultation.
                 </p>
             </div>
         </div>
@@ -1072,16 +1070,17 @@
 
         <div class="services-grid">
             <div class="service-card">
-                <span class="service-icon">🌿</span>
+                <span class="service-symbol">◆</span>
                 <h3 class="service-title">Bilan de naturopathie</h3>
                 <p class="service-description">
-                    Consultation approfondie avec évaluation de votre vitalité, analyse morphologique et conseils personnalisés.
+                    Consultation approfondie avec évaluation de votre vitalité, analyse morphologique et conseils personnalisés pour retrouver votre équilibre naturel.
                 </p>
                 <ul class="service-features">
                     <li>Bilan de vitalité complet (90 min)</li>
-                    <li>Plan alimentaire personnalisé</li>
-                    <li>Conseils en phytothérapie</li>
+                    <li>Plan alimentaire personnalisé et détaillé</li>
+                    <li>Conseils en phytothérapie et aromathérapie</li>
                     <li>Programme d'hygiène de vie sur 3 mois</li>
+                    <li>Document écrit de recommandations</li>
                 </ul>
                 <div class="service-price">85€</div>
                 <div class="service-duration">Durée : 90 minutes</div>
@@ -1089,16 +1088,17 @@
             </div>
 
             <div class="service-card">
-                <span class="service-icon">🦶</span>
+                <span class="service-symbol">✦</span>
                 <h3 class="service-title">Réflexologie plantaire</h3>
                 <p class="service-description">
-                    Stimulation des zones réflexes pour libérer les tensions et rééquilibrer l'organisme en profondeur.
+                    Stimulation des zones réflexes pour libérer les tensions, rééquilibrer l'organisme en profondeur et activer vos capacités d'auto-guérison.
                 </p>
                 <ul class="service-features">
-                    <li>Cartographie des zones réflexes</li>
+                    <li>Cartographie précise des zones réflexes</li>
                     <li>Libération des blocages énergétiques</li>
                     <li>Détente profonde du système nerveux</li>
-                    <li>Amélioration de la circulation</li>
+                    <li>Amélioration de la circulation lymphatique</li>
+                    <li>Harmonisation des organes internes</li>
                 </ul>
                 <div class="service-price">60€</div>
                 <div class="service-duration">Durée : 60 minutes</div>
@@ -1106,36 +1106,20 @@
             </div>
 
             <div class="service-card">
-                <span class="service-icon">💆‍♀️</span>
-                <h3 class="service-title">Massage bien-être</h3>
+                <span class="service-symbol">◇</span>
+                <h3 class="service-title">Forfait bien-être (3 mois)</h3>
                 <p class="service-description">
-                    Massage relaxant aux huiles essentielles pour détendre le corps et apaiser l'esprit durablement.
+                    Programme complet sur 3 mois combinant naturopathie, réflexologie et massages pour une transformation durable de votre bien-être global.
                 </p>
                 <ul class="service-features">
-                    <li>Massage personnalisé (dos, nuque, membres)</li>
-                    <li>Aromathérapie sur mesure</li>
-                    <li>Techniques de relaxation profonde</li>
-                    <li>Moment de reconnexion à soi</li>
+                    <li>1 bilan de naturopathie initial complet</li>
+                    <li>6 séances de réflexologie</li>
+                    <li>3 massages bien-être aux huiles</li>
+                    <li>Suivi personnalisé WhatsApp illimité</li>
+                    <li>2 bilans de suivi de vitalité inclus</li>
                 </ul>
-                <div class="service-price">70€</div>
-                <div class="service-duration">Durée : 60 minutes</div>
-                <a href="#contact" class="service-cta">Réserver</a>
-            </div>
-
-            <div class="service-card">
-                <span class="service-icon">🌸</span>
-                <h3 class="service-title">Forfait bien-être</h3>
-                <p class="service-description">
-                    Programme complet sur 1 mois combinant naturopathie, réflexologie et massages pour une transformation durable.
-                </p>
-                <ul class="service-features">
-                    <li>1 bilan de naturopathie initial</li>
-                    <li>3 séances de réflexologie</li>
-                    <li>2 massages bien-être</li>
-                    <li>Suivi personnalisé WhatsApp inclus</li>
-                </ul>
-                <div class="service-price">320€</div>
-                <div class="service-duration">Économisez 65€</div>
+                <div class="service-price">450€</div>
+                <div class="service-duration">Économisez 115€</div>
                 <a href="#contact" class="service-cta">Réserver</a>
             </div>
         </div>

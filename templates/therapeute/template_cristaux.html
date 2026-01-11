@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{name}} - Lithothérapie & Guérison Énergétique</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --amethyst: #9b59b6;
@@ -59,8 +59,6 @@
         .crystal-particle:nth-child(4) { left: 55%; animation-delay: 2s; animation-duration: 24s; }
         .crystal-particle:nth-child(5) { left: 70%; animation-delay: 8s; animation-duration: 23s; }
         .crystal-particle:nth-child(6) { left: 85%; animation-delay: 4s; animation-duration: 25s; }
-        .crystal-particle:nth-child(7) { left: 15%; animation-delay: 7s; animation-duration: 21s; }
-        .crystal-particle:nth-child(8) { left: 60%; animation-delay: 5s; animation-duration: 27s; }
 
         @keyframes float {
             0% {
@@ -185,8 +183,19 @@
         .hero-description {
             font-size: 1rem;
             color: rgba(232, 223, 245, 0.8);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             line-height: 1.9;
+        }
+
+        .hero-quote {
+            border-left: 3px solid var(--amethyst);
+            padding-left: 2rem;
+            margin: 2rem 0 3rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--rose-quartz);
+            line-height: 1.7;
         }
 
         .cta-group {
@@ -293,15 +302,6 @@
             z-index: 2;
         }
 
-        .side-crystal:nth-child(5) {
-            width: 110px;
-            height: 160px;
-            top: 10%;
-            right: 20%;
-            animation-delay: 2s;
-            z-index: 1;
-        }
-
         @keyframes crystalGlow {
             0%, 100% {
                 filter: brightness(1) drop-shadow(0 0 30px rgba(155, 89, 182, 0.6));
@@ -309,6 +309,37 @@
             50% {
                 filter: brightness(1.3) drop-shadow(0 0 50px rgba(248, 180, 217, 0.8));
             }
+        }
+
+        /* Stats */
+        .stats {
+            padding: 6rem 8%;
+            background: rgba(74, 28, 111, 0.1);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            color: var(--amethyst);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .stat-item p {
+            font-size: 0.95rem;
+            color: var(--moonstone);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
         }
 
         /* Section commune */
@@ -354,14 +385,14 @@
             line-height: 1.9;
         }
 
-        /* Why Choose Me */
+        /* Why Choose - 3 cartes */
         .why-choose {
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
         }
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -383,10 +414,13 @@
             background: rgba(155, 89, 182, 0.05);
         }
 
-        .benefit-icon {
+        .benefit-number {
+            font-family: 'Cinzel', serif;
             font-size: 3.5rem;
+            color: var(--amethyst);
             margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.5));
+            font-weight: 300;
+            opacity: 0.7;
         }
 
         .benefit-title {
@@ -403,14 +437,14 @@
             font-size: 0.95rem;
         }
 
-        /* Services */
+        /* Services - 3 cartes */
         .services {
             background: rgba(22, 33, 62, 0.5);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             max-width: 1400px;
             margin: 0 auto;
@@ -448,11 +482,12 @@
             box-shadow: 0 20px 60px rgba(155, 89, 182, 0.4);
         }
 
-        .service-icon {
-            font-size: 4rem;
+        .service-symbol {
+            font-size: 2.5rem;
+            color: var(--amethyst);
             margin-bottom: 2rem;
             display: block;
-            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.6));
+            font-weight: 300;
         }
 
         .service-title {
@@ -479,16 +514,16 @@
         .service-features li {
             color: rgba(232, 223, 245, 0.7);
             padding: 0.7rem 0;
-            padding-left: 2rem;
+            padding-left: 1.5rem;
             position: relative;
             font-size: 0.9rem;
         }
 
         .service-features li::before {
-            content: '💎';
+            content: '—';
             position: absolute;
             left: 0;
-            font-size: 1rem;
+            color: var(--amethyst);
         }
 
         .service-price {
@@ -496,7 +531,7 @@
             font-size: 2.2rem;
             color: var(--amethyst);
             font-weight: 600;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .service-duration {
@@ -528,45 +563,30 @@
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
         }
 
-        .about-content {
+        .about-container {
             max-width: 900px;
             margin: 0 auto;
         }
 
-        .about-image-placeholder {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 3rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            box-shadow: 0 0 60px rgba(155, 89, 182, 0.5);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 60px rgba(155, 89, 182, 0.5);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 80px rgba(248, 180, 217, 0.7);
-            }
-        }
-
         .about-text {
             color: rgba(232, 223, 245, 0.9);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 2;
             text-align: center;
         }
 
         .about-text p {
             margin-bottom: 2rem;
+        }
+
+        .about-highlight {
+            font-style: italic;
+            color: var(--rose-quartz);
+            border-left: 3px solid var(--amethyst);
+            padding-left: 2rem;
+            margin: 3rem 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
 
         .certifications {
@@ -593,48 +613,57 @@
         }
 
         .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .process-step {
-            text-align: center;
+        .step {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
             position: relative;
         }
 
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 60px;
+            top: 120px;
+            width: 1px;
+            height: calc(100% - 80px);
+            background: linear-gradient(180deg, var(--amethyst), transparent);
+        }
+
         .step-number {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            border-radius: 50%;
+            width: 120px;
+            height: 120px;
             background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            font-weight: 600;
+            font-size: 3rem;
             color: white;
+            font-weight: 300;
             box-shadow: 0 10px 40px rgba(155, 89, 182, 0.4);
             position: relative;
             z-index: 2;
         }
 
-        .step-title {
+        .step-content h3 {
             font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: var(--amethyst);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-weight: 500;
         }
 
-        .step-description {
+        .step-content p {
             color: rgba(232, 223, 245, 0.8);
-            line-height: 1.8;
-            font-size: 0.95rem;
+            line-height: 1.9;
+            font-size: 1rem;
         }
 
         /* Testimonials */
@@ -644,7 +673,7 @@
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -666,6 +695,17 @@
             font-style: italic;
         }
 
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--amethyst);
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-family: 'Cinzel', serif;
+        }
+
         .testimonial-author {
             display: flex;
             align-items: center;
@@ -682,6 +722,7 @@
             justify-content: center;
             font-size: 1.5rem;
             box-shadow: 0 0 30px rgba(155, 89, 182, 0.4);
+            color: white;
         }
 
         .author-info {
@@ -698,14 +739,6 @@
         .author-title {
             color: rgba(232, 223, 245, 0.6);
             font-size: 0.9rem;
-        }
-
-        .testimonial-stars {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            color: var(--citrine);
-            font-size: 1.2rem;
         }
 
         /* Contact */
@@ -734,8 +767,16 @@
         }
 
         .contact-icon {
-            font-size: 2rem;
-            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.5));
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--amethyst);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--amethyst);
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }
 
         .contact-details h3 {
@@ -913,6 +954,17 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .benefits-grid,
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr 1fr;
             }
@@ -957,8 +1009,7 @@
                 height: 112px;
             }
 
-            .side-crystal:nth-child(4),
-            .side-crystal:nth-child(5) {
+            .side-crystal:nth-child(4) {
                 display: none;
             }
 
@@ -970,13 +1021,6 @@
                 font-size: 2.5rem;
             }
 
-            .benefits-grid,
-            .services-grid,
-            .process-steps,
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
             .contact-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
@@ -985,6 +1029,17 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 3rem;
+            }
+
+            .step {
+                grid-template-columns: 80px 1fr;
+                gap: 2rem;
+            }
+
+            .step-number {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
             }
 
             .cta-group {
@@ -1008,35 +1063,36 @@
         <div class="crystal-particle"></div>
         <div class="crystal-particle"></div>
         <div class="crystal-particle"></div>
-        <div class="crystal-particle"></div>
-        <div class="crystal-particle"></div>
     </div>
 
     <header>
         <div class="logo">{{name}}</div>
         <nav>
-            <a href="#services">Services</a>
-            <a href="#about">À propos</a>
-            <a href="#process">Processus</a>
-            <a href="#testimonials">Témoignages</a>
-            <a href="#contact">Contact</a>
+            <a href="#services">SERVICES</a>
+            <a href="#about">PARCOURS</a>
+            <a href="#process">MÉTHODE</a>
+            <a href="#testimonials">TÉMOIGNAGES</a>
+            <a href="#contact">CONTACT</a>
         </nav>
     </header>
 
     <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-label">Lithothérapie & Énergies</div>
+            <div class="hero-label">Lithothérapeute</div>
             <h1 class="hero-title">Harmonisez vos énergies</h1>
             <p class="hero-subtitle">
-                {{hero_subtitle|default:'Libérez votre potentiel énergétique grâce au pouvoir des cristaux et aux soins vibratoires.'}}
+                {{hero_subtitle|default:'Libérez votre potentiel énergétique grâce au pouvoir ancestral des cristaux et aux soins vibratoires.'}}
             </p>
             <p class="hero-description">
-                Découvrez la puissance ancestrale des pierres et cristaux pour rééquilibrer vos chakras, dissoudre les blocages énergétiques et retrouver votre alignement naturel. Une approche holistique alliant lithothérapie, Reiki et méditation guidée.
+                Après 12 ans passés dans la finance où j'ai développé un burnout sévère, j'ai découvert la lithothérapie lors d'un voyage initiatique au Népal. Les cristaux m'ont littéralement sauvé la vie. Formée auprès de maîtres Reiki japonais et de lithothérapeutes renommés en France et en Inde, j'ai consacré les 12 dernières années à comprendre la signature vibratoire unique de chaque cristal. Ma méthode allie tradition ancestrale et approches modernes de biorésonance pour des résultats tangibles et durables.
+            </p>
+            <p class="hero-quote">
+                "Les cristaux ne guérissent pas, ils rappellent à votre corps sa fréquence d'origine."
             </p>
             <div class="cta-group">
                 <a href="#contact" class="btn-primary">{{cta|default:'Réserver une séance'}}</a>
-                <a href="#services" class="btn-secondary">Découvrir →</a>
+                <a href="#services" class="btn-secondary">Découvrir</a>
             </div>
         </div>
 
@@ -1046,15 +1102,32 @@
                 <div class="side-crystal"></div>
                 <div class="side-crystal"></div>
                 <div class="side-crystal"></div>
-                <div class="side-crystal"></div>
             </div>
         </div>
     </section>
 
-    <!-- WHY CHOOSE ME -->
+    <!-- STATS -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>12+</h3>
+                <p>Années de pratique</p>
+            </div>
+            <div class="stat-item">
+                <h3>800+</h3>
+                <p>Personnes accompagnées</p>
+            </div>
+            <div class="stat-item">
+                <h3>200+</h3>
+                <p>Cristaux en collection</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE ME - 3 CARTES -->
     <section class="why-choose">
         <div class="section-header">
-            <div class="section-tag">Pourquoi me choisir</div>
+            <div class="section-tag">Mon expertise</div>
             <h2 class="section-title">Une expertise énergétique reconnue</h2>
             <p class="section-description">
                 Plus de 12 ans d'expérience dans l'accompagnement énergétique et la lithothérapie, avec des centaines de personnes transformées.
@@ -1063,43 +1136,35 @@
 
         <div class="benefits-grid">
             <div class="benefit-card">
-                <div class="benefit-icon">💎</div>
-                <h3 class="benefit-title">Maître Reiki certifié</h3>
+                <div class="benefit-number">I</div>
+                <h3 class="benefit-title">Maître Reiki certifiée</h3>
                 <p class="benefit-description">
-                    Formation complète en Reiki Usui niveau 3, avec transmission de maître à élève selon la tradition japonaise authentique.
+                    Formation complète en Reiki Usui niveau 3, avec transmission de maître à élève selon la tradition japonaise authentique. Cette expertise me permet de combiner le pouvoir des cristaux avec l'énergie universelle pour des résultats profonds.
                 </p>
             </div>
 
             <div class="benefit-card">
-                <div class="benefit-icon">🔮</div>
-                <h3 class="benefit-title">Collection de cristaux</h3>
+                <div class="benefit-number">II</div>
+                <h3 class="benefit-title">Collection de 200+ cristaux</h3>
                 <p class="benefit-description">
-                    Accès à plus de 200 cristaux et pierres précieuses sélectionnés pour leurs propriétés vibratoires exceptionnelles.
+                    Accès à plus de 200 cristaux et pierres précieuses sélectionnés pour leurs propriétés vibratoires exceptionnelles. Chaque pierre est purifiée selon des protocoles spécifiques et programmée pour votre intention unique.
                 </p>
             </div>
 
             <div class="benefit-card">
-                <div class="benefit-icon">⚡</div>
-                <h3 class="benefit-title">Approche personnalisée</h3>
+                <div class="benefit-number">III</div>
+                <h3 class="benefit-title">Approche par biorésonance</h3>
                 <p class="benefit-description">
-                    Chaque séance est adaptée à votre signature énergétique unique après un bilan complet de vos chakras et méridiens.
-                </p>
-            </div>
-
-            <div class="benefit-card">
-                <div class="benefit-icon">🌟</div>
-                <h3 class="benefit-title">Résultats mesurables</h3>
-                <p class="benefit-description">
-                    Techniques de biorésonance pour visualiser l'évolution de votre champ énergétique avant et après chaque session.
+                    Utilisation de techniques de biorésonance pour visualiser l'évolution de votre champ énergétique avant et après chaque session. Une approche scientifique et mesurable de la guérison énergétique qui convainc même les plus sceptiques.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- SERVICES - 3 CARTES -->
     <section id="services" class="services">
         <div class="section-header">
-            <div class="section-tag">Mes accompagnements</div>
+            <div class="section-tag">Mes soins</div>
             <h2 class="section-title">Soins énergétiques & Lithothérapie</h2>
             <p class="section-description">
                 Des séances sur mesure pour rétablir l'harmonie de vos énergies subtiles et débloquer votre plein potentiel.
@@ -1108,16 +1173,17 @@
 
         <div class="services-grid">
             <div class="service-card">
-                <span class="service-icon">💎</span>
+                <span class="service-symbol">◆</span>
                 <h3 class="service-title">Lithothérapie avancée</h3>
                 <p class="service-description">
-                    Séance complète avec placement de cristaux sur les chakras, grille énergétique personnalisée et activation vibratoire.
+                    Séance complète avec placement de cristaux sur les chakras, grille énergétique personnalisée et activation vibratoire. Inclut un bilan complet de votre champ aurique.
                 </p>
                 <ul class="service-features">
-                    <li>Bilan énergétique complet</li>
-                    <li>Sélection de 12 à 15 cristaux adaptés</li>
-                    <li>Nettoyage et alignement des chakras</li>
-                    <li>Programmation de cristal personnel</li>
+                    <li>Bilan énergétique par radiesthésie</li>
+                    <li>Sélection intuitive de 12-15 cristaux adaptés</li>
+                    <li>Nettoyage et alignement des 7 chakras</li>
+                    <li>Programmation d'un cristal personnel offert</li>
+                    <li>Rituel de protection énergétique</li>
                 </ul>
                 <div class="service-price">120€</div>
                 <div class="service-duration">Durée : 90 minutes</div>
@@ -1125,16 +1191,17 @@
             </div>
 
             <div class="service-card">
-                <span class="service-icon">⚡</span>
+                <span class="service-symbol">✦</span>
                 <h3 class="service-title">Soin Reiki énergétique</h3>
                 <p class="service-description">
-                    Transmission d'énergie universelle pour dissoudre les blocages, apaiser le mental et régénérer votre force vitale.
+                    Transmission d'énergie universelle pour dissoudre les blocages émotionnels, apaiser le mental et régénérer votre force vitale. Combiné avec des cristaux amplificateurs.
                 </p>
                 <ul class="service-features">
-                    <li>Harmonisation des 7 chakras</li>
+                    <li>Harmonisation complète des chakras</li>
                     <li>Déblocage des nœuds énergétiques</li>
-                    <li>Activation de l'auto-guérison</li>
-                    <li>Ancrage et protection énergétique</li>
+                    <li>Activation de l'auto-guérison naturelle</li>
+                    <li>Ancrage et protection du champ aurique</li>
+                    <li>Cristaux de quartz amplificateurs</li>
                 </ul>
                 <div class="service-price">90€</div>
                 <div class="service-duration">Durée : 60 minutes</div>
@@ -1142,36 +1209,20 @@
             </div>
 
             <div class="service-card">
-                <span class="service-icon">🧘‍♀️</span>
-                <h3 class="service-title">Méditation guidée aux cristaux</h3>
+                <span class="service-symbol">◇</span>
+                <h3 class="service-title">Parcours transformation (3 mois)</h3>
                 <p class="service-description">
-                    Voyage intérieur profond accompagné par les fréquences vibratoires des bols tibétains et des cristaux de quartz.
+                    Programme complet sur 3 mois combinant lithothérapie, Reiki et coaching énergétique pour une métamorphose profonde et durable de votre être.
                 </p>
                 <ul class="service-features">
-                    <li>Méditation avec bols chantants</li>
-                    <li>Grille de cristaux amplificatrice</li>
-                    <li>Visualisation guidée personnalisée</li>
-                    <li>Ancrage et intégration</li>
-                </ul>
-                <div class="service-price">70€</div>
-                <div class="service-duration">Durée : 45 minutes</div>
-                <a href="#contact" class="service-cta">Réserver</a>
-            </div>
-
-            <div class="service-card">
-                <span class="service-icon">🌈</span>
-                <h3 class="service-title">Parcours transformation</h3>
-                <p class="service-description">
-                    Programme complet sur 3 mois combinant lithothérapie, Reiki et coaching énergétique pour une métamorphose profonde.
-                </p>
-                <ul class="service-features">
-                    <li>12 séances personnalisées</li>
-                    <li>Suivi énergétique hebdomadaire</li>
-                    <li>Kit de cristaux offert (valeur 150€)</li>
-                    <li>Accès groupe privé + méditations</li>
+                    <li>12 séances individuelles personnalisées</li>
+                    <li>Suivi énergétique hebdomadaire par WhatsApp</li>
+                    <li>Kit de 7 cristaux thérapeutiques offert</li>
+                    <li>Méditations guidées audio personnalisées</li>
+                    <li>Accès au groupe privé de pratique</li>
                 </ul>
                 <div class="service-price">990€</div>
-                <div class="service-duration">Durée : 3 mois</div>
+                <div class="service-duration">Économisez 450€</div>
                 <a href="#contact" class="service-cta">Réserver</a>
             </div>
         </div>
@@ -1180,13 +1231,11 @@
     <!-- ABOUT -->
     <section id="about" class="about">
         <div class="section-header">
-            <div class="section-tag">Mon parcours</div>
+            <div class="section-tag">Mon histoire</div>
             <h2 class="section-title">Une vocation énergétique</h2>
         </div>
 
-        <div class="about-content">
-            <div class="about-image-placeholder">✨</div>
-
+        <div class="about-container">
             <div class="about-text">
                 <p>
                     Ma rencontre avec les cristaux a transformé ma vie il y a plus de 12 ans. Après une carrière épuisante dans la finance, j'ai vécu un burnout qui m'a poussée à explorer les médecines énergétiques. C'est lors d'un voyage initiatique au Népal que j'ai découvert le Reiki et ressenti pour la première fois la puissance des énergies subtiles.
@@ -1196,16 +1245,19 @@
                     Formée auprès de maîtres Reiki japonais et de lithothérapeutes renommés en France et en Inde, j'ai consacré des années à comprendre la signature vibratoire unique de chaque cristal. Ma méthode allie tradition ancestrale et approches modernes de biorésonance pour des résultats tangibles et durables.
                 </p>
 
+                <p class="about-highlight">
+                    "Les cristaux ne guérissent pas, ils rappellent simplement à votre corps sa fréquence d'origine. Mon rôle est de vous guider vers cette réharmonisation."
+                </p>
+
                 <p>
-                    Aujourd'hui, j'accompagne des centaines de personnes chaque année vers leur équilibre énergétique. Chaque séance est une opportunité de reconnexion à votre essence divine et à la sagesse infinie de l'univers cristallin.
+                    Aujourd'hui, j'accompagne des centaines de personnes chaque année vers leur équilibre énergétique. Chaque séance est une opportunité de reconnexion à votre essence divine et à la sagesse infinie de l'univers cristallin. Ma plus grande joie est de voir mes clients retrouver leur vitalité et leur paix intérieure.
                 </p>
             </div>
 
             <div class="certifications">
                 <div class="certification-badge">Maître Reiki Usui III</div>
                 <div class="certification-badge">Lithothérapeute certifiée</div>
-                <div class="certification-badge">Praticienne en biorésonance</div>
-                <div class="certification-badge">Formatrice agrée</div>
+                <div class="certification-badge">Praticienne biorésonance</div>
             </div>
         </div>
     </section>
@@ -1213,7 +1265,7 @@
     <!-- PROCESS -->
     <section id="process" class="process">
         <div class="section-header">
-            <div class="section-tag">Comment ça marche</div>
+            <div class="section-tag">Ma méthode</div>
             <h2 class="section-title">Votre parcours énergétique</h2>
             <p class="section-description">
                 Un processus en 4 étapes pour une transformation énergétique profonde et durable.
@@ -1221,36 +1273,44 @@
         </div>
 
         <div class="process-steps">
-            <div class="process-step">
+            <div class="step">
                 <div class="step-number">1</div>
-                <h3 class="step-title">Bilan énergétique</h3>
-                <p class="step-description">
-                    Évaluation complète de vos chakras, analyse de votre champ aurique et identification des blocages énergétiques par radiesthésie.
-                </p>
+                <div class="step-content">
+                    <h3>Bilan énergétique</h3>
+                    <p>
+                        Évaluation complète de vos chakras par radiesthésie, analyse de votre champ aurique et identification des blocages énergétiques. Cette première étape me permet de comprendre votre signature vibratoire unique.
+                    </p>
+                </div>
             </div>
 
-            <div class="process-step">
+            <div class="step">
                 <div class="step-number">2</div>
-                <h3 class="step-title">Sélection des cristaux</h3>
-                <p class="step-description">
-                    Choix intuitif et guidé des pierres et cristaux spécifiques à votre signature énergétique et vos besoins de guérison.
-                </p>
+                <div class="step-content">
+                    <h3>Sélection des cristaux</h3>
+                    <p>
+                        Choix intuitif et guidé des pierres et cristaux spécifiques à votre signature énergétique. Chaque cristal est purifié et programmé selon votre intention de guérison personnelle.
+                    </p>
+                </div>
             </div>
 
-            <div class="process-step">
+            <div class="step">
                 <div class="step-number">3</div>
-                <h3 class="step-title">Séance de soin</h3>
-                <p class="step-description">
-                    Application des cristaux, transmission Reiki et harmonisation vibratoire pour rétablir la circulation énergétique optimale.
-                </p>
+                <div class="step-content">
+                    <h3>Séance de soin</h3>
+                    <p>
+                        Application des cristaux, transmission Reiki et harmonisation vibratoire pour rétablir la circulation énergétique optimale. Vous entrez dans un état de relaxation profonde permettant la régénération cellulaire.
+                    </p>
+                </div>
             </div>
 
-            <div class="process-step">
+            <div class="step">
                 <div class="step-number">4</div>
-                <h3 class="step-title">Intégration</h3>
-                <p class="step-description">
-                    Conseils personnalisés, rituel de cristaux à domicile et suivi pour ancrer durablement votre nouvelle fréquence vibratoire.
-                </p>
+                <div class="step-content">
+                    <h3>Intégration</h3>
+                    <p>
+                        Conseils personnalisés pour ancrer les bienfaits, rituel de cristaux à domicile et suivi pour maintenir votre nouvelle fréquence vibratoire. Je reste disponible entre les séances pour votre évolution.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -1267,9 +1327,8 @@
 
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
                 <p class="testimonial-quote">
-                    "Après 3 séances de lithothérapie, j'ai enfin retrouvé mon énergie vitale. Les migraines chroniques qui me paralysaient depuis 5 ans ont complètement disparu. C'est une véritable renaissance !"
+                    Après 3 séances de lithothérapie, j'ai enfin retrouvé mon énergie vitale. Les migraines chroniques qui me paralysaient depuis 5 ans ont complètement disparu. Le bilan énergétique initial a révélé des blocages que je portais inconsciemment. C'est une véritable renaissance.
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">S</div>
@@ -1281,9 +1340,8 @@
             </div>
 
             <div class="testimonial-card">
-                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
                 <p class="testimonial-quote">
-                    "Le parcours transformation a changé ma vie. J'ai enfin compris mes blocages émotionnels et j'ai retrouvé confiance en moi. Le suivi personnalisé et les cristaux offerts m'accompagnent chaque jour."
+                    Le parcours transformation a changé ma vie. J'ai enfin compris mes blocages émotionnels et j'ai retrouvé confiance en moi. Le suivi personnalisé et les cristaux offerts m'accompagnent chaque jour. Je me sens aligné avec mon véritable moi pour la première fois.
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">M</div>
@@ -1295,9 +1353,8 @@
             </div>
 
             <div class="testimonial-card">
-                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
                 <p class="testimonial-quote">
-                    "Sceptique au départ, j'ai été bluffée par la précision du bilan énergétique. Les séances Reiki m'ont libérée d'angoisses que je traînais depuis l'enfance. Un immense merci !"
+                    Sceptique au départ, j'ai été bluffée par la précision du bilan énergétique. Les séances Reiki m'ont libérée d'angoisses que je traînais depuis l'enfance. La biorésonance a rendu les résultats visibles et mesurables. Un immense merci.
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">C</div>
@@ -1323,7 +1380,7 @@
         <div class="contact-container">
             <div class="contact-info">
                 <div class="contact-item">
-                    <div class="contact-icon">📞</div>
+                    <div class="contact-icon">☎</div>
                     <div class="contact-details">
                         <h3>Téléphone</h3>
                         <p><a href="tel:{{phone}}">{{phone}}</a></p>
@@ -1332,16 +1389,16 @@
                 </div>
 
                 <div class="contact-item">
-                    <div class="contact-icon">📍</div>
+                    <div class="contact-icon">⊙</div>
                     <div class="contact-details">
                         <h3>Cabinet</h3>
                         <p>{{address}}</p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Parking gratuit disponible<br>Accès PMR</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Parking gratuit<br>Accès PMR</p>
                     </div>
                 </div>
 
                 <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
+                    <div class="contact-icon">✉</div>
                     <div class="contact-details">
                         <h3>Email</h3>
                         <p><a href="mailto:contact@example.com">contact@example.com</a></p>
@@ -1381,8 +1438,8 @@
                 </p>
                 <div class="social-links">
                     <a href="#" aria-label="Facebook">f</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="YouTube">▶</a>
+                    <a href="#" aria-label="Instagram">i</a>
+                    <a href="#" aria-label="YouTube">y</a>
                 </div>
             </div>
 
@@ -1390,8 +1447,8 @@
                 <h4>Navigation</h4>
                 <ul>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#about">À propos</a></li>
-                    <li><a href="#process">Processus</a></li>
+                    <li><a href="#about">Parcours</a></li>
+                    <li><a href="#process">Méthode</a></li>
                     <li><a href="#testimonials">Témoignages</a></li>
                 </ul>
             </div>
@@ -1401,8 +1458,8 @@
                 <ul>
                     <li><a href="#services">Lithothérapie</a></li>
                     <li><a href="#services">Reiki</a></li>
-                    <li><a href="#services">Méditation</a></li>
-                    <li><a href="#services">Formations</a></li>
+                    <li><a href="#services">Transformation</a></li>
+                    <li><a href="#contact">Réserver</a></li>
                 </ul>
             </div>
 

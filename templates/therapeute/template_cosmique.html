@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{name}} - Guide Spirituel & Astrologie</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>{{name}} - Guidance Spirituelle & Astrologie Karmique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --cosmic-deep: #0a0e27;
@@ -98,32 +98,29 @@
             z-index: 100;
             background: rgba(10, 14, 39, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 300;
+            font-size: 1.8rem;
             color: var(--gold);
+            font-weight: 300;
             letter-spacing: 3px;
-            font-style: italic;
         }
 
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
         }
 
         nav a {
             color: var(--gold-light);
             text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            font-weight: 300;
             transition: all 0.3s;
             position: relative;
-            font-weight: 300;
         }
 
         nav a::after {
@@ -145,333 +142,367 @@
             width: 100%;
         }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
-            min-height: 100vh;
+            padding: 6rem 5% 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 6rem;
             align-items: center;
-            padding: 5rem 5%;
-            gap: 5rem;
             position: relative;
+            z-index: 10;
         }
 
         .hero-content {
-            animation: fadeInLeft 1.2s ease-out;
+            max-width: 600px;
         }
 
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .hero-subtitle {
-            font-size: 0.95rem;
-            color: var(--stardust);
-            letter-spacing: 4px;
+        .hero-label {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            background: rgba(212, 175, 55, 0.05);
         }
 
         .hero-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 5rem;
-            font-weight: 300;
+            font-size: 4.5rem;
             line-height: 1.1;
             color: var(--gold);
             margin-bottom: 2rem;
-            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--stardust);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .hero-description {
-            font-size: 1.2rem;
-            line-height: 1.9;
+            font-size: 1.05rem;
             color: var(--gold-light);
+            line-height: 1.9;
             margin-bottom: 3rem;
             font-weight: 300;
-            max-width: 550px;
+            opacity: 0.95;
         }
 
-        .cta-button {
+        .hero-quote {
+            border-left: 3px solid var(--gold);
+            padding-left: 2rem;
+            margin: 3rem 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--stardust);
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .btn-primary {
             display: inline-block;
-            padding: 1.2rem 3.5rem;
-            background: transparent;
-            border: 1px solid var(--gold);
+            padding: 1.2rem 3rem;
+            background: var(--gold);
+            color: var(--cosmic-deep);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-secondary {
             color: var(--gold);
             text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid var(--gold);
+            transition: all 0.3s;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gold);
-            transition: left 0.4s;
-            z-index: -1;
+        .btn-secondary:hover {
+            color: var(--stardust);
+            border-color: var(--stardust);
         }
 
-        .cta-button:hover {
-            color: var(--cosmic-deep);
-        }
-
-        .cta-button:hover::before {
-            left: 0;
-        }
-
-        /* Hero Visual - Phases de lune */
+        /* Hero Visual - Carte astrologique */
         .hero-visual {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 3rem;
-            animation: fadeInRight 1.2s ease-out;
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .moon-phases {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .moon-phase {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--moon-glow);
-            box-shadow: 0 0 20px rgba(254, 249, 231, 0.5);
             position: relative;
-            animation: moonGlow 4s ease-in-out infinite;
         }
 
-        @keyframes moonGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(254, 249, 231, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(254, 249, 231, 0.8); }
+        .astro-wheel {
+            width: 450px;
+            height: 450px;
+            position: relative;
+            animation: slowRotate 120s linear infinite;
         }
 
-        .moon-phase:nth-child(1)::after {
-            content: '';
+        @keyframes slowRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .zodiac-circle {
             position: absolute;
-            right: 0;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background: var(--cosmic-deep);
-            border-radius: 0 50% 50% 0;
-        }
-
-        .moon-phase:nth-child(3)::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background: var(--cosmic-deep);
-            border-radius: 50% 0 0 50%;
-        }
-
-        .main-moon {
-            width: 280px;
-            height: 280px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            border: 2px solid var(--gold);
             border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, var(--moon-glow), #d4c5a9);
-            box-shadow:
-                0 0 80px rgba(254, 249, 231, 0.6),
-                inset -20px -20px 40px rgba(0, 0, 0, 0.2);
-            animation: moonFloat 6s ease-in-out infinite;
+            opacity: 0.6;
         }
 
-        @keyframes moonFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .zodiac-circle:nth-child(2) {
+            width: 320px;
+            height: 320px;
+            border-color: var(--stardust);
+            animation: counterRotate 60s linear infinite;
         }
 
-        .main-moon::before,
-        .main-moon::after {
-            content: '';
+        .zodiac-circle:nth-child(3) {
+            width: 240px;
+            height: 240px;
+            border-color: var(--gold);
+            opacity: 0.8;
+        }
+
+        .zodiac-circle:nth-child(4) {
+            width: 160px;
+            height: 160px;
+            border-color: var(--stardust);
+            animation: counterRotate 90s linear infinite;
+        }
+
+        @keyframes counterRotate {
+            from { transform: translate(-50%, -50%) rotate(360deg); }
+            to { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+
+        .astro-center {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--gold), var(--cosmic-purple));
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.7);
         }
 
-        .main-moon::before {
-            width: 45px;
-            height: 45px;
-            top: 30%;
-            left: 25%;
+        /* Stats Section */
+        .stats {
+            padding: 6rem 5%;
+            background: rgba(74, 28, 111, 0.1);
         }
 
-        .main-moon::after {
-            width: 65px;
-            height: 65px;
-            bottom: 25%;
-            right: 20%;
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            text-align: center;
         }
 
-        /* Section divider */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 6rem auto;
-            max-width: 600px;
+        .stat-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 300;
         }
 
-        /* Why Choose Me */
-        .why-choose {
+        .stat-item p {
+            font-size: 0.95rem;
+            color: var(--stardust);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* Section commune */
+        section {
             padding: 8rem 5%;
             position: relative;
+            z-index: 10;
+        }
+
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto 6rem;
+            text-align: center;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            background: rgba(212, 175, 55, 0.05);
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 3.5rem;
-            font-weight: 300;
             color: var(--gold);
-            text-align: center;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            font-weight: 300;
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--stardust);
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin-bottom: 5rem;
-            font-style: italic;
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--gold-light);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Why Choose - 3 cartes */
+        .why-choose {
+            background: rgba(10, 14, 39, 0.5);
         }
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .benefit-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(74, 28, 111, 0.2);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 3rem 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 3rem 2.5rem;
             text-align: center;
             transition: all 0.4s;
-            position: relative;
-        }
-
-        .benefit-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.4s;
         }
 
         .benefit-card:hover {
             transform: translateY(-10px);
             border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+            background: rgba(74, 28, 111, 0.3);
         }
 
-        .benefit-card:hover::before {
-            width: 80%;
-        }
-
-        .benefit-icon {
+        .benefit-number {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 3.5rem;
+            color: var(--gold);
             margin-bottom: 1.5rem;
+            font-weight: 300;
+            opacity: 0.7;
         }
 
         .benefit-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--gold);
-            margin-bottom: 1rem;
-            font-weight: 400;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            line-height: 1.3;
         }
 
         .benefit-description {
             color: var(--gold-light);
-            line-height: 1.8;
+            line-height: 1.9;
             font-size: 0.95rem;
             font-weight: 300;
         }
 
-        /* Services Section */
+        /* Services */
         .services {
-            padding: 8rem 5%;
-            background: linear-gradient(135deg, rgba(74, 28, 111, 0.2), rgba(10, 14, 39, 0.8));
+            background: transparent;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+            background: rgba(74, 28, 111, 0.15);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 3.5rem 2.5rem;
-            transition: all 0.5s;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
         }
 
-        .service-card::after {
+        .service-card::before {
             content: '';
             position: absolute;
             top: -50%;
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
             opacity: 0;
             transition: all 0.5s;
         }
 
-        .service-card:hover::after {
+        .service-card:hover::before {
             opacity: 1;
             top: -20%;
             right: -20%;
         }
 
         .service-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             border-color: var(--gold);
             box-shadow: 0 30px 60px rgba(212, 175, 55, 0.3);
         }
 
-        .service-icon {
-            font-size: 4rem;
+        .service-symbol {
+            font-size: 2.5rem;
+            color: var(--gold);
             margin-bottom: 2rem;
             display: block;
+            font-weight: 300;
         }
 
         .service-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--gold);
             margin-bottom: 1.5rem;
             font-weight: 500;
@@ -480,47 +511,84 @@
         .service-description {
             color: var(--gold-light);
             line-height: 1.9;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
             font-weight: 300;
         }
 
-        .service-price {
+        .service-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .service-features li {
             color: var(--stardust);
-            font-size: 1.5rem;
+            padding: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .service-features li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .service-price {
+            color: var(--gold);
+            font-size: 2rem;
             font-weight: 500;
-            margin-top: 2rem;
+            margin-bottom: 1rem;
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* About Section */
+        .service-duration {
+            color: var(--stardust);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .service-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .service-cta:hover {
+            background: var(--gold);
+            color: var(--cosmic-deep);
+            transform: translateY(-2px);
+        }
+
+        /* About */
         .about {
-            padding: 8rem 5%;
+            background: rgba(74, 28, 111, 0.1);
         }
 
         .about-container {
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
         }
 
-        .about-image {
-            position: relative;
+        .about-intro {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            text-align: center;
         }
 
-        .about-photo {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid var(--gold);
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
-        }
-
-        .about-content h2 {
+        .about-intro h2 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 3rem;
             color: var(--gold);
@@ -528,36 +596,55 @@
             font-weight: 300;
         }
 
-        .about-content p {
+        .about-text {
             color: var(--gold-light);
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
             font-size: 1.05rem;
+            line-height: 2;
+            margin-bottom: 2rem;
             font-weight: 300;
         }
 
-        .signature {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--gold);
+        .about-highlight {
             font-style: italic;
-            margin-top: 2rem;
+            color: var(--stardust);
+            border-left: 3px solid var(--gold);
+            padding-left: 2rem;
+            margin: 3rem 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
 
-        /* Process Section */
+        .certifications {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 4rem;
+        }
+
+        .certification-badge {
+            padding: 1rem 2rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        /* Process */
         .process {
-            padding: 8rem 5%;
-            background: rgba(74, 28, 111, 0.1);
+            background: transparent;
         }
 
         .process-steps {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .step {
             display: grid;
-            grid-template-columns: 100px 1fr;
+            grid-template-columns: 120px 1fr;
             gap: 3rem;
             margin-bottom: 4rem;
             position: relative;
@@ -566,16 +653,16 @@
         .step:not(:last-child)::after {
             content: '';
             position: absolute;
-            left: 50px;
-            top: 100px;
-            width: 2px;
-            height: calc(100% + 2rem);
+            left: 60px;
+            top: 120px;
+            width: 1px;
+            height: calc(100% - 80px);
             background: linear-gradient(180deg, var(--gold), transparent);
         }
 
         .step-number {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-blue));
             border-radius: 50%;
             display: flex;
@@ -584,182 +671,190 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 3rem;
             color: var(--gold);
-            font-weight: 600;
+            font-weight: 300;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            border: 2px solid var(--gold);
         }
 
         .step-content h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
             color: var(--gold);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-weight: 500;
         }
 
         .step-content p {
             color: var(--gold-light);
-            line-height: 1.8;
-            font-size: 1.05rem;
+            line-height: 1.9;
+            font-size: 1rem;
             font-weight: 300;
         }
 
         /* Testimonials */
         .testimonials {
-            padding: 8rem 5%;
+            background: rgba(74, 28, 111, 0.1);
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .testimonial-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(10, 14, 39, 0.5);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 3rem;
+            padding: 3rem 2.5rem;
             position: relative;
         }
 
-        .quote-icon {
+        .testimonial-quote {
+            color: var(--gold-light);
+            font-size: 1rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
             font-size: 4rem;
             color: var(--gold);
             opacity: 0.3;
             position: absolute;
             top: 1rem;
             left: 2rem;
-        }
-
-        .testimonial-text {
-            color: var(--gold-light);
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .author-avatar {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold), var(--stardust));
+            background: linear-gradient(135deg, var(--cosmic-purple), var(--gold));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
-            color: var(--cosmic-deep);
-            font-weight: 600;
+            color: white;
+            border: 2px solid var(--gold);
         }
 
-        .author-info h4 {
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
             color: var(--gold);
-            font-size: 1.1rem;
+            font-weight: 500;
             margin-bottom: 0.3rem;
+            font-size: 1rem;
         }
 
-        .author-info p {
+        .author-title {
             color: var(--stardust);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 300;
         }
 
-        /* Contact Section */
+        /* Contact */
         .contact {
-            padding: 8rem 5%;
-            background: linear-gradient(135deg, rgba(74, 28, 111, 0.3), rgba(10, 14, 39, 0.9));
+            background: transparent;
         }
 
         .contact-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 5rem;
         }
 
-        .contact-info h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 2rem;
-            font-weight: 400;
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
         .contact-item {
             display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            align-items: flex-start;
+            gap: 2rem;
         }
 
         .contact-icon {
             width: 50px;
             height: 50px;
-            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .contact-text {
-            flex: 1;
-        }
-
-        .contact-text p {
-            color: var(--stardust);
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-text a {
             color: var(--gold);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s;
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }
 
-        .contact-text a:hover {
+        .contact-details h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .contact-details p {
             color: var(--gold-light);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .contact-details a {
+            color: var(--stardust);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-details a:hover {
+            color: var(--gold);
         }
 
         .contact-form {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
         .form-group label {
-            display: block;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
+            color: var(--gold-light);
+            font-size: 0.9rem;
             letter-spacing: 1px;
+            font-weight: 300;
         }
 
         .form-group input,
         .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            background: rgba(74, 28, 111, 0.2);
             border: 1px solid rgba(212, 175, 55, 0.3);
             color: var(--gold-light);
             font-family: 'Montserrat', sans-serif;
@@ -771,7 +866,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--gold);
-            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
         .form-group textarea {
@@ -779,141 +874,218 @@
             resize: vertical;
         }
 
-        .submit-btn {
-            width: 100%;
-            padding: 1.2rem;
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+        .form-submit {
+            padding: 1.2rem 3rem;
             background: var(--gold);
-            transition: left 0.4s;
-            z-index: -1;
-        }
-
-        .submit-btn:hover {
             color: var(--cosmic-deep);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
 
-        .submit-btn:hover::before {
-            left: 0;
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
         }
 
         /* Footer */
         footer {
-            padding: 4rem 5%;
+            padding: 5rem 5% 3rem;
+            background: rgba(10, 14, 39, 0.8);
+            position: relative;
+            z-index: 10;
             border-top: 1px solid rgba(212, 175, 55, 0.2);
-            text-align: center;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
         }
 
-        .footer-logo {
+        .footer-about h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
             color: var(--gold);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
             font-weight: 300;
-            font-style: italic;
         }
 
-        .footer-text {
+        .footer-about p {
+            color: var(--gold-light);
+            line-height: 1.9;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .footer-links h4 {
+            font-family: 'Cormorant Garamond', serif;
             color: var(--stardust);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
         }
 
         .social-links {
             display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .social-links a {
             width: 45px;
             height: 45px;
-            background: rgba(212, 175, 55, 0.1);
             border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--gold);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
         }
 
         .social-links a:hover {
             background: var(--gold);
             color: var(--cosmic-deep);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
             color: var(--stardust);
             font-size: 0.85rem;
             letter-spacing: 1px;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            font-weight: 300;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
+        @media (max-width: 1024px) {
+            .benefits-grid,
+            .services-grid,
+            .testimonials-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
-                padding-top: 3rem;
             }
 
-            .hero-title {
-                font-size: 3.5rem;
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
-            .main-moon {
-                width: 200px;
-                height: 200px;
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
             }
+        }
 
+        @media (max-width: 768px) {
             nav {
                 display: none;
             }
 
-            .about-container,
-            .contact-container {
+            .hero {
                 grid-template-columns: 1fr;
+                padding: 4rem 5%;
+                gap: 3rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .astro-wheel {
+                width: 300px;
+                height: 300px;
+            }
+
+            .zodiac-circle {
+                width: 280px;
+                height: 280px;
+            }
+
+            .zodiac-circle:nth-child(2) {
+                width: 220px;
+                height: 220px;
+            }
+
+            .zodiac-circle:nth-child(3) {
+                width: 160px;
+                height: 160px;
+            }
+
+            .zodiac-circle:nth-child(4) {
+                width: 100px;
+                height: 100px;
+            }
+
+            section {
+                padding: 5rem 5%;
             }
 
             .section-title {
                 font-size: 2.5rem;
             }
 
-            .step {
+            .contact-container {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 3rem;
             }
 
-            .step:not(:last-child)::after {
-                display: none;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .step {
+                grid-template-columns: 80px 1fr;
+                gap: 2rem;
+            }
+
+            .step-number {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                text-align: center;
             }
         }
     </style>
@@ -938,149 +1110,219 @@
     <header>
         <div class="logo">{{name}}</div>
         <nav>
-            <a href="#services">Services</a>
-            <a href="#about">À propos</a>
-            <a href="#process">Processus</a>
-            <a href="#testimonials">Témoignages</a>
-            <a href="#contact">Contact</a>
+            <a href="#services">SERVICES</a>
+            <a href="#about">PARCOURS</a>
+            <a href="#process">MÉTHODE</a>
+            <a href="#testimonials">TÉMOIGNAGES</a>
+            <a href="#contact">CONTACT</a>
         </nav>
     </header>
 
     <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-            <p class="hero-subtitle">Guide spirituel & Astrologie</p>
-            <h1 class="hero-title">Votre destinée est écrite dans les étoiles</h1>
-            <p class="hero-description">
-                Depuis plus de 15 ans, j'accompagne les âmes en quête de sens dans leur voyage spirituel. À travers l'astrologie, le tarot et la guidance intuitive, je vous aide à révéler votre plein potentiel et à trouver votre chemin.
+            <div class="hero-label">Le Guide</div>
+            <h1 class="hero-title">Astrologie Karmique & Guidance Spirituelle</h1>
+            <p class="hero-subtitle">
+                {{hero_subtitle|default:'Éclairez votre chemin de vie à travers la sagesse millénaire des astres et la connexion à votre conscience supérieure.'}}
             </p>
-            <a href="#contact" class="cta-button">Réserver une consultation</a>
+            <p class="hero-description">
+                Formé aux neurosciences cognitives à Genève puis initié aux traditions chamaniques en Amazonie péruvienne, j'ai créé un pont unique entre la rigueur scientifique occidentale et le mystère du sacré. Mon parcours m'a mené des temples silencieux d'Asie aux laboratoires de recherche sur la conscience. Aujourd'hui, je vous accompagne pour que vous puissiez descendre en vous-même en toute sécurité et transmuter le plomb en or.
+            </p>
+            <p class="hero-quote">
+                "La guérison n'est pas l'ajout de quelque chose qui vous manque, mais le retrait de tout ce qui n'est pas vous."
+            </p>
+            <div class="cta-group">
+                <a href="#contact" class="btn-primary">{{cta|default:'Réserver une consultation'}}</a>
+                <a href="#services" class="btn-secondary">Découvrir</a>
+            </div>
         </div>
 
         <div class="hero-visual">
-            <div class="moon-phases">
-                <div class="moon-phase"></div>
-                <div class="moon-phase"></div>
-                <div class="moon-phase"></div>
-                <div class="moon-phase"></div>
-                <div class="moon-phase"></div>
+            <div class="astro-wheel">
+                <div class="zodiac-circle"></div>
+                <div class="zodiac-circle"></div>
+                <div class="zodiac-circle"></div>
+                <div class="zodiac-circle"></div>
+                <div class="astro-center"></div>
             </div>
-            <div class="main-moon"></div>
         </div>
     </section>
 
-    <div class="section-divider"></div>
+    <!-- STATS -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>15+</h3>
+                <p>Années d'expérience</p>
+            </div>
+            <div class="stat-item">
+                <h3>2000+</h3>
+                <p>Consultations réalisées</p>
+            </div>
+            <div class="stat-item">
+                <h3>∞</h3>
+                <p>Vies transformées</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- WHY CHOOSE ME -->
+    <!-- WHY CHOOSE ME - 3 CARTES -->
     <section class="why-choose">
-        <h2 class="section-title">Pourquoi me choisir ?</h2>
-        <p class="section-subtitle">Une approche authentique et bienveillante</p>
+        <div class="section-header">
+            <div class="section-tag">Mon approche</div>
+            <h2 class="section-title">Une expertise rare au service de votre évolution</h2>
+            <p class="section-description">
+                Depuis 15 ans, je forme dirigeants, artistes et chercheurs de vérité à descendre en eux-mêmes pour transmuter leurs blessures en force créatrice.
+            </p>
+        </div>
 
         <div class="benefits-grid">
             <div class="benefit-card">
-                <div class="benefit-icon">🌟</div>
-                <h3 class="benefit-title">Expérience Reconnue</h3>
+                <div class="benefit-number">I</div>
+                <h3 class="benefit-title">Formation scientifique et spirituelle</h3>
                 <p class="benefit-description">
-                    Plus de 15 ans d'expérience en astrologie et guidance spirituelle. Formée aux meilleures écoles d'Europe.
+                    Diplômé en neurosciences cognitives et initié aux traditions chamaniques amazoniennes. Cette double formation me permet d'offrir un accompagnement ancré dans la science ET le sacré, pour une transformation profonde et durable.
                 </p>
             </div>
 
             <div class="benefit-card">
-                <div class="benefit-icon">💫</div>
-                <h3 class="benefit-title">Approche Holistique</h3>
+                <div class="benefit-number">II</div>
+                <h3 class="benefit-title">Astrologie karmique approfondie</h3>
                 <p class="benefit-description">
-                    Je combine plusieurs outils (astrologie, tarot, numérologie) pour une vision complète de votre situation.
+                    Spécialisé dans l'interprétation des nœuds lunaires et du thème natal karmique. Je décode les schémas répétitifs de votre âme pour vous libérer de vos entraves et révéler votre mission de vie avec une précision qui surprend même les plus sceptiques.
                 </p>
             </div>
 
             <div class="benefit-card">
-                <div class="benefit-icon">🔮</div>
-                <h3 class="benefit-title">Guidance Personnalisée</h3>
+                <div class="benefit-number">III</div>
+                <h3 class="benefit-title">Espace sacré et confidentialité</h3>
                 <p class="benefit-description">
-                    Chaque consultation est unique. Je m'adapte à vos besoins spécifiques et à votre rythme.
-                </p>
-            </div>
-
-            <div class="benefit-card">
-                <div class="benefit-icon">✨</div>
-                <h3 class="benefit-title">Confidentialité Absolue</h3>
-                <p class="benefit-description">
-                    Vos échanges restent strictement confidentiels. Un espace sûr pour explorer vos questionnements.
+                    Cabinet conçu comme un temple moderne, où le silence devient thérapeutique. Confidentialité absolue garantie. Vous ne serez jamais jugé, seulement accompagné dans votre descente intérieure avec la bienveillance d'un guide qui a lui-même traversé l'ombre.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- SERVICES - 3 CARTES -->
     <section id="services" class="services">
-        <h2 class="section-title">Mes Accompagnements</h2>
-        <p class="section-subtitle">Trouvez le service qui résonne avec vous</p>
+        <div class="section-header">
+            <div class="section-tag">Mes accompagnements</div>
+            <h2 class="section-title">Révélez votre carte du ciel intérieure</h2>
+            <p class="section-description">
+                Chaque consultation est un voyage initiatique où l'astrologie devient outil de transformation et non simple prédiction.
+            </p>
+        </div>
 
         <div class="services-grid">
             <div class="service-card">
-                <span class="service-icon">🌙</span>
-                <h3 class="service-title">Thème Astral Complet</h3>
+                <span class="service-symbol">☉</span>
+                <h3 class="service-title">Thème Astral Karmique</h3>
                 <p class="service-description">
-                    Lecture approfondie de votre carte du ciel de naissance. Découvrez vos talents cachés, vos défis karmiques et votre mission de vie.
+                    Analyse complète de votre carte natale avec focus sur vos nœuds lunaires, maisons karmiques et aspects majeurs. Je dévoile les contrats d'âme que vous avez signés avant cette incarnation.
                 </p>
-                <div class="service-price">À partir de 120€</div>
+                <ul class="service-features">
+                    <li>Calcul précis de votre thème natal complet</li>
+                    <li>Interprétation des nœuds lunaires et karma</li>
+                    <li>Analyse des transits actuels et futurs</li>
+                    <li>Document écrit personnalisé de 15 pages</li>
+                    <li>Enregistrement audio de la consultation</li>
+                </ul>
+                <div class="service-price">180€</div>
+                <div class="service-duration">Durée : 2 heures</div>
+                <a href="#contact" class="service-cta">Réserver</a>
             </div>
 
             <div class="service-card">
-                <span class="service-icon">🔮</span>
-                <h3 class="service-title">Lecture de Tarot</h3>
+                <span class="service-symbol">☽</span>
+                <h3 class="service-title">Guidance Intuitive</h3>
                 <p class="service-description">
-                    Guidance intuitive pour éclairer vos choix. Réponses claires à vos questions sur l'amour, le travail et votre évolution spirituelle.
+                    Séance de canalisation profonde où je me connecte à votre champ énergétique et à vos guides spirituels pour vous transmettre les messages dont votre âme a besoin maintenant.
                 </p>
-                <div class="service-price">À partir de 80€</div>
+                <ul class="service-features">
+                    <li>Connexion intuitive à votre champ aurique</li>
+                    <li>Messages de vos guides spirituels</li>
+                    <li>Lecture des mémoires akashiques</li>
+                    <li>Réponses à 3 questions précises</li>
+                    <li>Rituel de protection énergétique</li>
+                </ul>
+                <div class="service-price">140€</div>
+                <div class="service-duration">Durée : 90 minutes</div>
+                <a href="#contact" class="service-cta">Réserver</a>
             </div>
 
             <div class="service-card">
-                <span class="service-icon">✨</span>
-                <h3 class="service-title">Coaching Spirituel</h3>
+                <span class="service-symbol">✧</span>
+                <h3 class="service-title">Parcours Transformation (3 mois)</h3>
                 <p class="service-description">
-                    Accompagnement sur plusieurs mois pour votre transformation profonde. Outils pratiques et méditations guidées inclus.
+                    Accompagnement intensif combinant astrologie karmique, guidance spirituelle et coaching de conscience. Pour ceux qui sont prêts à mourir à leur ancienne version.
                 </p>
-                <div class="service-price">À partir de 500€</div>
+                <ul class="service-features">
+                    <li>6 séances individuelles de 2 heures</li>
+                    <li>Thème astral complet + prévisions annuelles</li>
+                    <li>Suivi WhatsApp illimité entre les séances</li>
+                    <li>Méditations guidées personnalisées</li>
+                    <li>Rituels de transmutation selon les cycles lunaires</li>
+                </ul>
+                <div class="service-price">1200€</div>
+                <div class="service-duration">Économisez 480€</div>
+                <a href="#contact" class="service-cta">Réserver</a>
             </div>
         </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="about">
-        <div class="about-container">
-            <div class="about-image">
-                <div class="about-photo" style="background: linear-gradient(135deg, rgba(74, 28, 111, 0.6), rgba(13, 115, 119, 0.6)); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 5rem;">✨</div>
-            </div>
+        <div class="section-header">
+            <div class="section-tag">Mon histoire</div>
+            <h2 class="section-title">Du laboratoire au temple intérieur</h2>
+        </div>
 
-            <div class="about-content">
-                <h2>Mon Histoire</h2>
-                <p>
-                    Depuis mon plus jeune âge, j'ai été fascinée par les mystères de l'univers et la sagesse des étoiles. Après des années d'études approfondies en astrologie, tarot et sciences ésotériques, j'ai décidé de mettre mes connaissances au service des autres.
+        <div class="about-container">
+            <div class="about-intro">
+                <p class="about-text">
+                    Mon voyage a commencé dans les amphithéâtres de Genève où j'étudiais les neurosciences cognitives, fasciné par les mécanismes de la conscience. Mais quelque chose manquait. La science expliquait le "comment" mais jamais le "pourquoi". Après un burnout existentiel à 28 ans, j'ai tout quitté pour un voyage de deux ans en Asie et en Amazonie.
                 </p>
-                <p>
-                    Ma mission est simple : vous aider à vous reconnecter à votre essence profonde, à comprendre les cycles de votre vie et à naviguer avec confiance sur votre chemin spirituel.
+
+                <p class="about-text">
+                    C'est dans les temples silencieux du Bhoutan que j'ai rencontré mon premier maître spirituel. Puis dans la jungle péruvienne que j'ai été initié aux traditions chamaniques lors de cérémonies qui ont dissous mon ego scientifique. J'ai compris que la vraie connaissance ne vient pas des livres mais de la descente en soi-même.
                 </p>
-                <p>
-                    Chaque âme que j'accompagne est unique. C'est pourquoi j'adapte mes consultations à vos besoins spécifiques, dans un espace de bienveillance et de non-jugement.
+
+                <p class="about-highlight">
+                    "La guérison n'est pas l'ajout de quelque chose qui vous manque, mais le retrait de tout ce qui n'est pas vous. Mon rôle est de vous tenir l'espace pour que vous puissiez descendre en vous-même en toute sécurité et transmuter le plomb en or."
                 </p>
-                <div class="signature">~ {{name}}</div>
+
+                <p class="about-text">
+                    De retour en France, j'ai étudié l'astrologie karmique auprès de maîtres reconnus et développé ma propre approche fusionnant science, spiritualité et art de la transformation. Depuis 15 ans, j'accompagne des dirigeants, artistes et chercheurs de vérité qui refusent les réponses superficielles et osent plonger dans leur vérité profonde.
+                </p>
+
+                <div class="certifications">
+                    <div class="certification-badge">Neurosciences Cognitives</div>
+                    <div class="certification-badge">Astrologie Karmique</div>
+                    <div class="certification-badge">Chamanisme Amazonien</div>
+                    <div class="certification-badge">Méditation Vipassana</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- PROCESS -->
     <section id="process" class="process">
-        <h2 class="section-title">Comment se déroule une consultation ?</h2>
-        <p class="section-subtitle">Un processus simple et bienveillant</p>
+        <div class="section-header">
+            <div class="section-tag">Ma méthode</div>
+            <h2 class="section-title">Le chemin de la transformation</h2>
+            <p class="section-description">
+                Un processus en 4 étapes pour révéler votre essence et aligner votre vie avec votre mission d'âme.
+            </p>
+        </div>
 
         <div class="process-steps">
             <div class="step">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h3>Prise de Contact</h3>
+                    <h3>Révélation</h3>
                     <p>
-                        Vous me contactez par téléphone ou email. Nous discutons brièvement de vos attentes et je vous propose le service le plus adapté.
+                        Premier entretien approfondi où nous explorons votre histoire de vie, vos questionnements existentiels et vos aspirations profondes. J'établis votre thème astral complet et identifie les nœuds karmiques qui freinent votre évolution.
                     </p>
                 </div>
             </div>
@@ -1088,9 +1330,9 @@
             <div class="step">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>Préparation</h3>
+                    <h3>Décodage</h3>
                     <p>
-                        Je vous demande vos informations de naissance (date, heure, lieu) et vos questions principales. Je prépare votre thème en amont.
+                        Analyse détaillée de votre carte du ciel. Je décode les messages inscrits dans vos planètes, maisons et aspects. Vous comprenez enfin POURQUOI certains schémas se répètent et quelle est la mission que votre âme s'est donnée dans cette incarnation.
                     </p>
                 </div>
             </div>
@@ -1098,9 +1340,9 @@
             <div class="step">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>Consultation</h3>
+                    <h3>Transmutation</h3>
                     <p>
-                        Nous nous rencontrons (en présentiel ou visio) pour une séance de 1h à 2h. Je vous révèle les messages de votre thème et réponds à vos questions.
+                        Travail de libération énergétique et de reprogrammation consciente. À travers des rituels personnalisés selon les cycles lunaires et des pratiques méditatives, vous transformez vos blessures en forces et vos peurs en sagesse.
                     </p>
                 </div>
             </div>
@@ -1108,9 +1350,9 @@
             <div class="step">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>Suivi</h3>
+                    <h3>Incarnation</h3>
                     <p>
-                        Vous recevez un enregistrement de la séance et un document récapitulatif. Je reste disponible pour d'éventuelles questions dans les jours suivants.
+                        Intégration pratique de votre nouvelle conscience dans votre quotidien. Vous recevez un plan d'action concret aligné avec vos transits astrologiques pour manifester votre plein potentiel. Suivi régulier pour ancrer la transformation.
                     </p>
                 </div>
             </div>
@@ -1119,48 +1361,50 @@
 
     <!-- TESTIMONIALS -->
     <section id="testimonials" class="testimonials">
-        <h2 class="section-title">Témoignages</h2>
-        <p class="section-subtitle">Ce que disent mes clients</p>
+        <div class="section-header">
+            <div class="section-tag">Témoignages</div>
+            <h2 class="section-title">Ils ont osé plonger en eux-mêmes</h2>
+            <p class="section-description">
+                Les mots de ceux qui ont choisi de quitter les réponses faciles pour la vérité difficile.
+            </p>
+        </div>
 
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <div class="quote-icon">"</div>
-                <p class="testimonial-text">
-                    Une consultation incroyablement précise et éclairante. {{name}} a su mettre des mots sur ce que je ressentais depuis des années. Un vrai déclic dans ma vie.
-                </p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">M</div>
-                    <div class="author-info">
-                        <h4>Marie L.</h4>
-                        <p>Paris</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="quote-icon">"</div>
-                <p class="testimonial-text">
-                    Grâce à l'accompagnement de {{name}}, j'ai pu prendre des décisions importantes avec confiance. Son écoute bienveillante et ses conseils ont transformé ma vie.
+                <p class="testimonial-quote">
+                    J'ai consulté pendant 3 ans en psychanalyse sans jamais comprendre l'origine de mes blocages relationnels. En une seule séance d'astrologie karmique, tout s'est éclairé. J'ai enfin compris le contrat que mon âme avait signé et pourquoi je répétais les mêmes schémas. Six mois plus tard, ma vie a complètement changé.
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">S</div>
                     <div class="author-info">
-                        <h4>Sophie D.</h4>
-                        <p>Lyon</p>
+                        <div class="author-name">Sophie M.</div>
+                        <div class="author-title">Directrice marketing, Paris</div>
                     </div>
                 </div>
             </div>
 
             <div class="testimonial-card">
-                <div class="quote-icon">"</div>
-                <p class="testimonial-text">
-                    Une expérience magique ! Le thème astral réalisé par {{name}} était d'une justesse incroyable. Je recommande vivement ses services.
+                <p class="testimonial-quote">
+                    Le parcours transformation a été l'investissement le plus précieux de ma vie. J'étais CEO d'une startup en plein succès mais complètement vide à l'intérieur. En 3 mois, j'ai compris ma véritable mission et eu le courage de tout reconstruire aligné avec mon âme. Aujourd'hui je vis enfin ma vie et non celle que la société attendait de moi.
                 </p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">A</div>
+                    <div class="author-avatar">M</div>
                     <div class="author-info">
-                        <h4>Antoine M.</h4>
-                        <p>Bordeaux</p>
+                        <div class="author-name">Marc L.</div>
+                        <div class="author-title">Entrepreneur, Lyon</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    La précision de l'analyse astrologique m'a sidérée. En tant que scientifique, j'étais sceptique. Mais la lecture de mes nœuds lunaires a révélé des patterns familiaux transgénérationnels que je n'avais jamais osé regarder. Ce travail m'a libérée de fardeaux que je portais sans le savoir depuis des générations.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">C</div>
+                    <div class="author-info">
+                        <div class="author-name">Claire D.</div>
+                        <div class="author-title">Chercheuse CNRS, Toulouse</div>
                     </div>
                 </div>
             </div>
@@ -1169,55 +1413,69 @@
 
     <!-- CONTACT -->
     <section id="contact" class="contact">
-        <h2 class="section-title">Commencez votre voyage</h2>
-        <p class="section-subtitle">Les étoiles vous attendent</p>
+        <div class="section-header">
+            <div class="section-tag">Prenons contact</div>
+            <h2 class="section-title">Êtes-vous prêt pour la descente ?</h2>
+            <p class="section-description">
+                Consultations sur rendez-vous uniquement. Premier échange téléphonique gratuit de 15 minutes pour vérifier que mon approche résonne avec votre quête.
+            </p>
+        </div>
 
         <div class="contact-container">
             <div class="contact-info">
-                <h3>Contactez-moi</h3>
-
                 <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-text">
-                        <p>Téléphone</p>
-                        <a href="tel:{{phone}}">{{phone}}</a>
+                    <div class="contact-icon">☎</div>
+                    <div class="contact-details">
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:{{phone}}">{{phone}}</a></p>
+                        <p style="font-size: 0.85rem; margin-top: 0.8rem; opacity: 0.8;">
+                            Lundi - Vendredi : 10h - 19h<br>
+                            Premier contact gratuit : 15 min
+                        </p>
                     </div>
                 </div>
 
                 <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-text">
-                        <p>Adresse</p>
-                        <span style="color: var(--gold);">{{address}}</span>
+                    <div class="contact-icon">⊙</div>
+                    <div class="contact-details">
+                        <h3>Cabinet</h3>
+                        <p>{{address}}</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.8rem; opacity: 0.8;">
+                            Espace sacré au calme<br>
+                            Parking privé disponible
+                        </p>
                     </div>
                 </div>
 
                 <div class="contact-item">
-                    <div class="contact-icon">⏰</div>
-                    <div class="contact-text">
-                        <p>Horaires</p>
-                        <span style="color: var(--gold);">Lun - Sam : 9h - 19h</span>
+                    <div class="contact-icon">✉</div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p><a href="mailto:contact@example.com">contact@example.com</a></p>
+                        <p style="font-size: 0.85rem; margin-top: 0.8rem; opacity: 0.8;">
+                            Réponse sous 48h
+                        </p>
                     </div>
                 </div>
             </div>
 
             <form class="contact-form">
                 <div class="form-group">
-                    <label>Votre nom</label>
-                    <input type="text" required>
+                    <label for="name">Votre nom</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Votre email</label>
-                    <input type="email" required>
+                    <label for="email">Votre email</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Votre message</label>
-                    <textarea required></textarea>
+                    <label for="message">Votre message</label>
+                    <textarea id="message" name="message" required placeholder="Parlez-moi de votre quête..."></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">Envoyer</button>
+                <button type="submit" class="form-submit">Envoyer</button>
             </form>
         </div>
     </section>
@@ -1225,21 +1483,51 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">{{name}}</div>
-            <p class="footer-text">
-                Guide spirituel & Astrologie professionnelle<br>
-                Accompagnement bienveillant depuis 2009
-            </p>
-
-            <div class="social-links">
-                <a href="#">📘</a>
-                <a href="#">📷</a>
-                <a href="#">✉️</a>
+            <div class="footer-about">
+                <h3>{{name}}</h3>
+                <p>
+                    Guide spirituel et astrologue karmique spécialisé dans la transformation profonde de l'être. Formé aux neurosciences et initié aux traditions chamaniques, j'accompagne votre descente vers votre vérité essentielle.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">i</a>
+                    <a href="#" aria-label="YouTube">y</a>
+                </div>
             </div>
 
-            <div class="footer-bottom">
-                © 2026 {{name}}. Tous droits réservés.
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">Parcours</a></li>
+                    <li><a href="#process">Méthode</a></li>
+                    <li><a href="#testimonials">Témoignages</a></li>
+                </ul>
             </div>
+
+            <div class="footer-links">
+                <h4>Consultations</h4>
+                <ul>
+                    <li><a href="#services">Thème Astral</a></li>
+                    <li><a href="#services">Guidance</a></li>
+                    <li><a href="#services">Transformation</a></li>
+                    <li><a href="#contact">Réserver</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Informations</h4>
+                <ul>
+                    <li><a href="#">Tarifs</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                    <li><a href="#">CGV</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 {{name}} • Tous droits réservés • Astrologie Karmique & Guidance Spirituelle</p>
         </div>
     </footer>
 </body>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Guérison par les Cristaux</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amethyst: #9b59b6;
+            --rose-quartz: #f8b4d9;
+            --clear-quartz: #f0f4f8;
+            --obsidian: #1a1a2e;
+            --jade: #3eb489;
+            --citrine: #f39c12;
+            --moonstone: #e8dff5;
+            --deep-purple: #4a0e4e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%);
+            color: var(--clear-quartz);
+            overflow-x: hidden;
+        }
+
+        /* Particules flottantes (cristaux) */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 25s; }
+        .particle:nth-child(3) { left: 40%; animation-delay: 4s; animation-duration: 22s; }
+        .particle:nth-child(4) { left: 55%; animation-delay: 1s; animation-duration: 24s; }
+        .particle:nth-child(5) { left: 70%; animation-delay: 3s; animation-duration: 23s; }
+        .particle:nth-child(6) { left: 85%; animation-delay: 5s; animation-duration: 21s; }
+        .particle:nth-child(7) { left: 15%; animation-delay: 6s; animation-duration: 26s; }
+        .particle:nth-child(8) { left: 65%; animation-delay: 2.5s; animation-duration: 20s; }
+
+        /* Header */
+        header {
+            position: relative;
+            z-index: 100;
+            padding: 2.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--moonstone);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--amethyst), transparent);
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--moonstone);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::before {
+            content: '◆';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: all 0.3s;
+            color: var(--amethyst);
+        }
+
+        nav a:hover {
+            color: var(--amethyst);
+            transform: translateX(10px);
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+            left: -20px;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            z-index: 10;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            gap: 6rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--amethyst);
+            color: var(--amethyst);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            background: rgba(155, 89, 182, 0.1);
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--moonstone), var(--amethyst), var(--rose-quartz));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--moonstone);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: linear-gradient(135deg, var(--amethyst), var(--deep-purple));
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rose-quartz), var(--amethyst));
+            transition: left 0.5s;
+        }
+
+        .cta-primary:hover::before {
+            left: 0;
+        }
+
+        .cta-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(155, 89, 182, 0.5);
+        }
+
+        /* Cristaux 3D visuels */
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .crystal-cluster {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .crystal {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.8), rgba(248, 180, 217, 0.8));
+            clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 80% 90%, 50% 100%, 20% 90%, 0% 35%, 20% 10%);
+            animation: crystalGlow 4s ease-in-out infinite;
+        }
+
+        .crystal:nth-child(1) {
+            width: 120px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        .crystal:nth-child(2) {
+            width: 80px;
+            height: 140px;
+            top: 40%;
+            left: 20%;
+            opacity: 0.8;
+            z-index: 2;
+            animation-delay: 1s;
+        }
+
+        .crystal:nth-child(3) {
+            width: 90px;
+            height: 160px;
+            top: 35%;
+            right: 15%;
+            opacity: 0.7;
+            z-index: 1;
+            animation-delay: 2s;
+        }
+
+        .crystal:nth-child(4) {
+            width: 70px;
+            height: 120px;
+            bottom: 25%;
+            left: 30%;
+            opacity: 0.6;
+            z-index: 1;
+            animation-delay: 1.5s;
+        }
+
+        .crystal:nth-child(5) {
+            width: 75px;
+            height: 130px;
+            bottom: 20%;
+            right: 25%;
+            opacity: 0.65;
+            z-index: 2;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes crystalGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.6));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(248, 180, 217, 0.8));
+                transform: scale(1.05);
+            }
+        }
+
+        /* Chakras Section */
+        .chakras {
+            padding: 8rem 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--moonstone), var(--amethyst));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--rose-quartz);
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .chakra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chakra-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chakra-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(155, 89, 182, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .chakra-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--amethyst);
+            box-shadow: 0 25px 50px rgba(155, 89, 182, 0.3);
+        }
+
+        .chakra-card:hover::before {
+            opacity: 1;
+        }
+
+        .chakra-symbol {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .chakra-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--moonstone);
+            margin-bottom: 1rem;
+        }
+
+        .chakra-description {
+            color: var(--clear-quartz);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 8rem 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            padding: 5rem 4rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            font-size: 1.2rem;
+            color: var(--moonstone);
+            letter-spacing: 1px;
+        }
+
+        .contact-item a {
+            color: var(--amethyst);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--rose-quartz);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(155, 89, 182, 0.2);
+            color: var(--moonstone);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .crystal-cluster {
+                width: 300px;
+                height: 300px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .chakra-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particules flottantes -->
+    <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <header>
+        <div class="logo">{{name}}</div>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#about">À propos</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">Guérison holistique</div>
+            <h1 class="hero-title">Harmonisez vos énergies</h1>
+            <p class="hero-description">
+                {{hero_subtitle|default:'Libérez votre potentiel de guérison naturelle grâce au pouvoir des cristaux et à l\'harmonisation énergétique des chakras.'}}
+            </p>
+            <a href="#contact" class="cta-primary">
+                <span>{{cta|default:'Commencer votre guérison'}}</span>
+            </a>
+        </div>
+
+        <div class="hero-visual">
+            <div class="crystal-cluster">
+                <div class="crystal"></div>
+                <div class="crystal"></div>
+                <div class="crystal"></div>
+                <div class="crystal"></div>
+                <div class="crystal"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="chakras">
+        <div class="section-header">
+            <h2 class="section-title">Soins énergétiques</h2>
+            <p class="section-subtitle">Rééquilibrage des 7 chakras</p>
+        </div>
+
+        <div class="chakra-grid">
+            <div class="chakra-card">
+                <div class="chakra-symbol">💎</div>
+                <h3 class="chakra-name">Lithothérapie</h3>
+                <p class="chakra-description">
+                    Soin par les pierres et cristaux. Rééquilibrage énergétique profond et harmonisation.
+                </p>
+            </div>
+
+            <div class="chakra-card">
+                <div class="chakra-symbol">🌸</div>
+                <h3 class="chakra-name">Reiki</h3>
+                <p class="chakra-description">
+                    Soin énergétique japonais. Apaise l'esprit, libère les blocages et restaure l'harmonie.
+                </p>
+            </div>
+
+            <div class="chakra-card">
+                <div class="chakra-symbol">🧘</div>
+                <h3 class="chakra-name">Méditation guidée</h3>
+                <p class="chakra-description">
+                    Voyages intérieurs pour la guérison. Connexion profonde avec votre sagesse innée.
+                </p>
+            </div>
+
+            <div class="chakra-card">
+                <div class="chakra-symbol">🌿</div>
+                <h3 class="chakra-name">Aromathérapie</h3>
+                <p class="chakra-description">
+                    Huiles essentielles sacrées. Purification et élévation vibratoire de l'esprit.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Prenez rendez-vous</h2>
+            <p class="section-subtitle">Votre transformation commence ici</p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    Téléphone: <a href="tel:{{phone}}">{{phone}}</a>
+                </div>
+                <div class="contact-item">
+                    {{address}}
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <a href="#" class="cta-primary">
+                    <span>{{cta|default:'Réserver une séance'}}</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>{{name}} • Thérapeute énergétique & Guérisseuse holistique</p>
+    </footer>
+</body>
+</html>

@@ -377,6 +377,8 @@ class SectorAnalyzer:
             return 'restauration'
         elif 'médecin' in category_lower or 'dentist' in category_lower or 'kiné' in category_lower or 'cabinet' in category_lower:
             return 'sante'
+        elif any(word in category_lower for word in ['thérapeu', 'naturo', 'ostéo', 'acupun', 'massage', 'reiki', 'énergé', 'chiropra', 'psychothéra', 'hypnothéra', 'réflexo', 'médecine douce', 'holistique']):
+            return 'therapeute'
         else:
             return 'commerce'
 

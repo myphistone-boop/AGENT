@@ -65,6 +65,11 @@ DEFAULT_COLORS = {
         'secondary': '#388e3c',
         'accent': '#c8e6c9'
     },
+    'therapeute': {
+        'primary': '#9b59b6',
+        'secondary': '#87a878',
+        'accent': '#f8b4d9'
+    },
     'commerce': {
         'primary': '#ff9800',
         'secondary': '#f57c00',
@@ -102,6 +107,16 @@ SECTOR_MAPPING = {
     'dentist': 'sante',
     'pharmacy': 'sante',
     'hospital': 'sante',
+
+    # Thérapeutes & Médecine douce
+    'acupuncturist': 'therapeute',
+    'chiropractor': 'therapeute',
+    'massage_therapist': 'therapeute',
+    'naturopath': 'therapeute',
+    'osteopath': 'therapeute',
+    'psychotherapist': 'therapeute',
+    'hypnotherapist': 'therapeute',
+    'reflexologist': 'therapeute',
 
     # Commerce
     'store': 'commerce',

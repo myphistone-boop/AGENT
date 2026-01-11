@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Médecine Douce & Bien-être</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sage: #87a878;
+            --sand: #e8dcc4;
+            --clay: #c9a882;
+            --deep-earth: #3d3d3d;
+            --cream: #faf8f3;
+            --misty: #d4e4db;
+            --stone: #6b7466;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--deep-earth);
+            line-height: 1.7;
+        }
+
+        /* Fond ondulé subtil */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(135, 168, 120, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(201, 168, 130, 0.06) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Cercles zen flottants */
+        .zen-circles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .zen-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(135, 168, 120, 0.15);
+            animation: zen-float 30s infinite ease-in-out;
+        }
+
+        .zen-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            animation-delay: 0s;
+        }
+
+        .zen-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            left: 10%;
+            animation-delay: 5s;
+        }
+
+        .zen-circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 20%;
+            animation-delay: 10s;
+        }
+
+        @keyframes zen-float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(20px, -30px) scale(1.1);
+                opacity: 0.15;
+            }
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            z-index: 100;
+            padding: 3rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            color: var(--sage);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: var(--stone);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--sage);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--sage);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            z-index: 10;
+            min-height: 85vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            padding: 0 8%;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            background: var(--misty);
+            color: var(--sage);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-family: 'Lora', serif;
+            font-size: 4rem;
+            line-height: 1.15;
+            color: var(--deep-earth);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--stone);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--sage);
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 24px rgba(135, 168, 120, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--stone);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(135, 168, 120, 0.35);
+        }
+
+        .btn-secondary {
+            color: var(--sage);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--sage);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            color: var(--stone);
+            border-color: var(--stone);
+        }
+
+        /* Hero visual - Mandala */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .mandala-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .mandala {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: mandala-rotate 60s linear infinite;
+        }
+
+        @keyframes mandala-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .mandala-layer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px solid;
+            opacity: 0.4;
+        }
+
+        .mandala-layer:nth-child(1) {
+            width: 350px;
+            height: 350px;
+            border-color: var(--sage);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .mandala-layer:nth-child(2) {
+            width: 280px;
+            height: 280px;
+            border-color: var(--clay);
+            animation: pulse 4s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .mandala-layer:nth-child(3) {
+            width: 210px;
+            height: 210px;
+            border-color: var(--sage);
+            animation: pulse 4s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .mandala-layer:nth-child(4) {
+            width: 140px;
+            height: 140px;
+            border-color: var(--clay);
+            animation: pulse 4s ease-in-out infinite;
+            animation-delay: 3s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+
+        /* Petals decoration */
+        .mandala::before,
+        .mandala::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--sage) 30%, transparent 30%);
+            opacity: 0.2;
+        }
+
+        .mandala::before {
+            width: 120px;
+            height: 120px;
+        }
+
+        /* Services */
+        .services {
+            padding: 8rem 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 6rem;
+            text-align: center;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--misty);
+            color: var(--sage);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 3rem;
+            color: var(--deep-earth);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--stone);
+            line-height: 1.8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3.5rem 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s;
+            border-left: 3px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            border-left-color: var(--sage);
+        }
+
+        .service-number {
+            font-family: 'Lora', serif;
+            font-size: 3rem;
+            color: var(--misty);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-title {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            color: var(--deep-earth);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .service-description {
+            color: var(--stone);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 8rem 8%;
+            background: linear-gradient(135deg, var(--misty) 0%, var(--cream) 100%);
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content {
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            font-size: 1.2rem;
+            color: var(--deep-earth);
+        }
+
+        .contact-item a {
+            color: var(--sage);
+            text-decoration: none;
+            border-bottom: 1px solid var(--sage);
+            transition: all 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--stone);
+            border-color: var(--stone);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 8%;
+            text-align: center;
+            background: var(--cream);
+            color: var(--stone);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 2rem 5%;
+                gap: 3rem;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .mandala-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .services,
+            .contact {
+                padding: 5rem 5%;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-primary {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cercles zen -->
+    <div class="zen-circles">
+        <div class="zen-circle"></div>
+        <div class="zen-circle"></div>
+        <div class="zen-circle"></div>
+    </div>
+
+    <header>
+        <div class="logo">{{name}}</div>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#about">Approche</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Médecine douce</div>
+            <h1 class="hero-title">Retrouvez votre équilibre naturel</h1>
+            <p class="hero-subtitle">
+                {{hero_subtitle|default:'Accompagnement holistique pour votre bien-être physique, mental et émotionnel. Une approche douce et naturelle de la santé.'}}
+            </p>
+            <div class="cta-group">
+                <a href="#contact" class="btn-primary">{{cta|default:'Prendre rendez-vous'}}</a>
+                <a href="#services" class="btn-secondary">Découvrir →</a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="mandala-container">
+                <div class="mandala">
+                    <div class="mandala-layer"></div>
+                    <div class="mandala-layer"></div>
+                    <div class="mandala-layer"></div>
+                    <div class="mandala-layer"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="section-header">
+            <div class="section-tag">Soins naturels</div>
+            <h2 class="section-title">Mes accompagnements</h2>
+            <p class="section-description">
+                Une approche personnalisée et bienveillante pour prendre soin de vous, naturellement.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-number">01</div>
+                <h3 class="service-title">Naturopathie</h3>
+                <p class="service-description">
+                    Bilan de vitalité complet et conseils personnalisés en hygiène de vie, nutrition et phytothérapie.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <h3 class="service-title">Réflexologie</h3>
+                <p class="service-description">
+                    Stimulation des zones réflexes pour libérer les tensions et rééquilibrer l'organisme en profondeur.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <h3 class="service-title">Massages bien-être</h3>
+                <p class="service-description">
+                    Massages relaxants et énergétiques pour détendre le corps et apaiser l'esprit durablement.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="section-tag">Prenez soin de vous</div>
+            <h2 class="section-title">Commençons ensemble</h2>
+            <p class="section-description">
+                Chaque parcours de guérison est unique. Prenons le temps d'échanger sur vos besoins.
+            </p>
+
+            <div class="contact-content">
+                <div class="contact-item">
+                    <a href="tel:{{phone}}">{{phone}}</a>
+                </div>
+                <div class="contact-item">
+                    {{address}}
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <a href="#" class="btn-primary">{{cta|default:'Réserver une séance'}}</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>{{name}} • Praticienne en médecine douce & bien-être holistique</p>
+    </footer>
+</body>
+</html>

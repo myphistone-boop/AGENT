@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} - Thérapeute & Guide Spirituel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cosmic-deep: #0a0e27;
+            --cosmic-purple: #4a1c6f;
+            --cosmic-blue: #1e3a8a;
+            --cosmic-teal: #0d7377;
+            --gold: #d4af37;
+            --gold-light: #f4e4b5;
+            --stardust: #e8d5ff;
+            --moon-glow: #fef9e7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cosmic-deep);
+            color: var(--gold-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fond cosmique animé */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(74, 28, 111, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(13, 115, 119, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(30, 58, 138, 0.2) 0%, transparent 70%);
+            animation: cosmicPulse 15s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes cosmicPulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Étoiles scintillantes */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--stardust);
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Génération procédurale d'étoiles */
+        .star:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 25%; left: 45%; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 15%; left: 75%; animation-delay: 1s; }
+        .star:nth-child(4) { top: 40%; left: 25%; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 50%; left: 85%; animation-delay: 2s; }
+        .star:nth-child(6) { top: 65%; left: 10%; animation-delay: 0.7s; }
+        .star:nth-child(7) { top: 70%; left: 60%; animation-delay: 1.2s; }
+        .star:nth-child(8) { top: 80%; left: 40%; animation-delay: 1.8s; }
+        .star:nth-child(9) { top: 90%; left: 70%; animation-delay: 0.3s; }
+        .star:nth-child(10) { top: 35%; left: 55%; animation-delay: 2.5s; }
+        .star:nth-child(11) { top: 45%; left: 90%; animation-delay: 0.9s; }
+        .star:nth-child(12) { top: 55%; left: 35%; animation-delay: 1.4s; }
+
+        /* Header */
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: lowercase;
+            font-style: italic;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            gap: 5rem;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            animation: fadeInLeft 1.2s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: var(--stardust);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--gold-light);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: var(--cosmic-deep);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        /* Phases de lune */
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            animation: fadeInRight 1.2s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .moon-phases {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .moon-phase {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--moon-glow);
+            box-shadow: 0 0 20px rgba(254, 249, 231, 0.5);
+            position: relative;
+            animation: moonGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes moonGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(254, 249, 231, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(254, 249, 231, 0.8); }
+        }
+
+        /* Nouvelles lune variations */
+        .moon-phase:nth-child(1)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: var(--cosmic-deep);
+            border-radius: 0 50% 50% 0;
+        }
+
+        .moon-phase:nth-child(3)::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: var(--cosmic-deep);
+            border-radius: 50% 0 0 50%;
+        }
+
+        .main-moon {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, var(--moon-glow), #d4c5a9);
+            box-shadow:
+                0 0 60px rgba(254, 249, 231, 0.6),
+                inset -20px -20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: moonFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes moonFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Cratères lunaires */
+        .main-moon::before,
+        .main-moon::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .main-moon::before {
+            width: 40px;
+            height: 40px;
+            top: 30%;
+            left: 25%;
+        }
+
+        .main-moon::after {
+            width: 60px;
+            height: 60px;
+            bottom: 25%;
+            right: 20%;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--stardust);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 5rem;
+            font-style: italic;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .service-description {
+            color: var(--gold-light);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 5%;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            color: var(--gold-light);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .contact-item a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--stardust);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--stardust);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* Constellation décorative */
+        .constellation {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            opacity: 0.3;
+        }
+
+        .constellation-line {
+            stroke: var(--gold);
+            stroke-width: 1;
+            fill: none;
+            stroke-dasharray: 500;
+            stroke-dashoffset: 500;
+            animation: drawConstellation 3s ease-out forwards;
+        }
+
+        @keyframes drawConstellation {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .constellation-star {
+            fill: var(--gold);
+            animation: starPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes starPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 5rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .main-moon {
+                width: 180px;
+                height: 180px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Étoiles scintillantes -->
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <!-- Constellation décorative -->
+    <svg class="constellation" viewBox="0 0 200 200">
+        <polyline class="constellation-line" points="50,30 80,70 120,50 150,90 110,120 130,160"/>
+        <circle class="constellation-star" cx="50" cy="30" r="3"/>
+        <circle class="constellation-star" cx="80" cy="70" r="2"/>
+        <circle class="constellation-star" cx="120" cy="50" r="4"/>
+        <circle class="constellation-star" cx="150" cy="90" r="2"/>
+        <circle class="constellation-star" cx="110" cy="120" r="3"/>
+        <circle class="constellation-star" cx="130" cy="160" r="2"/>
+    </svg>
+
+    <header>
+        <div class="logo">{{name}}</div>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#about">À propos</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Guide spirituel</p>
+            <h1 class="hero-title">Votre destinée est écrite dans les étoiles.</h1>
+            <p class="hero-description">
+                {{hero_subtitle|default:'Accompagnement holistique pour révéler votre plein potentiel. Astrologie, énergies et guidance spirituelle.'}}
+            </p>
+            <a href="#contact" class="cta-button">{{cta|default:'Prendre rendez-vous'}}</a>
+        </div>
+
+        <div class="hero-visual">
+            <div class="moon-phases">
+                <div class="moon-phase"></div>
+                <div class="moon-phase"></div>
+                <div class="moon-phase"></div>
+                <div class="moon-phase"></div>
+                <div class="moon-phase"></div>
+            </div>
+            <div class="main-moon"></div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <h2 class="section-title">Mes accompagnements</h2>
+        <p class="section-subtitle">La voûte céleste révèle votre chemin</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3 class="service-title">Thème Astral</h3>
+                <p class="service-description">
+                    Lecture approfondie de votre carte du ciel. Découvrez vos talents, défis et mission de vie.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🌙</div>
+                <h3 class="service-title">Guidance Lunaire</h3>
+                <p class="service-description">
+                    Harmonisez-vous avec les cycles lunaires. Rituels et pratiques pour chaque phase.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔮</div>
+                <h3 class="service-title">Lecture Intuitive</h3>
+                <p class="service-description">
+                    Consultation guidée par l'intuition. Réponses claires à vos questionnements profonds.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-content">
+            <h2 class="section-title">Commencez votre voyage</h2>
+            <p class="section-subtitle">Les étoiles vous attendent</p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <a href="tel:{{phone}}">{{phone}}</a>
+                </div>
+                <div class="contact-item">
+                    {{address}}
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <a href="#" class="cta-button">{{cta|default:'Réserver une séance'}}</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>{{name}} • Thérapeute holistique & Guide spirituel</p>
+    </footer>
+</body>
+</html>

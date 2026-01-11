@@ -7,7 +7,8 @@ Système automatisé pour générer des propositions de sites web personnalisée
 - [Vue d'ensemble](#vue-densemble)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Utilisation](#utilisation)
+- [Mode Test (recommandé pour commencer)](#mode-test)
+- [Utilisation complète](#utilisation)
 - [Modules individuels](#modules-individuels)
 - [Troubleshooting](#troubleshooting)
 
@@ -17,16 +18,18 @@ Système automatisé pour générer des propositions de sites web personnalisée
 
 Ce système permet de :
 1. 🔍 Scraper Google Maps pour trouver des prospects
-2. 🌐 Analyser leurs sites web (s'ils en ont)
-3. 🎨 Générer des propositions de nouveaux designs
-4. 📄 Créer des PDFs de présentation
+2. 🌐 Analyser leurs sites web existants (qualité, modernité)
+3. 🎨 Générer des propositions de nouveaux designs modernes
+4. 📄 Créer des PDFs de présentation professionnels
 5. 📧 Envoyer des emails personnalisés automatiquement
 
 **Fonctionnalités :**
+- **Mode Test** : Analyser des sites sans envoyer d'emails (idéal pour commencer)
+- Analyse de qualité : score 0-100 pour évaluer si un site est daté
 - Supporte les clients AVEC et SANS site web
 - Extraction automatique de couleurs depuis les logos
 - Génération de contenu par IA (Claude) pour clients sans site
-- Templates HTML personnalisables par secteur
+- Templates HTML personnalisables par secteur (beauté, artisan, restauration, santé, commerce)
 - Screenshots automatiques (desktop + mobile)
 - PDFs professionnels avec avant/après
 - Gestion des proxies et SSL (compatible environnements d'entreprise)
@@ -72,21 +75,39 @@ cp .env.example .env
 
 ### 2. Éditer `.env` avec vos clés API
 
-Ouvrez `.env` et remplissez **OBLIGATOIREMENT** :
+Ouvrez `.env` et remplissez selon vos besoins :
 
-#### 🔴 OBLIGATOIRE - SendGrid (pour les emails)
+#### 🔵 Pour le MODE TEST (analyse uniquement, pas d'emails)
+
+Configuration minimale - aucune clé API nécessaire ! Juste :
 
 ```env
-SENDGRID_API_KEY=SG.votre_cle_sendgrid_ici
-FROM_EMAIL=votre-email@votreentreprise.com
+# Rien de spécial à configurer pour le mode test
+# Optionnel : proxy si vous êtes en entreprise
+HTTP_PROXY=
+HTTPS_PROXY=
+VERIFY_SSL=true
+```
+
+#### 🔴 Pour le MODE COMPLET (avec envoi d'emails)
+
+##### Gmail (recommandé pour commencer)
+
+```env
+GMAIL_ADDRESS=votre-email@gmail.com
+GMAIL_APP_PASSWORD=xxxx xxxx xxxx xxxx
 FROM_NAME=Votre Nom
 ```
 
-**Comment obtenir la clé SendGrid :**
-1. Créer un compte sur [SendGrid](https://sendgrid.com)
-2. Aller dans Settings → API Keys
-3. Créer une nouvelle clé avec permissions "Full Access"
-4. Copier la clé (elle ne sera montrée qu'une fois !)
+**Comment obtenir un App Password Gmail :**
+1. Activer la validation en 2 étapes sur votre compte Google
+2. Aller sur https://myaccount.google.com/apppasswords
+3. Créer un mot de passe d'application pour "Mail"
+4. Copier le code à 16 caractères
+
+> **Voir GMAIL_SETUP.md pour un guide détaillé**
+
+**Limites Gmail :** 500/jour max, mais pour du cold email on recommande **20-30 emails/jour maximum**
 
 #### 🟡 OPTIONNEL - Claude AI (uniquement pour clients SANS site)
 
@@ -125,20 +146,113 @@ VERIFY_SSL=false
 ### 3. Vérifier la configuration
 
 ```bash
-python config/settings.py
+# Test rapide de la configuration
+python scripts/quick_test.py
 ```
 
 Vous devriez voir :
 ```
-✅ Configuration valide !
-📧 Email: votre-email@votreentreprise.com
-🎯 Max prospects/jour: 50
-...
+✅ PASS - Configuration
+✅ PASS - Analyseur de sites
+✅ PASS - Génération HTML
+🎉 TOUS LES TESTS SONT PASSÉS !
 ```
 
 ---
 
-## 🎮 Utilisation
+## 🧪 Mode Test
+
+**👉 RECOMMANDÉ POUR COMMENCER**
+
+Le mode test permet d'**analyser des sites web et générer des propositions SANS envoyer d'emails**.
+
+### Pourquoi commencer par le mode test ?
+
+1. ✅ Aucune configuration email nécessaire
+2. ✅ Voir la qualité des sites générés
+3. ✅ Tester sur votre propre secteur
+4. ✅ Valider les templates avant prospection
+
+### Utilisation
+
+```bash
+# Analyser 3 coiffeurs à Paris
+python scripts/test_analysis.py --secteur "coiffeur" --ville "Paris" --limite 3
+
+# Analyser 5 restaurants à Lyon
+python scripts/test_analysis.py --secteur "restaurant" --ville "Lyon" --limite 5
+```
+
+### Ce qui se passe
+
+```
+📍 Recherche Google Maps
+   └─ Trouve 5 établissements
+
+🔄 Pour chaque établissement :
+   ├─ Scrape le site existant
+   ├─ 📊 ANALYSE DE QUALITÉ (score /100)
+   │   ├─ HTML5 structure
+   │   ├─ Responsive design
+   │   ├─ Modernité CSS
+   │   └─ Qualité contenu
+   ├─ Extrait couleurs du logo
+   ├─ Génère version améliorée
+   └─ Screenshots avant/après
+
+📊 Rapport d'analyse détaillé
+   ├─ Score de chaque site
+   ├─ % de sites datés
+   └─ Opportunités détectées
+```
+
+### Résultats générés
+
+```
+outputs/
+├── html/
+│   ├── test_001_generated.html      # Nouveau design #1
+│   └── test_002_generated.html      # Nouveau design #2
+├── screenshots/
+│   ├── test_001_generated_desktop.png
+│   └── test_001_generated_mobile.png
+├── temp/
+│   └── test_001/
+│       └── screenshot_original.png   # Site original (AVANT)
+└── report/
+    └── analyse_coiffeur_Paris_*.txt  # Rapport détaillé
+```
+
+### Exemple de rapport
+
+```
+Prospect 1/5: Salon Beauté Parisienne
+
+Score: 42/100
+Qualité: Moyen (design daté)
+Site daté: OUI ⚠️
+Recommandation: Site daté, refonte visuelle recommandée
+
+⚠️ Problèmes détectés:
+  • Structure HTML obsolète (pas de tags sémantiques)
+  • Pas de meta viewport (site non-responsive)
+  • Pas de media queries (design fixe)
+
+✅ Points forts:
+  • Logo présent
+  • 5 images de qualité
+
+📁 Fichiers générés:
+   HTML: outputs/html/test_001_generated.html
+   Screenshot original: outputs/temp/test_001/screenshot_original.png
+   Screenshot nouveau: outputs/screenshots/test_001_generated_desktop.png
+```
+
+> **📖 Voir TEST_MODE.md pour plus de détails sur les critères d'analyse**
+
+---
+
+## 🎮 Utilisation complète
 
 ### Mode complet (recommandé)
 
@@ -277,16 +391,19 @@ AGENT/
 ├── config/
 │   └── settings.py              # Configuration centrale
 ├── scripts/
-│   ├── main.py                  # Script principal
+│   ├── main.py                  # Script principal (pipeline complet)
+│   ├── test_analysis.py         # 🆕 Mode test (analyse sans emails)
+│   ├── quick_test.py            # 🆕 Test de configuration
 │   ├── modules/                 # Modules fonctionnels
 │   │   ├── google_maps_scraper.py
 │   │   ├── website_scraper.py
+│   │   ├── website_analyzer.py  # 🆕 Analyse qualité sites
 │   │   ├── color_extractor.py
 │   │   ├── content_generator.py
 │   │   ├── html_generator.py
 │   │   ├── screenshot_maker.py
 │   │   ├── pdf_generator.py
-│   │   └── email_sender.py
+│   │   └── email_sender.py      # ✏️ Migré de SendGrid vers Gmail
 │   └── utils/                   # Utilitaires
 │       ├── logger.py
 │       └── file_manager.py
@@ -299,23 +416,30 @@ AGENT/
 ├── data/
 │   └── prospects/               # Fichiers CSV des prospects
 ├── outputs/
+│   ├── html/                    # Sites HTML générés
 │   ├── screenshots/             # Screenshots générés
 │   ├── pdfs/                    # PDFs créés
-│   └── reports/                 # Rapports d'exécution
+│   └── reports/                 # Rapports d'exécution et d'analyse
 ├── temp/                        # Fichiers temporaires (auto-nettoyés)
 ├── .env                         # Configuration (À CRÉER)
 ├── .env.example                 # Template de configuration
 ├── requirements.txt             # Dépendances Python
-└── README.md                    # Ce fichier
+├── README.md                    # Ce fichier
+├── TEST_MODE.md                 # 🆕 Guide du mode test
+├── GMAIL_SETUP.md               # 🆕 Guide configuration Gmail
+└── CONFIGURATION.md             # Guide de configuration détaillé
 ```
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Erreur : "SENDGRID_API_KEY manquante"
+### Erreur : "GMAIL_ADDRESS manquante" ou "GMAIL_APP_PASSWORD manquante"
 
-✅ **Solution :** Vérifiez que `.env` existe et contient `SENDGRID_API_KEY=...`
+✅ **Solution :**
+1. Vérifiez que `.env` existe et contient `GMAIL_ADDRESS` et `GMAIL_APP_PASSWORD`
+2. Consultez `GMAIL_SETUP.md` pour créer un App Password
+3. Si vous voulez juste tester, utilisez le mode test (pas besoin d'email)
 
 ### Erreur : "Timeout lors de la recherche Google Maps"
 
@@ -366,9 +490,11 @@ pip install -r requirements.txt
 
 | Service | Coût | Note |
 |---------|------|------|
-| **SendGrid** | Gratuit | Jusqu'à 100 emails/jour |
+| **Gmail SMTP** | Gratuit | Jusqu'à 500 emails/jour (20-30 recommandés pour cold email) |
 | **Claude API** | $0.60 | Pour 20 clients SANS site (optionnel) |
-| **Total pour 50 prospects/jour** | **$0.60** | Quasi gratuit ! |
+| **Total pour 30 prospects/jour** | **$0.30-0.60** | Quasi gratuit ! |
+
+> **Mode test :** Complètement gratuit (pas d'envoi d'emails, pas d'API)
 
 ---
 

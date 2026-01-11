@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{name}} - Guérison par les Cristaux</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>{{name}} - Lithothérapie & Guérison Énergétique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --amethyst: #9b59b6;
             --rose-quartz: #f8b4d9;
-            --clear-quartz: #f0f4f8;
+            --moonstone: #e8dff5;
             --obsidian: #1a1a2e;
             --jade: #3eb489;
             --citrine: #f39c12;
-            --moonstone: #e8dff5;
-            --deep-purple: #4a0e4e;
+            --pearl: #fef9f3;
         }
 
         * {
@@ -25,13 +24,14 @@
 
         body {
             font-family: 'Raleway', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%);
-            color: var(--clear-quartz);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--moonstone);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Particules flottantes (cristaux) */
-        .floating-particles {
+        /* Cristaux flottants animés */
+        .floating-crystals {
             position: fixed;
             top: 0;
             left: 0;
@@ -42,19 +42,29 @@
             overflow: hidden;
         }
 
-        .particle {
+        .crystal-particle {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 15px;
+            height: 15px;
             background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            opacity: 0.6;
+            opacity: 0;
             animation: float 20s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
         }
 
+        .crystal-particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 22s; }
+        .crystal-particle:nth-child(2) { left: 25%; animation-delay: 3s; animation-duration: 26s; }
+        .crystal-particle:nth-child(3) { left: 40%; animation-delay: 6s; animation-duration: 20s; }
+        .crystal-particle:nth-child(4) { left: 55%; animation-delay: 2s; animation-duration: 24s; }
+        .crystal-particle:nth-child(5) { left: 70%; animation-delay: 8s; animation-duration: 23s; }
+        .crystal-particle:nth-child(6) { left: 85%; animation-delay: 4s; animation-duration: 25s; }
+        .crystal-particle:nth-child(7) { left: 15%; animation-delay: 7s; animation-duration: 21s; }
+        .crystal-particle:nth-child(8) { left: 60%; animation-delay: 5s; animation-duration: 27s; }
+
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
+            0% {
+                transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
             }
             10% {
@@ -64,46 +74,30 @@
                 opacity: 0.6;
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(-100px) rotate(360deg);
                 opacity: 0;
             }
         }
-
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 25s; }
-        .particle:nth-child(3) { left: 40%; animation-delay: 4s; animation-duration: 22s; }
-        .particle:nth-child(4) { left: 55%; animation-delay: 1s; animation-duration: 24s; }
-        .particle:nth-child(5) { left: 70%; animation-delay: 3s; animation-duration: 23s; }
-        .particle:nth-child(6) { left: 85%; animation-delay: 5s; animation-duration: 21s; }
-        .particle:nth-child(7) { left: 15%; animation-delay: 6s; animation-duration: 26s; }
-        .particle:nth-child(8) { left: 65%; animation-delay: 2.5s; animation-duration: 20s; }
 
         /* Header */
         header {
             position: relative;
             z-index: 100;
-            padding: 2.5rem 5%;
+            padding: 2.5rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(26, 26, 46, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            color: var(--moonstone);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            position: relative;
-        }
-
-        .logo::after {
-            content: '';
-            display: block;
-            width: 60%;
-            height: 1px;
-            background: linear-gradient(90deg, var(--amethyst), transparent);
-            margin-top: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--amethyst);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
         }
 
         nav {
@@ -115,122 +109,127 @@
             color: var(--moonstone);
             text-decoration: none;
             font-size: 0.95rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 300;
+            letter-spacing: 1px;
             transition: all 0.3s;
             position: relative;
         }
 
-        nav a::before {
-            content: '◆';
+        nav a::after {
+            content: '';
             position: absolute;
-            left: -15px;
-            opacity: 0;
-            transition: all 0.3s;
-            color: var(--amethyst);
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--amethyst);
+            transition: width 0.3s;
         }
 
         nav a:hover {
             color: var(--amethyst);
-            transform: translateX(10px);
         }
 
-        nav a:hover::before {
-            opacity: 1;
-            left: -20px;
+        nav a:hover::after {
+            width: 100%;
         }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
             position: relative;
             z-index: 10;
             min-height: 90vh;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 8%;
             align-items: center;
-            padding: 0 5%;
-            gap: 6rem;
         }
 
         .hero-content {
-            flex: 1;
-            max-width: 650px;
+            max-width: 600px;
         }
 
-        .hero-tag {
+        .hero-label {
             display: inline-block;
-            padding: 0.5rem 1.5rem;
+            padding: 0.8rem 2rem;
+            background: rgba(155, 89, 182, 0.2);
             border: 1px solid var(--amethyst);
             color: var(--amethyst);
             font-size: 0.85rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 2rem;
-            background: rgba(155, 89, 182, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .hero-title {
             font-family: 'Cinzel', serif;
             font-size: 4.5rem;
             line-height: 1.1;
-            margin-bottom: 2rem;
             background: linear-gradient(135deg, var(--moonstone), var(--amethyst), var(--rose-quartz));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--moonstone);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         .hero-description {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            color: var(--moonstone);
+            font-size: 1rem;
+            color: rgba(232, 223, 245, 0.8);
             margin-bottom: 3rem;
-            font-weight: 300;
+            line-height: 1.9;
         }
 
-        .cta-primary {
+        .cta-group {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .btn-primary {
             display: inline-block;
-            padding: 1.2rem 3.5rem;
-            background: linear-gradient(135deg, var(--amethyst), var(--deep-purple));
+            padding: 1.3rem 3.5rem;
+            background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
             color: white;
             text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: all 0.4s;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
-            position: relative;
-            overflow: hidden;
+            border: none;
+            cursor: pointer;
         }
 
-        .cta-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--rose-quartz), var(--amethyst));
-            transition: left 0.5s;
-        }
-
-        .cta-primary:hover::before {
-            left: 0;
-        }
-
-        .cta-primary span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-primary:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(155, 89, 182, 0.5);
         }
 
-        /* Cristaux 3D visuels */
+        .btn-secondary {
+            color: var(--amethyst);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--amethyst);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            color: var(--rose-quartz);
+            border-color: var(--rose-quartz);
+        }
+
+        /* Hero Visual - Cluster de cristaux */
         .hero-visual {
-            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -239,107 +238,361 @@
 
         .crystal-cluster {
             position: relative;
-            width: 400px;
-            height: 400px;
+            width: 450px;
+            height: 450px;
         }
 
-        .crystal {
+        .main-crystal {
             position: absolute;
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.8), rgba(248, 180, 217, 0.8));
-            clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 80% 90%, 50% 100%, 20% 90%, 0% 35%, 20% 10%);
-            animation: crystalGlow 4s ease-in-out infinite;
-        }
-
-        .crystal:nth-child(1) {
-            width: 120px;
-            height: 200px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 200px;
+            height: 280px;
+            background: linear-gradient(135deg, var(--amethyst) 0%, var(--rose-quartz) 100%);
+            clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 80% 90%, 50% 100%, 20% 90%, 0% 35%, 20% 10%);
+            animation: crystalGlow 4s ease-in-out infinite;
+            box-shadow:
+                0 0 60px rgba(155, 89, 182, 0.6),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
+            z-index: 5;
+        }
+
+        .side-crystal {
+            position: absolute;
+            background: linear-gradient(135deg, var(--amethyst), var(--moonstone));
+            clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 80% 90%, 50% 100%, 20% 90%, 0% 35%, 20% 10%);
+            animation: crystalGlow 4s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(155, 89, 182, 0.4);
+        }
+
+        .side-crystal:nth-child(2) {
+            width: 120px;
+            height: 180px;
+            top: 20%;
+            left: 5%;
+            animation-delay: 0.5s;
             z-index: 3;
         }
 
-        .crystal:nth-child(2) {
-            width: 80px;
-            height: 140px;
-            top: 40%;
-            left: 20%;
-            opacity: 0.8;
-            z-index: 2;
+        .side-crystal:nth-child(3) {
+            width: 100px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
             animation-delay: 1s;
+            z-index: 4;
         }
 
-        .crystal:nth-child(3) {
+        .side-crystal:nth-child(4) {
             width: 90px;
-            height: 160px;
-            top: 35%;
-            right: 15%;
-            opacity: 0.7;
-            z-index: 1;
-            animation-delay: 2s;
-        }
-
-        .crystal:nth-child(4) {
-            width: 70px;
-            height: 120px;
-            bottom: 25%;
-            left: 30%;
-            opacity: 0.6;
-            z-index: 1;
-            animation-delay: 1.5s;
-        }
-
-        .crystal:nth-child(5) {
-            width: 75px;
             height: 130px;
-            bottom: 20%;
-            right: 25%;
-            opacity: 0.65;
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 1.5s;
             z-index: 2;
-            animation-delay: 0.5s;
+        }
+
+        .side-crystal:nth-child(5) {
+            width: 110px;
+            height: 160px;
+            top: 10%;
+            right: 20%;
+            animation-delay: 2s;
+            z-index: 1;
         }
 
         @keyframes crystalGlow {
             0%, 100% {
-                filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.6));
-                transform: scale(1);
+                filter: brightness(1) drop-shadow(0 0 30px rgba(155, 89, 182, 0.6));
             }
             50% {
-                filter: drop-shadow(0 0 40px rgba(248, 180, 217, 0.8));
-                transform: scale(1.05);
+                filter: brightness(1.3) drop-shadow(0 0 50px rgba(248, 180, 217, 0.8));
             }
         }
 
-        /* Chakras Section */
-        .chakras {
-            padding: 8rem 5%;
+        /* Section commune */
+        section {
             position: relative;
             z-index: 10;
+            padding: 8rem 8%;
         }
 
         .section-header {
+            max-width: 800px;
+            margin: 0 auto 6rem;
             text-align: center;
-            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.6rem 2rem;
+            background: rgba(155, 89, 182, 0.15);
+            border: 1px solid var(--amethyst);
+            color: var(--amethyst);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
         }
 
         .section-title {
             font-family: 'Cinzel', serif;
             font-size: 3.5rem;
-            margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--moonstone), var(--amethyst));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 2rem;
+            font-weight: 600;
         }
 
-        .section-subtitle {
+        .section-description {
+            font-size: 1.2rem;
+            color: rgba(232, 223, 245, 0.9);
+            line-height: 1.9;
+        }
+
+        /* Why Choose Me */
+        .why-choose {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(155, 89, 182, 0.2);
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--amethyst);
+            box-shadow: 0 15px 50px rgba(155, 89, 182, 0.3);
+            background: rgba(155, 89, 182, 0.05);
+        }
+
+        .benefit-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.5));
+        }
+
+        .benefit-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--amethyst);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .benefit-description {
+            color: rgba(232, 223, 245, 0.8);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Services */
+        .services {
+            background: rgba(22, 33, 62, 0.5);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            padding: 3.5rem 2.5rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(155, 89, 182, 0.2) 0%, transparent 70%);
+            transition: transform 0.6s;
+        }
+
+        .service-card:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--rose-quartz);
+            box-shadow: 0 20px 60px rgba(155, 89, 182, 0.4);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.6));
+        }
+
+        .service-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--moonstone);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .service-description {
+            color: rgba(232, 223, 245, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .service-features li {
+            color: rgba(232, 223, 245, 0.7);
+            padding: 0.7rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .service-features li::before {
+            content: '💎';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .service-price {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--amethyst);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .service-duration {
+            color: rgba(232, 223, 245, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: rgba(155, 89, 182, 0.2);
+            border: 1px solid var(--amethyst);
+            color: var(--amethyst);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .service-cta:hover {
+            background: var(--amethyst);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* About */
+        .about {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-image-placeholder {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 3rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            box-shadow: 0 0 60px rgba(155, 89, 182, 0.5);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 60px rgba(155, 89, 182, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 80px rgba(248, 180, 217, 0.7);
+            }
+        }
+
+        .about-text {
+            color: rgba(232, 223, 245, 0.9);
             font-size: 1.1rem;
-            color: var(--rose-quartz);
-            letter-spacing: 3px;
-            font-weight: 300;
+            line-height: 2;
+            text-align: center;
         }
 
-        .chakra-grid {
+        .about-text p {
+            margin-bottom: 2rem;
+        }
+
+        .certifications {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 4rem;
+        }
+
+        .certification-badge {
+            padding: 1rem 2rem;
+            background: rgba(155, 89, 182, 0.15);
+            border: 1px solid var(--amethyst);
+            color: var(--amethyst);
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Process */
+        .process {
+            background: rgba(22, 33, 62, 0.3);
+        }
+
+        .process-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
@@ -347,125 +600,336 @@
             margin: 0 auto;
         }
 
-        .chakra-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(155, 89, 182, 0.3);
-            padding: 2.5rem 2rem;
+        .process-step {
             text-align: center;
-            transition: all 0.5s;
             position: relative;
-            overflow: hidden;
         }
 
-        .chakra-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(155, 89, 182, 0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .chakra-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            border-color: var(--amethyst);
-            box-shadow: 0 25px 50px rgba(155, 89, 182, 0.3);
-        }
-
-        .chakra-card:hover::before {
-            opacity: 1;
-        }
-
-        .chakra-symbol {
+        .step-number {
             width: 80px;
             height: 80px;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 2rem;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Cinzel', serif;
             font-size: 2rem;
-            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.4);
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 10px 40px rgba(155, 89, 182, 0.4);
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .chakra-name {
+        .step-title {
             font-family: 'Cinzel', serif;
             font-size: 1.5rem;
-            color: var(--moonstone);
+            color: var(--amethyst);
             margin-bottom: 1rem;
+            font-weight: 500;
         }
 
-        .chakra-description {
-            color: var(--clear-quartz);
-            line-height: 1.7;
+        .step-description {
+            color: rgba(232, 223, 245, 0.8);
+            line-height: 1.8;
             font-size: 0.95rem;
-            font-weight: 300;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(155, 89, 182, 0.2);
+            padding: 3rem 2.5rem;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            color: rgba(232, 223, 245, 0.9);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 30px rgba(155, 89, 182, 0.4);
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            color: var(--moonstone);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+
+        .author-title {
+            color: rgba(232, 223, 245, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-stars {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: var(--citrine);
+            font-size: 1.2rem;
         }
 
         /* Contact */
         .contact {
-            padding: 8rem 5%;
-            position: relative;
-            z-index: 10;
+            background: rgba(22, 33, 62, 0.5);
         }
 
         .contact-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(155, 89, 182, 0.3);
-            padding: 5rem 4rem;
-            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 2.5rem;
         }
 
         .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.5));
+        }
+
+        .contact-details h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--amethyst);
+            margin-bottom: 0.5rem;
             font-size: 1.2rem;
+        }
+
+        .contact-details p {
+            color: rgba(232, 223, 245, 0.8);
+            line-height: 1.6;
+        }
+
+        .contact-details a {
             color: var(--moonstone);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-details a:hover {
+            color: var(--amethyst);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--moonstone);
+            font-size: 0.9rem;
             letter-spacing: 1px;
         }
 
-        .contact-item a {
-            color: var(--amethyst);
-            text-decoration: none;
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            color: var(--moonstone);
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.95rem;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
 
-        .contact-item a:hover {
-            color: var(--rose-quartz);
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--amethyst);
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--amethyst), var(--rose-quartz));
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(155, 89, 182, 0.5);
         }
 
         /* Footer */
         footer {
-            padding: 3rem 5%;
-            text-align: center;
-            border-top: 1px solid rgba(155, 89, 182, 0.2);
-            color: var(--moonstone);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            padding: 4rem 8% 3rem;
+            background: rgba(26, 26, 46, 0.95);
             position: relative;
             z-index: 10;
         }
 
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--amethyst);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-about p {
+            color: rgba(232, 223, 245, 0.7);
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--moonstone);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(232, 223, 245, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--amethyst);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(155, 89, 182, 0.2);
+            border: 1px solid var(--amethyst);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--amethyst);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--amethyst);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(155, 89, 182, 0.2);
+            text-align: center;
+            color: rgba(232, 223, 245, 0.5);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
         /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
+            header {
+                padding: 2rem 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
             .hero {
-                flex-direction: column;
-                text-align: center;
+                grid-template-columns: 1fr;
+                padding: 3rem 5%;
                 gap: 3rem;
             }
 
@@ -478,31 +942,74 @@
                 height: 300px;
             }
 
-            nav {
+            .main-crystal {
+                width: 150px;
+                height: 210px;
+            }
+
+            .side-crystal:nth-child(2) {
+                width: 90px;
+                height: 135px;
+            }
+
+            .side-crystal:nth-child(3) {
+                width: 75px;
+                height: 112px;
+            }
+
+            .side-crystal:nth-child(4),
+            .side-crystal:nth-child(5) {
                 display: none;
             }
 
-            .chakra-grid {
+            section {
+                padding: 5rem 5%;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .benefits-grid,
+            .services-grid,
+            .process-steps,
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
             .contact-container {
-                padding: 3rem 2rem;
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Particules flottantes -->
-    <div class="floating-particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+    <!-- Cristaux flottants -->
+    <div class="floating-crystals">
+        <div class="crystal-particle"></div>
+        <div class="crystal-particle"></div>
+        <div class="crystal-particle"></div>
+        <div class="crystal-particle"></div>
+        <div class="crystal-particle"></div>
+        <div class="crystal-particle"></div>
+        <div class="crystal-particle"></div>
+        <div class="crystal-particle"></div>
     </div>
 
     <header>
@@ -510,98 +1017,409 @@
         <nav>
             <a href="#services">Services</a>
             <a href="#about">À propos</a>
+            <a href="#process">Processus</a>
+            <a href="#testimonials">Témoignages</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-tag">Guérison holistique</div>
+            <div class="hero-label">Lithothérapie & Énergies</div>
             <h1 class="hero-title">Harmonisez vos énergies</h1>
-            <p class="hero-description">
-                {{hero_subtitle|default:'Libérez votre potentiel de guérison naturelle grâce au pouvoir des cristaux et à l\'harmonisation énergétique des chakras.'}}
+            <p class="hero-subtitle">
+                {{hero_subtitle|default:'Libérez votre potentiel énergétique grâce au pouvoir des cristaux et aux soins vibratoires.'}}
             </p>
-            <a href="#contact" class="cta-primary">
-                <span>{{cta|default:'Commencer votre guérison'}}</span>
-            </a>
+            <p class="hero-description">
+                Découvrez la puissance ancestrale des pierres et cristaux pour rééquilibrer vos chakras, dissoudre les blocages énergétiques et retrouver votre alignement naturel. Une approche holistique alliant lithothérapie, Reiki et méditation guidée.
+            </p>
+            <div class="cta-group">
+                <a href="#contact" class="btn-primary">{{cta|default:'Réserver une séance'}}</a>
+                <a href="#services" class="btn-secondary">Découvrir →</a>
+            </div>
         </div>
 
         <div class="hero-visual">
             <div class="crystal-cluster">
-                <div class="crystal"></div>
-                <div class="crystal"></div>
-                <div class="crystal"></div>
-                <div class="crystal"></div>
-                <div class="crystal"></div>
+                <div class="main-crystal"></div>
+                <div class="side-crystal"></div>
+                <div class="side-crystal"></div>
+                <div class="side-crystal"></div>
+                <div class="side-crystal"></div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="chakras">
+    <!-- WHY CHOOSE ME -->
+    <section class="why-choose">
         <div class="section-header">
-            <h2 class="section-title">Soins énergétiques</h2>
-            <p class="section-subtitle">Rééquilibrage des 7 chakras</p>
+            <div class="section-tag">Pourquoi me choisir</div>
+            <h2 class="section-title">Une expertise énergétique reconnue</h2>
+            <p class="section-description">
+                Plus de 12 ans d'expérience dans l'accompagnement énergétique et la lithothérapie, avec des centaines de personnes transformées.
+            </p>
         </div>
 
-        <div class="chakra-grid">
-            <div class="chakra-card">
-                <div class="chakra-symbol">💎</div>
-                <h3 class="chakra-name">Lithothérapie</h3>
-                <p class="chakra-description">
-                    Soin par les pierres et cristaux. Rééquilibrage énergétique profond et harmonisation.
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💎</div>
+                <h3 class="benefit-title">Maître Reiki certifié</h3>
+                <p class="benefit-description">
+                    Formation complète en Reiki Usui niveau 3, avec transmission de maître à élève selon la tradition japonaise authentique.
                 </p>
             </div>
 
-            <div class="chakra-card">
-                <div class="chakra-symbol">🌸</div>
-                <h3 class="chakra-name">Reiki</h3>
-                <p class="chakra-description">
-                    Soin énergétique japonais. Apaise l'esprit, libère les blocages et restaure l'harmonie.
+            <div class="benefit-card">
+                <div class="benefit-icon">🔮</div>
+                <h3 class="benefit-title">Collection de cristaux</h3>
+                <p class="benefit-description">
+                    Accès à plus de 200 cristaux et pierres précieuses sélectionnés pour leurs propriétés vibratoires exceptionnelles.
                 </p>
             </div>
 
-            <div class="chakra-card">
-                <div class="chakra-symbol">🧘</div>
-                <h3 class="chakra-name">Méditation guidée</h3>
-                <p class="chakra-description">
-                    Voyages intérieurs pour la guérison. Connexion profonde avec votre sagesse innée.
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3 class="benefit-title">Approche personnalisée</h3>
+                <p class="benefit-description">
+                    Chaque séance est adaptée à votre signature énergétique unique après un bilan complet de vos chakras et méridiens.
                 </p>
             </div>
 
-            <div class="chakra-card">
-                <div class="chakra-symbol">🌿</div>
-                <h3 class="chakra-name">Aromathérapie</h3>
-                <p class="chakra-description">
-                    Huiles essentielles sacrées. Purification et élévation vibratoire de l'esprit.
+            <div class="benefit-card">
+                <div class="benefit-icon">🌟</div>
+                <h3 class="benefit-title">Résultats mesurables</h3>
+                <p class="benefit-description">
+                    Techniques de biorésonance pour visualiser l'évolution de votre champ énergétique avant et après chaque session.
                 </p>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="contact-container">
-            <h2 class="section-title">Prenez rendez-vous</h2>
-            <p class="section-subtitle">Votre transformation commence ici</p>
+    <!-- SERVICES -->
+    <section id="services" class="services">
+        <div class="section-header">
+            <div class="section-tag">Mes accompagnements</div>
+            <h2 class="section-title">Soins énergétiques & Lithothérapie</h2>
+            <p class="section-description">
+                Des séances sur mesure pour rétablir l'harmonie de vos énergies subtiles et débloquer votre plein potentiel.
+            </p>
+        </div>
 
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">💎</span>
+                <h3 class="service-title">Lithothérapie avancée</h3>
+                <p class="service-description">
+                    Séance complète avec placement de cristaux sur les chakras, grille énergétique personnalisée et activation vibratoire.
+                </p>
+                <ul class="service-features">
+                    <li>Bilan énergétique complet</li>
+                    <li>Sélection de 12 à 15 cristaux adaptés</li>
+                    <li>Nettoyage et alignement des chakras</li>
+                    <li>Programmation de cristal personnel</li>
+                </ul>
+                <div class="service-price">120€</div>
+                <div class="service-duration">Durée : 90 minutes</div>
+                <a href="#contact" class="service-cta">Réserver</a>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">⚡</span>
+                <h3 class="service-title">Soin Reiki énergétique</h3>
+                <p class="service-description">
+                    Transmission d'énergie universelle pour dissoudre les blocages, apaiser le mental et régénérer votre force vitale.
+                </p>
+                <ul class="service-features">
+                    <li>Harmonisation des 7 chakras</li>
+                    <li>Déblocage des nœuds énergétiques</li>
+                    <li>Activation de l'auto-guérison</li>
+                    <li>Ancrage et protection énergétique</li>
+                </ul>
+                <div class="service-price">90€</div>
+                <div class="service-duration">Durée : 60 minutes</div>
+                <a href="#contact" class="service-cta">Réserver</a>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">🧘‍♀️</span>
+                <h3 class="service-title">Méditation guidée aux cristaux</h3>
+                <p class="service-description">
+                    Voyage intérieur profond accompagné par les fréquences vibratoires des bols tibétains et des cristaux de quartz.
+                </p>
+                <ul class="service-features">
+                    <li>Méditation avec bols chantants</li>
+                    <li>Grille de cristaux amplificatrice</li>
+                    <li>Visualisation guidée personnalisée</li>
+                    <li>Ancrage et intégration</li>
+                </ul>
+                <div class="service-price">70€</div>
+                <div class="service-duration">Durée : 45 minutes</div>
+                <a href="#contact" class="service-cta">Réserver</a>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">🌈</span>
+                <h3 class="service-title">Parcours transformation</h3>
+                <p class="service-description">
+                    Programme complet sur 3 mois combinant lithothérapie, Reiki et coaching énergétique pour une métamorphose profonde.
+                </p>
+                <ul class="service-features">
+                    <li>12 séances personnalisées</li>
+                    <li>Suivi énergétique hebdomadaire</li>
+                    <li>Kit de cristaux offert (valeur 150€)</li>
+                    <li>Accès groupe privé + méditations</li>
+                </ul>
+                <div class="service-price">990€</div>
+                <div class="service-duration">Durée : 3 mois</div>
+                <a href="#contact" class="service-cta">Réserver</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <div class="section-header">
+            <div class="section-tag">Mon parcours</div>
+            <h2 class="section-title">Une vocation énergétique</h2>
+        </div>
+
+        <div class="about-content">
+            <div class="about-image-placeholder">✨</div>
+
+            <div class="about-text">
+                <p>
+                    Ma rencontre avec les cristaux a transformé ma vie il y a plus de 12 ans. Après une carrière épuisante dans la finance, j'ai vécu un burnout qui m'a poussée à explorer les médecines énergétiques. C'est lors d'un voyage initiatique au Népal que j'ai découvert le Reiki et ressenti pour la première fois la puissance des énergies subtiles.
+                </p>
+
+                <p>
+                    Formée auprès de maîtres Reiki japonais et de lithothérapeutes renommés en France et en Inde, j'ai consacré des années à comprendre la signature vibratoire unique de chaque cristal. Ma méthode allie tradition ancestrale et approches modernes de biorésonance pour des résultats tangibles et durables.
+                </p>
+
+                <p>
+                    Aujourd'hui, j'accompagne des centaines de personnes chaque année vers leur équilibre énergétique. Chaque séance est une opportunité de reconnexion à votre essence divine et à la sagesse infinie de l'univers cristallin.
+                </p>
+            </div>
+
+            <div class="certifications">
+                <div class="certification-badge">Maître Reiki Usui III</div>
+                <div class="certification-badge">Lithothérapeute certifiée</div>
+                <div class="certification-badge">Praticienne en biorésonance</div>
+                <div class="certification-badge">Formatrice agrée</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="process">
+        <div class="section-header">
+            <div class="section-tag">Comment ça marche</div>
+            <h2 class="section-title">Votre parcours énergétique</h2>
+            <p class="section-description">
+                Un processus en 4 étapes pour une transformation énergétique profonde et durable.
+            </p>
+        </div>
+
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Bilan énergétique</h3>
+                <p class="step-description">
+                    Évaluation complète de vos chakras, analyse de votre champ aurique et identification des blocages énergétiques par radiesthésie.
+                </p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Sélection des cristaux</h3>
+                <p class="step-description">
+                    Choix intuitif et guidé des pierres et cristaux spécifiques à votre signature énergétique et vos besoins de guérison.
+                </p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Séance de soin</h3>
+                <p class="step-description">
+                    Application des cristaux, transmission Reiki et harmonisation vibratoire pour rétablir la circulation énergétique optimale.
+                </p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Intégration</h3>
+                <p class="step-description">
+                    Conseils personnalisés, rituel de cristaux à domicile et suivi pour ancrer durablement votre nouvelle fréquence vibratoire.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="testimonials">
+        <div class="section-header">
+            <div class="section-tag">Témoignages</div>
+            <h2 class="section-title">Ils ont transformé leur énergie</h2>
+            <p class="section-description">
+                Les retours authentiques de personnes qui ont expérimenté la puissance des soins énergétiques.
+            </p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-quote">
+                    "Après 3 séances de lithothérapie, j'ai enfin retrouvé mon énergie vitale. Les migraines chroniques qui me paralysaient depuis 5 ans ont complètement disparu. C'est une véritable renaissance !"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <div class="author-name">Sophie M.</div>
+                        <div class="author-title">Enseignante, 42 ans</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-quote">
+                    "Le parcours transformation a changé ma vie. J'ai enfin compris mes blocages émotionnels et j'ai retrouvé confiance en moi. Le suivi personnalisé et les cristaux offerts m'accompagnent chaque jour."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <div class="author-name">Marc L.</div>
+                        <div class="author-title">Entrepreneur, 38 ans</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-quote">
+                    "Sceptique au départ, j'ai été bluffée par la précision du bilan énergétique. Les séances Reiki m'ont libérée d'angoisses que je traînais depuis l'enfance. Un immense merci !"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">C</div>
+                    <div class="author-info">
+                        <div class="author-name">Claire D.</div>
+                        <div class="author-title">Graphiste, 29 ans</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <div class="section-tag">Prenons contact</div>
+            <h2 class="section-title">Commencez votre transformation</h2>
+            <p class="section-description">
+                Réservez votre bilan énergétique gratuit de 15 minutes pour découvrir comment les cristaux peuvent vous aider.
+            </p>
+        </div>
+
+        <div class="contact-container">
             <div class="contact-info">
                 <div class="contact-item">
-                    Téléphone: <a href="tel:{{phone}}">{{phone}}</a>
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:{{phone}}">{{phone}}</a></p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Lun-Ven : 9h-19h<br>Sam : 10h-16h</p>
+                    </div>
                 </div>
+
                 <div class="contact-item">
-                    {{address}}
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h3>Cabinet</h3>
+                        <p>{{address}}</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Parking gratuit disponible<br>Accès PMR</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p><a href="mailto:contact@example.com">contact@example.com</a></p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Réponse sous 24h</p>
+                    </div>
                 </div>
             </div>
 
-            <div style="margin-top: 3rem;">
-                <a href="#" class="cta-primary">
-                    <span>{{cta|default:'Réserver une séance'}}</span>
-                </a>
-            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Votre nom</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Votre email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Votre message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">Envoyer ma demande</button>
+            </form>
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
-        <p>{{name}} • Thérapeute énergétique & Guérisseuse holistique</p>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>{{name}}</h3>
+                <p>
+                    Praticienne en lithothérapie et Maître Reiki certifiée, je vous accompagne vers l'harmonisation de vos énergies subtiles grâce au pouvoir ancestral des cristaux.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="YouTube">▶</a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#process">Processus</a></li>
+                    <li><a href="#testimonials">Témoignages</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Lithothérapie</a></li>
+                    <li><a href="#services">Reiki</a></li>
+                    <li><a href="#services">Méditation</a></li>
+                    <li><a href="#services">Formations</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Informations</h4>
+                <ul>
+                    <li><a href="#">Tarifs</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                    <li><a href="#">CGV</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 {{name}} • Tous droits réservés • Lithothérapie & Guérison Énergétique</p>
+        </div>
     </footer>
 </body>
 </html>

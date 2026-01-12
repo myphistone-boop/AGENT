@@ -575,6 +575,238 @@
             text-decoration: underline;
         }
 
+        /* Info Cards Section */
+        .info-cards {
+            padding: 6rem 2rem;
+            background: rgba(48, 43, 99, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-cards-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow:
+                0 20px 50px rgba(102, 126, 234, 0.25),
+                0 0 40px rgba(118, 75, 162, 0.2);
+        }
+
+        .info-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .info-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .info-card p {
+            color: #4A5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .info-card .learn-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .info-card .learn-more:hover {
+            gap: 1rem;
+        }
+
+        .info-card .learn-more::after {
+            content: '→';
+            transition: transform 0.3s;
+        }
+
+        .info-card .learn-more:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 6rem 2rem;
+            background: rgba(15, 12, 41, 0.7);
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.4s;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 20px 50px rgba(102, 126, 234, 0.3),
+                0 0 40px rgba(118, 75, 162, 0.25);
+            border-color: rgba(102, 126, 234, 0.6);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Contact Info Cards & Booking */
+        .contact-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s;
+        }
+
+        .contact-info-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .contact-info-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-info-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .contact-info-content p {
+            color: #4A5568;
+            font-size: 1rem;
+        }
+
+        .booking-section {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow:
+                0 10px 50px rgba(0,0,0,0.2),
+                0 0 40px rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .booking-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .booking-slots {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .time-slot {
+            padding: 1rem;
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .time-slot:hover,
+        .time-slot.selected {
+            background: var(--gradient);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .booking-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -582,7 +814,8 @@
             }
 
             .hero,
-            .about-container {
+            .about-container,
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -590,7 +823,13 @@
                 font-size: 2.5rem;
             }
 
-            .services-grid {
+            .services-grid,
+            .info-cards-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-slots {
                 grid-template-columns: 1fr;
             }
 
@@ -679,6 +918,36 @@
         </div>
     </section>
 
+    <!-- Info Cards Section -->
+    <section class="info-cards">
+        <div class="section-header">
+            <h2>Pourquoi Choisir l'Astrologie Karmique</h2>
+            <p>Une approche unique pour révéler votre potentiel</p>
+        </div>
+        <div class="info-cards-grid">
+            <div class="info-card">
+                <div class="info-card-icon">🌟</div>
+                <h3>Guidance Personnalisée</h3>
+                <p>Chaque consultation est unique et adaptée à votre thème astral, vos défis actuels et votre chemin d'évolution personnel.</p>
+                <a href="#services" class="learn-more">En savoir plus</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">🔮</div>
+                <h3>Approche Holistique</h3>
+                <p>Fusion de l'astrologie traditionnelle, de la psychologie transpersonnelle et des enseignements spirituels ancestraux.</p>
+                <a href="#apropos" class="learn-more">En savoir plus</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">✨</div>
+                <h3>Transformation Durable</h3>
+                <p>Des outils concrets et pratiques pour intégrer les insights astrologiques dans votre vie quotidienne.</p>
+                <a href="#contact" class="learn-more">En savoir plus</a>
+            </div>
+        </div>
+    </section>
+
     <!-- About -->
     <section id="apropos" class="about">
         <div class="section-header">
@@ -698,32 +967,104 @@
         </div>
     </section>
 
+    <!-- Gallery -->
+    <section class="gallery">
+        <div class="section-header">
+            <h2>Galerie</h2>
+            <p>Moments de transformation et guidance</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop" alt="Séance d'astrologie">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?w=600&h=400&fit=crop" alt="Cartes astrologiques">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=600&h=400&fit=crop" alt="Espace de méditation">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?w=600&h=400&fit=crop" alt="Ambiance cosmique">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop" alt="Cristaux et énergie">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=600&h=400&fit=crop" alt="Guidance spirituelle">
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <h2>Prenons Contact</h2>
-                <p>Commencez votre transformation</p>
+        <div class="section-header">
+            <h2>Prenons Contact</h2>
+            <p>Choisissez votre créneau pour une consultation</p>
+        </div>
+        <div class="contact-grid">
+            <!-- Info Cards -->
+            <div class="contact-info-cards">
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📧</div>
+                    <div class="contact-info-content">
+                        <h4>Email</h4>
+                        <p>{{email}}</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📱</div>
+                    <div class="contact-info-content">
+                        <h4>Téléphone</h4>
+                        <p>{{phone}}</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📍</div>
+                    <div class="contact-info-content">
+                        <h4>Adresse</h4>
+                        <p>{{address}}</p>
+                    </div>
+                </div>
             </div>
-            <form>
-                <div class="form-group">
-                    <label for="name">Votre nom</label>
-                    <input type="text" id="name" name="name" required>
+
+            <!-- Booking Section -->
+            <div class="booking-section">
+                <h3>Réservation en ligne</h3>
+                <p style="color: #4A5568; margin-bottom: 2rem;">Sélectionnez un créneau pour votre consultation</p>
+
+                <div class="booking-slots">
+                    <div class="time-slot">Lundi 14h00</div>
+                    <div class="time-slot">Lundi 16h30</div>
+                    <div class="time-slot">Mardi 10h00</div>
+                    <div class="time-slot">Mardi 15h00</div>
+                    <div class="time-slot">Mercredi 14h00</div>
+                    <div class="time-slot">Jeudi 11h00</div>
+                    <div class="time-slot">Vendredi 14h00</div>
+                    <div class="time-slot">Vendredi 16h00</div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Votre email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Votre téléphone</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                <div class="form-group">
-                    <label for="message">Votre message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Envoyer ma demande</button>
-            </form>
+
+                <form class="booking-form">
+                    <div class="form-group">
+                        <label for="booking-name">Votre nom complet</label>
+                        <input type="text" id="booking-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-email">Votre email</label>
+                        <input type="email" id="booking-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-phone">Votre téléphone</label>
+                        <input type="tel" id="booking-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-message">Message (optionnel)</label>
+                        <textarea id="booking-message" name="message" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Confirmer la réservation</button>
+                </form>
+            </div>
         </div>
     </section>
 

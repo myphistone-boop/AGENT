@@ -1346,12 +1346,13 @@
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
         }
 
-        /* Zodiac Wheel */
+        /* Zodiac Wheel - Cosmic Theme */
         .zodiac-wheel-container {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 2rem;
         }
 
         .zodiac-wheel {
@@ -1360,26 +1361,52 @@
             position: relative;
             border-radius: 50%;
             background:
-                radial-gradient(circle at center, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.98) 45%, transparent 45%),
+                radial-gradient(circle at center, rgba(15, 12, 41, 0.95) 0%, rgba(15, 12, 41, 0.95) 42%, transparent 42%),
                 conic-gradient(
                     from 0deg,
-                    #FF6B6B 0deg 30deg,
-                    #4ECDC4 30deg 60deg,
-                    #FFE66D 60deg 90deg,
-                    #95E1D3 90deg 120deg,
-                    #F38181 120deg 150deg,
-                    #AA96DA 150deg 180deg,
-                    #FCBAD3 180deg 210deg,
-                    #A8E6CF 210deg 240deg,
-                    #FFD3B6 240deg 270deg,
-                    #FFAAA5 270deg 300deg,
-                    #FF8B94 300deg 330deg,
-                    #C7CEEA 330deg 360deg
+                    rgba(102, 126, 234, 0.8) 0deg,
+                    rgba(118, 75, 162, 0.8) 30deg,
+                    rgba(139, 92, 246, 0.8) 60deg,
+                    rgba(159, 122, 234, 0.8) 90deg,
+                    rgba(107, 70, 193, 0.8) 120deg,
+                    rgba(102, 126, 234, 0.8) 150deg,
+                    rgba(118, 75, 162, 0.8) 180deg,
+                    rgba(139, 92, 246, 0.8) 210deg,
+                    rgba(159, 122, 234, 0.8) 240deg,
+                    rgba(107, 70, 193, 0.8) 270deg,
+                    rgba(102, 126, 234, 0.8) 300deg,
+                    rgba(118, 75, 162, 0.8) 330deg,
+                    rgba(102, 126, 234, 0.8) 360deg
                 );
             box-shadow:
-                0 0 60px rgba(102, 126, 234, 0.4),
-                inset 0 0 80px rgba(255, 255, 255, 0.5);
-            animation: rotate-wheel 120s linear infinite;
+                0 0 80px rgba(102, 126, 234, 0.6),
+                0 0 120px rgba(118, 75, 162, 0.4),
+                inset 0 0 60px rgba(102, 126, 234, 0.3);
+            border: 3px solid rgba(159, 122, 234, 0.5);
+            animation: rotate-wheel 120s linear infinite, cosmic-pulse 4s ease-in-out infinite;
+        }
+
+        /* Cosmic starfield overlay on wheel */
+        .zodiac-wheel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(1px 1px at 60% 70%, rgba(224, 231, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 50% 50%, white, transparent),
+                radial-gradient(2px 2px at 80% 10%, rgba(199, 210, 254, 0.8), transparent),
+                radial-gradient(1px 1px at 90% 60%, white, transparent),
+                radial-gradient(1px 1px at 15% 80%, rgba(224, 231, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 40% 20%, white, transparent),
+                radial-gradient(1px 1px at 70% 90%, rgba(199, 210, 254, 0.8), transparent);
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            animation: twinkle-wheel 3s ease-in-out infinite;
         }
 
         @keyframes rotate-wheel {
@@ -1387,33 +1414,72 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes cosmic-pulse {
+            0%, 100% {
+                box-shadow:
+                    0 0 80px rgba(102, 126, 234, 0.6),
+                    0 0 120px rgba(118, 75, 162, 0.4),
+                    inset 0 0 60px rgba(102, 126, 234, 0.3);
+            }
+            50% {
+                box-shadow:
+                    0 0 100px rgba(102, 126, 234, 0.8),
+                    0 0 150px rgba(118, 75, 162, 0.6),
+                    inset 0 0 80px rgba(102, 126, 234, 0.5);
+            }
+        }
+
+        @keyframes twinkle-wheel {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
         .zodiac-center {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            background: var(--gradient);
+            width: 190px;
+            height: 190px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             color: white;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.5);
+            box-shadow:
+                0 10px 50px rgba(102, 126, 234, 0.7),
+                inset 0 0 40px rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             z-index: 10;
+            animation: center-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes center-glow {
+            0%, 100% {
+                box-shadow:
+                    0 10px 50px rgba(102, 126, 234, 0.7),
+                    inset 0 0 40px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow:
+                    0 10px 70px rgba(102, 126, 234, 0.9),
+                    inset 0 0 60px rgba(255, 255, 255, 0.4);
+            }
         }
 
         .zodiac-center-icon {
             font-size: 4rem;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         }
 
         .zodiac-center-text {
             font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
             font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .zodiac-signs {
@@ -1422,20 +1488,33 @@
             height: 100%;
             top: 0;
             left: 0;
+            animation: rotate-wheel 120s linear infinite reverse;
         }
 
         .zodiac-sign {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: white;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(224, 231, 255, 0.98) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            border: 2px solid rgba(102, 126, 234, 0.3);
+            font-size: 1.6rem;
+            box-shadow:
+                0 5px 25px rgba(102, 126, 234, 0.4),
+                0 0 15px rgba(118, 75, 162, 0.3),
+                inset 0 0 10px rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+        }
+
+        .zodiac-sign:hover {
+            transform: scale(1.15);
+            box-shadow:
+                0 8px 35px rgba(102, 126, 234, 0.6),
+                0 0 25px rgba(118, 75, 162, 0.5);
+            border-color: rgba(159, 122, 234, 0.8);
         }
 
         /* Position each sign around the wheel */

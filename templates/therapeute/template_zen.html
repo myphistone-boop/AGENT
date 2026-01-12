@@ -4,789 +4,329 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{name}} - Naturopathie & Bien-être Holistique</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --sage: #87a878;
-            --sand: #e8dcc4;
-            --clay: #c9a882;
-            --deep-earth: #3d3d3d;
-            --cream: #faf8f3;
-            --misty: #d4e4db;
-            --stone: #6b7466;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #87a878;
+            --secondary: #d4e4db;
+            --accent: #c9a882;
+            --dark: #3d3d3d;
+            --light: #faf8f3;
+            --gradient: linear-gradient(135deg, #87a878 0%, #d4e4db 100%);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--cream);
-            color: var(--deep-earth);
-            line-height: 1.7;
-            overflow-x: hidden;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light);
         }
 
-        /* Fond ondulé subtil */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at 30% 20%, rgba(135, 168, 120, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(201, 168, 130, 0.06) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        /* Cercles zen flottants */
-        .zen-circles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .zen-circle {
-            position: absolute;
-            border-radius: 50%;
-            border: 1px solid rgba(135, 168, 120, 0.15);
-            animation: zen-float 30s infinite ease-in-out;
-        }
-
-        .zen-circle:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            right: 5%;
-            animation-delay: 0s;
-        }
-
-        .zen-circle:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: 15%;
-            left: 10%;
-            animation-delay: 5s;
-        }
-
-        .zen-circle:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            right: 20%;
-            animation-delay: 10s;
-        }
-
-        @keyframes zen-float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.3;
-            }
-            50% {
-                transform: translate(20px, -30px) scale(1.1);
-                opacity: 0.15;
-            }
-        }
-
-        /* Header */
+        /* Navigation sticky */
         header {
-            position: relative;
-            z-index: 100;
-            padding: 3rem 8%;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-family: 'Lora', serif;
-            font-size: 1.6rem;
-            color: var(--sage);
-            font-weight: 500;
-            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        nav {
+        .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
+            list-style: none;
         }
 
-        nav a {
-            color: var(--stone);
+        .nav-links a {
+            color: var(--dark);
             text-decoration: none;
+            font-weight: 500;
             font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            font-weight: 400;
-            transition: all 0.3s;
-            position: relative;
+            transition: color 0.3s;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--sage);
-            transition: width 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--sage);
-        }
-
-        nav a:hover::after {
-            width: 100%;
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
         /* Hero */
         .hero {
-            position: relative;
-            z-index: 10;
-            min-height: 85vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            padding: 0 8%;
+            gap: 4rem;
             align-items: center;
+            min-height: 85vh;
         }
 
-        .hero-content {
-            max-width: 600px;
-        }
-
-        .hero-label {
-            display: inline-block;
-            padding: 0.7rem 1.8rem;
-            background: var(--misty);
-            color: var(--sage);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 2.5rem;
-            font-weight: 500;
-        }
-
-        .hero-title {
-            font-family: 'Lora', serif;
-            font-size: 4rem;
-            line-height: 1.15;
-            color: var(--deep-earth);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--stone);
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
             margin-bottom: 1.5rem;
-            font-weight: 300;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #4A5568;
+            margin-bottom: 2.5rem;
             line-height: 1.8;
         }
 
-        .hero-description {
-            font-size: 1rem;
-            color: var(--stone);
-            margin-bottom: 3rem;
-            line-height: 1.9;
-            opacity: 0.9;
-        }
-
-        .cta-group {
+        .cta-buttons {
             display: flex;
             gap: 1.5rem;
-            align-items: center;
         }
 
         .btn-primary {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--sage);
+            padding: 1rem 2.5rem;
+            background: var(--gradient);
             color: white;
             text-decoration: none;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            box-shadow: 0 8px 24px rgba(135, 168, 120, 0.25);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(135, 168, 120, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--stone);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(135, 168, 120, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(135, 168, 120, 0.4);
         }
 
         .btn-secondary {
-            color: var(--sage);
+            padding: 1rem 2.5rem;
+            background: white;
+            color: var(--primary);
             text-decoration: none;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--sage);
+            border-radius: 50px;
+            font-weight: 600;
+            border: 2px solid var(--primary);
             transition: all 0.3s;
         }
 
         .btn-secondary:hover {
-            color: var(--stone);
-            border-color: var(--stone);
+            background: var(--primary);
+            color: white;
         }
 
-        /* Hero visual - Mandala */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
-        .mandala-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-        }
-
-        .mandala {
+        .hero-image img {
             width: 100%;
             height: 100%;
-            position: relative;
-            animation: mandala-rotate 60s linear infinite;
-        }
-
-        @keyframes mandala-rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .mandala-layer {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 2px solid;
-            opacity: 0.4;
-        }
-
-        .mandala-layer:nth-child(1) {
-            width: 350px;
-            height: 350px;
-            border-color: var(--sage);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        .mandala-layer:nth-child(2) {
-            width: 280px;
-            height: 280px;
-            border-color: var(--clay);
-            animation: pulse 4s ease-in-out infinite;
-            animation-delay: 1s;
-        }
-
-        .mandala-layer:nth-child(3) {
-            width: 210px;
-            height: 210px;
-            border-color: var(--sage);
-            animation: pulse 4s ease-in-out infinite;
-            animation-delay: 2s;
-        }
-
-        .mandala-layer:nth-child(4) {
-            width: 140px;
-            height: 140px;
-            border-color: var(--clay);
-            animation: pulse 4s ease-in-out infinite;
-            animation-delay: 3s;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.3;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.05);
-                opacity: 0.6;
-            }
-        }
-
-        /* Petals decoration */
-        .mandala::before,
-        .mandala::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, var(--sage) 30%, transparent 30%);
-            opacity: 0.2;
-        }
-
-        .mandala::before {
-            width: 120px;
-            height: 120px;
-        }
-
-        /* Section commune */
-        section {
-            padding: 8rem 8%;
-            position: relative;
-            z-index: 10;
-        }
-
-        .section-header {
-            max-width: 700px;
-            margin: 0 auto 6rem;
-            text-align: center;
-        }
-
-        .section-tag {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: var(--misty);
-            color: var(--sage);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .section-title {
-            font-family: 'Lora', serif;
-            font-size: 3rem;
-            color: var(--deep-earth);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--stone);
-            line-height: 1.8;
-        }
-
-        /* Why Choose */
-        .why-choose {
-            background: linear-gradient(135deg, var(--misty) 0%, var(--cream) 100%);
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .benefit-card {
-            background: white;
-            padding: 3rem 2.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s;
-            text-align: center;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .benefit-number {
-            font-family: 'Lora', serif;
-            font-size: 3.5rem;
-            color: var(--sage);
-            margin-bottom: 1.5rem;
-            font-weight: 300;
-            opacity: 0.7;
-        }
-
-        .benefit-title {
-            font-family: 'Lora', serif;
-            font-size: 1.5rem;
-            color: var(--sage);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .benefit-description {
-            color: var(--stone);
-            line-height: 1.8;
-            font-size: 0.95rem;
+            object-fit: cover;
         }
 
         /* Services */
         .services {
-            background: var(--cream);
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #4A5568;
         }
 
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
             max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
 
         .service-card {
             background: white;
-            padding: 3.5rem 2.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s;
-            border-left: 3px solid transparent;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-            border-left-color: var(--sage);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
 
-        .service-symbol {
-            font-size: 2.5rem;
-            color: var(--sage);
-            margin-bottom: 2rem;
-            display: block;
-            font-weight: 300;
-        }
-
-        .service-title {
-            font-family: 'Lora', serif;
-            font-size: 1.6rem;
-            color: var(--deep-earth);
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            font-weight: 500;
+            color: var(--primary);
         }
 
-        .service-description {
-            color: var(--stone);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            font-size: 0.95rem;
+        .service-card p {
+            color: #4A5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
 
-        .service-features {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .service-features li {
-            color: var(--stone);
-            padding: 0.7rem 0;
-            padding-left: 2rem;
-            position: relative;
-            font-size: 0.9rem;
-        }
-
-        .service-features li::before {
-            content: '🍃';
-            position: absolute;
-            left: 0;
-            font-size: 1rem;
-        }
-
-        .service-price {
-            font-family: 'Lora', serif;
+        .service-card .price {
             font-size: 2rem;
-            color: var(--sage);
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--primary);
             margin-bottom: 1.5rem;
         }
 
-        .service-duration {
-            color: var(--stone);
-            font-size: 0.9rem;
+        .service-card ul {
+            list-style: none;
             margin-bottom: 2rem;
-            opacity: 0.8;
         }
 
-        .service-cta {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: transparent;
-            border: 1px solid var(--sage);
-            color: var(--sage);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+        .service-card ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #4A5568;
         }
 
-        .service-cta:hover {
-            background: var(--sage);
-            color: white;
-            transform: translateY(-2px);
+        .service-card ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
         }
 
         /* About */
         .about {
-            background: linear-gradient(135deg, var(--misty) 0%, var(--cream) 100%);
-        }
-
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .about-image-placeholder {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 3rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--sage), var(--clay));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            box-shadow: 0 10px 40px rgba(135, 168, 120, 0.3);
-        }
-
-        .about-text {
-            color: var(--stone);
-            font-size: 1.1rem;
-            line-height: 2;
-            text-align: center;
-        }
-
-        .about-text p {
-            margin-bottom: 2rem;
-        }
-
-        .certifications {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 4rem;
-        }
-
-        .certification-badge {
-            padding: 1rem 2rem;
+            padding: 6rem 2rem;
             background: white;
-            border: 1px solid var(--sage);
-            color: var(--sage);
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
-        /* Process */
-        .process {
-            background: var(--cream);
-        }
-
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+        .about-container {
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .process-step {
-            text-align: center;
-            position: relative;
-        }
-
-        .step-number {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            border-radius: 50%;
-            background: var(--sage);
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            justify-content: center;
-            font-family: 'Lora', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: white;
-            box-shadow: 0 8px 24px rgba(135, 168, 120, 0.25);
         }
 
-        .step-title {
-            font-family: 'Lora', serif;
-            font-size: 1.5rem;
-            color: var(--sage);
-            margin-bottom: 1rem;
-            font-weight: 500;
+        .about-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
-        .step-description {
-            color: var(--stone);
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: #4A5568;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
             line-height: 1.8;
-            font-size: 0.95rem;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            background: linear-gradient(135deg, var(--misty) 0%, var(--cream) 100%);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 3rem 2.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            position: relative;
-        }
-
-        .testimonial-quote {
-            color: var(--stone);
-            font-size: 1.05rem;
-            line-height: 1.9;
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--sage), var(--clay));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(135, 168, 120, 0.25);
-        }
-
-        .author-info {
-            flex: 1;
-        }
-
-        .author-name {
-            color: var(--deep-earth);
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            font-size: 1.05rem;
-        }
-
-        .author-title {
-            color: var(--stone);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .testimonial-stars {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            color: var(--sage);
-            font-size: 1.2rem;
         }
 
         /* Contact */
         .contact {
-            padding: 8rem 8%;
-            background: var(--cream);
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
         }
 
         .contact-container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
         }
 
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-        }
-
-        .contact-details h3 {
-            font-family: 'Lora', serif;
-            color: var(--sage);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .contact-details p {
-            color: var(--stone);
-            line-height: 1.6;
-        }
-
-        .contact-details a {
-            color: var(--deep-earth);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-details a:hover {
-            color: var(--sage);
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .contact form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
-            color: var(--stone);
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
         }
 
         .form-group input,
         .form-group textarea {
-            padding: 1rem 1.5rem;
-            background: white;
-            border: 1px solid var(--misty);
-            color: var(--deep-earth);
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s;
+            font-size: 1rem;
+            transition: border-color 0.3s;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--sage);
-            box-shadow: 0 0 0 3px rgba(135, 168, 120, 0.1);
+            border-color: var(--primary);
         }
 
         .form-group textarea {
@@ -794,580 +334,207 @@
             resize: vertical;
         }
 
-        .form-submit {
-            padding: 1.2rem 3rem;
-            background: var(--sage);
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--gradient);
             color: white;
             border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            box-shadow: 0 8px 24px rgba(135, 168, 120, 0.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(135, 168, 120, 0.3);
         }
 
-        .form-submit:hover {
-            background: var(--stone);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(135, 168, 120, 0.35);
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(135, 168, 120, 0.4);
         }
 
         /* Footer */
         footer {
-            padding: 4rem 8% 3rem;
-            background: var(--misty);
-            position: relative;
-            z-index: 10;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-about h3 {
-            font-family: 'Lora', serif;
-            color: var(--sage);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-about p {
-            color: var(--stone);
-            line-height: 1.8;
-            font-size: 0.9rem;
-        }
-
-        .footer-links h4 {
-            font-family: 'Lora', serif;
-            color: var(--deep-earth);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--stone);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--sage);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: white;
-            border: 1px solid var(--sage);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--sage);
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .social-links a:hover {
-            background: var(--sage);
+            background: #1A202C;
             color: white;
-            transform: translateY(-3px);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
         }
 
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(135, 168, 120, 0.3);
-            text-align: center;
-            color: var(--stone);
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
         @media (max-width: 768px) {
-            header {
-                padding: 2rem 5%;
-            }
-
-            nav {
+            .nav-links {
                 display: none;
             }
 
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 2rem 5%;
-                gap: 3rem;
-            }
-
-            .hero-title {
-                font-size: 2.8rem;
-            }
-
-            .mandala-container {
-                width: 300px;
-                height: 300px;
-            }
-
-            section {
-                padding: 5rem 5%;
-            }
-
-            .section-title {
-                font-size: 2.3rem;
-            }
-
-            .benefits-grid,
-            .services-grid,
-            .process-steps,
-            .testimonials-grid {
+            .hero,
+            .about-container {
                 grid-template-columns: 1fr;
             }
 
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
+            .hero-content h1 {
+                font-size: 2.5rem;
             }
 
-            .footer-content {
+            .services-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
             }
 
-            .cta-group {
+            .cta-buttons {
                 flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Cercles zen -->
-    <div class="zen-circles">
-        <div class="zen-circle"></div>
-        <div class="zen-circle"></div>
-        <div class="zen-circle"></div>
-    </div>
-
+    <!-- Header sticky -->
     <header>
-        <div class="logo">{{name}}</div>
         <nav>
-            <a href="#services">Services</a>
-            <a href="#about">Approche</a>
-            <a href="#process">Processus</a>
-            <a href="#testimonials">Témoignages</a>
-            <a href="#contact">Contact</a>
+            <div class="logo">{{name}}</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#produits">Produits</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#contact">Nous contacter</a></li>
+                <li><a href="#mentions">Mentions légales</a></li>
+            </ul>
         </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
+    <!-- Hero -->
+    <section id="accueil" class="hero">
         <div class="hero-content">
-            <div class="hero-label">Médecine douce</div>
-            <h1 class="hero-title">Retrouvez votre équilibre naturel</h1>
-            <p class="hero-subtitle">
-                {{hero_subtitle|default:'Accompagnement holistique pour votre bien-être physique, mental et émotionnel.'}}
-            </p>
-            <p class="hero-description">
-                Une approche douce et naturelle de la santé qui respecte votre corps et stimule vos capacités d'auto-guérison. Naturopathie, réflexologie et massages bien-être au service de votre vitalité.
-            </p>
-            <div class="cta-group">
-                <a href="#contact" class="btn-primary">{{cta|default:'Prendre rendez-vous'}}</a>
-                <a href="#services" class="btn-secondary">Découvrir →</a>
+            <h1>Naturopathie & Équilibre Holistique</h1>
+            <p>Depuis 10 ans, j'accompagne mes clients vers un bien-être durable grâce à une approche naturelle et bienveillante. Retrouvez votre vitalité par l'alimentation vivante, les plantes et la réflexologie.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
+                <a href="#services" class="btn-secondary">Découvrir</a>
             </div>
         </div>
-
-        <div class="hero-visual">
-            <div class="mandala-container">
-                <div class="mandala">
-                    <div class="mandala-layer"></div>
-                    <div class="mandala-layer"></div>
-                    <div class="mandala-layer"></div>
-                    <div class="mandala-layer"></div>
-                </div>
-            </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop" alt="Naturopathie et bien-être">
         </div>
     </section>
 
-    <!-- WHY CHOOSE ME -->
-    <section class="why-choose">
-        <div class="section-header">
-            <div class="section-tag">Pourquoi me choisir</div>
-            <h2 class="section-title">Une expertise en médecine douce</h2>
-            <p class="section-description">
-                Plus de 10 ans d'accompagnement holistique avec une approche bienveillante et personnalisée.
-            </p>
-        </div>
-
-        <div class="benefits-grid">
-            <div class="benefit-card">
-                <div class="benefit-number">I</div>
-                <h3 class="benefit-title">Formation complète reconnue</h3>
-                <p class="benefit-description">
-                    Diplômée en naturopathie FENA avec formations complémentaires en réflexologie plantaire thaïlandaise et massages ayurvédiques. Plus de 2000 heures de formation auprès d'écoles reconnues pour vous offrir un accompagnement professionnel et sécurisé.
-                </p>
-            </div>
-
-            <div class="benefit-card">
-                <div class="benefit-number">II</div>
-                <h3 class="benefit-title">Approche holistique personnalisée</h3>
-                <p class="benefit-description">
-                    Vision globale de votre santé intégrant alimentation vivante, gestion du stress, sommeil et hygiène de vie. Chaque consultation est adaptée à votre constitution unique et vos objectifs de santé spécifiques.
-                </p>
-            </div>
-
-            <div class="benefit-card">
-                <div class="benefit-number">III</div>
-                <h3 class="benefit-title">Résultats mesurables et durables</h3>
-                <p class="benefit-description">
-                    Suivi régulier avec bilans de vitalité pour mesurer vos progrès. Ma priorité est votre autonomie : je vous transmets les clés pour devenir acteur de votre santé à long terme, pas seulement le temps d'une consultation.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES -->
+    <!-- Services -->
     <section id="services" class="services">
         <div class="section-header">
-            <div class="section-tag">Soins naturels</div>
-            <h2 class="section-title">Mes accompagnements</h2>
-            <p class="section-description">
-                Des soins sur mesure pour réveiller votre vitalité et retrouver l'harmonie corps-esprit.
-            </p>
+            <h2>Mes Accompagnements</h2>
+            <p>Des soins naturels pour réveiller votre vitalité</p>
         </div>
-
         <div class="services-grid">
             <div class="service-card">
-                <span class="service-symbol">◆</span>
-                <h3 class="service-title">Bilan de naturopathie</h3>
-                <p class="service-description">
-                    Consultation approfondie avec évaluation de votre vitalité, analyse morphologique et conseils personnalisés pour retrouver votre équilibre naturel.
-                </p>
-                <ul class="service-features">
-                    <li>Bilan de vitalité complet (90 min)</li>
-                    <li>Plan alimentaire personnalisé et détaillé</li>
-                    <li>Conseils en phytothérapie et aromathérapie</li>
-                    <li>Programme d'hygiène de vie sur 3 mois</li>
-                    <li>Document écrit de recommandations</li>
+                <h3>Bilan de Naturopathie</h3>
+                <p>Consultation approfondie avec évaluation de votre vitalité, analyse morphologique et conseils personnalisés.</p>
+                <div class="price">85€</div>
+                <ul>
+                    <li>Bilan de vitalité complet</li>
+                    <li>Plan alimentaire personnalisé</li>
+                    <li>Conseils en phytothérapie</li>
+                    <li>Programme d'hygiène de vie</li>
                 </ul>
-                <div class="service-price">85€</div>
-                <div class="service-duration">Durée : 90 minutes</div>
-                <a href="#contact" class="service-cta">Réserver</a>
+                <a href="#contact" class="btn-primary">Réserver</a>
             </div>
 
             <div class="service-card">
-                <span class="service-symbol">✦</span>
-                <h3 class="service-title">Réflexologie plantaire</h3>
-                <p class="service-description">
-                    Stimulation des zones réflexes pour libérer les tensions, rééquilibrer l'organisme en profondeur et activer vos capacités d'auto-guérison.
-                </p>
-                <ul class="service-features">
-                    <li>Cartographie précise des zones réflexes</li>
-                    <li>Libération des blocages énergétiques</li>
-                    <li>Détente profonde du système nerveux</li>
-                    <li>Amélioration de la circulation lymphatique</li>
-                    <li>Harmonisation des organes internes</li>
+                <h3>Réflexologie Plantaire</h3>
+                <p>Stimulation des zones réflexes pour libérer les tensions et rééquilibrer l'organisme en profondeur.</p>
+                <div class="price">60€</div>
+                <ul>
+                    <li>Cartographie des zones réflexes</li>
+                    <li>Libération des blocages</li>
+                    <li>Détente du système nerveux</li>
+                    <li>Harmonisation des organes</li>
                 </ul>
-                <div class="service-price">60€</div>
-                <div class="service-duration">Durée : 60 minutes</div>
-                <a href="#contact" class="service-cta">Réserver</a>
+                <a href="#contact" class="btn-primary">Réserver</a>
             </div>
 
             <div class="service-card">
-                <span class="service-symbol">◇</span>
-                <h3 class="service-title">Forfait bien-être (3 mois)</h3>
-                <p class="service-description">
-                    Programme complet sur 3 mois combinant naturopathie, réflexologie et massages pour une transformation durable de votre bien-être global.
-                </p>
-                <ul class="service-features">
-                    <li>1 bilan de naturopathie initial complet</li>
+                <h3>Forfait Bien-être</h3>
+                <p>Programme sur 3 mois combinant naturopathie, réflexologie et massages pour une transformation durable.</p>
+                <div class="price">450€</div>
+                <ul>
+                    <li>1 bilan naturopathie complet</li>
                     <li>6 séances de réflexologie</li>
-                    <li>3 massages bien-être aux huiles</li>
-                    <li>Suivi personnalisé WhatsApp illimité</li>
-                    <li>2 bilans de suivi de vitalité inclus</li>
+                    <li>3 massages bien-être</li>
+                    <li>Suivi personnalisé WhatsApp</li>
                 </ul>
-                <div class="service-price">450€</div>
-                <div class="service-duration">Économisez 115€</div>
-                <a href="#contact" class="service-cta">Réserver</a>
+                <a href="#contact" class="btn-primary">Réserver</a>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="about">
+    <!-- About -->
+    <section id="apropos" class="about">
         <div class="section-header">
-            <div class="section-tag">Mon parcours</div>
-            <h2 class="section-title">Une passion pour le naturel</h2>
+            <h2>Mon Parcours</h2>
+            <p>Une passion pour le naturel</p>
         </div>
-
-        <div class="about-content">
-            <div class="about-image-placeholder">🌿</div>
-
-            <div class="about-text">
-                <p>
-                    Mon chemin vers la naturopathie a commencé il y a 12 ans, lorsque j'ai découvert le pouvoir de la nature pour guérir mon propre corps. Après des années de fatigue chronique et de troubles digestifs que la médecine conventionnelle ne parvenait pas à résoudre, j'ai exploré les médecines douces et retrouvé ma vitalité grâce à l'alimentation vivante et aux plantes.
-                </p>
-
-                <p>
-                    Cette transformation personnelle m'a inspirée à me former professionnellement. Diplômée de l'école ISUPNAT (naturopathie holistique) et formée à la réflexologie plantaire thaïlandaise et aux massages ayurvédiques, j'ai acquis une expertise complète pour accompagner chaque personne dans son unicité.
-                </p>
-
-                <p>
-                    Aujourd'hui, j'accompagne des centaines de personnes chaque année vers un mieux-être durable. Ma philosophie : écouter votre corps, respecter votre rythme et vous transmettre les clés pour devenir acteur de votre santé naturellement.
-                </p>
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop" alt="Photo du thérapeute">
             </div>
-
-            <div class="certifications">
-                <div class="certification-badge">Naturopathe certifiée FENA</div>
-                <div class="certification-badge">Réflexologue diplômée</div>
-                <div class="certification-badge">Praticienne en massages</div>
-                <div class="certification-badge">Conseillère en nutrition</div>
+            <div class="about-content">
+                <h2>Une vocation holistique</h2>
+                <p>Mon chemin vers la naturopathie a commencé il y a 12 ans, lorsque j'ai découvert le pouvoir de la nature pour guérir mon propre corps. Après des années de fatigue chronique, j'ai retrouvé ma vitalité grâce à l'alimentation vivante et aux plantes.</p>
+                <p>Cette transformation personnelle m'a inspirée à me former professionnellement. Diplômée en naturopathie holistique et formée à la réflexologie plantaire thaïlandaise, j'ai acquis une expertise complète pour accompagner chaque personne dans son unicité.</p>
+                <p>Aujourd'hui, j'accompagne des centaines de personnes chaque année vers un mieux-être durable. Ma philosophie : écouter votre corps, respecter votre rythme et vous transmettre les clés pour devenir acteur de votre santé naturellement.</p>
             </div>
         </div>
     </section>
 
-    <!-- PROCESS -->
-    <section id="process" class="process">
-        <div class="section-header">
-            <div class="section-tag">Comment ça marche</div>
-            <h2 class="section-title">Votre parcours vers le mieux-être</h2>
-            <p class="section-description">
-                Un accompagnement en 4 étapes pour retrouver votre vitalité naturelle durablement.
-            </p>
-        </div>
-
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3 class="step-title">Premier contact</h3>
-                <p class="step-description">
-                    Échange téléphonique gratuit de 15 minutes pour comprendre vos besoins et vérifier que mon approche vous correspond.
-                </p>
-            </div>
-
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3 class="step-title">Bilan complet</h3>
-                <p class="step-description">
-                    Première consultation approfondie pour évaluer votre vitalité, identifier les déséquilibres et définir vos objectifs de santé.
-                </p>
-            </div>
-
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3 class="step-title">Plan personnalisé</h3>
-                <p class="step-description">
-                    Mise en place d'un programme sur mesure combinant alimentation, plantes, exercices et soins adaptés à votre rythme de vie.
-                </p>
-            </div>
-
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3 class="step-title">Suivi régulier</h3>
-                <p class="step-description">
-                    Accompagnement continu avec ajustements du programme et séances de soins pour ancrer durablement votre transformation.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="testimonials">
-        <div class="section-header">
-            <div class="section-tag">Témoignages</div>
-            <h2 class="section-title">Ils ont retrouvé leur vitalité</h2>
-            <p class="section-description">
-                Les retours authentiques de personnes accompagnées vers un mieux-être naturel.
-            </p>
-        </div>
-
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-quote">
-                    "Grâce au bilan de naturopathie, j'ai compris l'origine de mes troubles digestifs. En 2 mois avec le programme alimentaire personnalisé, tous mes symptômes ont disparu. Une vraie renaissance !"
-                </p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">A</div>
-                    <div class="author-info">
-                        <div class="author-name">Anne-Sophie L.</div>
-                        <div class="author-title">Comptable, 45 ans</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-quote">
-                    "Les séances de réflexologie m'ont aidé à gérer mon stress chronique. Je dors enfin paisiblement et j'ai retrouvé mon énergie. L'écoute bienveillante fait toute la différence."
-                </p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">P</div>
-                    <div class="author-info">
-                        <div class="author-name">Pierre M.</div>
-                        <div class="author-title">Chef d'entreprise, 52 ans</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-quote">
-                    "Le forfait bien-être a transformé ma vie. Entre les massages, la réflexologie et les conseils nutritionnels, j'ai enfin trouvé l'équilibre que je cherchais depuis des années."
-                </p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">C</div>
-                    <div class="author-info">
-                        <div class="author-name">Camille R.</div>
-                        <div class="author-title">Professeure, 38 ans</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
+    <!-- Contact -->
     <section id="contact" class="contact">
-        <div class="section-header">
-            <div class="section-tag">Prenez soin de vous</div>
-            <h2 class="section-title">Commençons ensemble</h2>
-            <p class="section-description">
-                Chaque parcours de guérison est unique. Prenons le temps d'échanger sur vos besoins.
-            </p>
-        </div>
-
         <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-details">
-                        <h3>Téléphone</h3>
-                        <p><a href="tel:{{phone}}">{{phone}}</a></p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Lun-Ven : 9h-19h<br>Sam : 10h-17h</p>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-details">
-                        <h3>Cabinet</h3>
-                        <p>{{address}}</p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Parking gratuit<br>Accès PMR</p>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div class="contact-details">
-                        <h3>Email</h3>
-                        <p><a href="mailto:contact@example.com">contact@example.com</a></p>
-                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Réponse sous 24h</p>
-                    </div>
-                </div>
+            <div class="section-header">
+                <h2>Prenons Contact</h2>
+                <p>Commencez votre parcours vers le bien-être</p>
             </div>
-
-            <form class="contact-form">
+            <form>
                 <div class="form-group">
                     <label for="name">Votre nom</label>
                     <input type="text" id="name" name="name" required>
                 </div>
-
                 <div class="form-group">
                     <label for="email">Votre email</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-
+                <div class="form-group">
+                    <label for="phone">Votre téléphone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
                 <div class="form-group">
                     <label for="message">Votre message</label>
                     <textarea id="message" name="message" required></textarea>
                 </div>
-
-                <button type="submit" class="form-submit">Envoyer ma demande</button>
+                <button type="submit" class="submit-btn">Envoyer ma demande</button>
             </form>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <h3>{{name}}</h3>
-                <p>
-                    Praticienne en naturopathie et médecine douce, je vous accompagne vers un bien-être durable grâce à des solutions naturelles et une approche holistique bienveillante.
-                </p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">f</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="LinkedIn">in</a>
-                </div>
-            </div>
-
-            <div class="footer-links">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">Approche</a></li>
-                    <li><a href="#process">Processus</a></li>
-                    <li><a href="#testimonials">Témoignages</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#services">Naturopathie</a></li>
-                    <li><a href="#services">Réflexologie</a></li>
-                    <li><a href="#services">Massages</a></li>
-                    <li><a href="#services">Forfaits</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>Informations</h4>
-                <ul>
-                    <li><a href="#">Tarifs</a></li>
-                    <li><a href="#">Mentions légales</a></li>
-                    <li><a href="#">Confidentialité</a></li>
-                    <li><a href="#">CGV</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2024 {{name}} • Tous droits réservés • Naturopathie & Médecine Douce</p>
-        </div>
+    <!-- Footer -->
+    <footer id="mentions">
+        <p>&copy; 2024 {{name}} - Tous droits réservés</p>
+        <p>
+            <a href="#mentions">Mentions légales</a>
+            <a href="#confidentialite">Confidentialité</a>
+            <a href="#cgv">CGV</a>
+        </p>
     </footer>
 </body>
 </html>

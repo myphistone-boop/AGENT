@@ -51,7 +51,7 @@
                 radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.9), transparent),
                 radial-gradient(1px 1px at 80% 10%, rgba(159, 122, 234, 0.8), transparent),
                 radial-gradient(2px 2px at 30% 60%, rgba(249, 115, 22, 0.7), transparent),
-                radial-gradient(1px 1px at 90% 80%, rgba(246, 173, 85, 0.8), transparent),
+                radial-gradient(1px 1px at 90% 80%, rgba(159, 122, 234, 0.8), transparent),
                 radial-gradient(2px 2px at 50% 30%, rgba(255, 255, 255, 0.9), transparent),
                 radial-gradient(1px 1px at 20% 70%, rgba(118, 75, 162, 0.7), transparent),
                 radial-gradient(1px 1px at 70% 40%, rgba(255, 255, 255, 0.8), transparent);
@@ -83,7 +83,7 @@
             background-image:
                 radial-gradient(2px 2px at 25% 15%, rgba(255, 255, 255, 1), transparent),
                 radial-gradient(3px 3px at 60% 50%, rgba(159, 122, 234, 1), transparent),
-                radial-gradient(2px 2px at 85% 25%, rgba(246, 173, 85, 0.9), transparent),
+                radial-gradient(2px 2px at 85% 25%, rgba(159, 122, 234, 0.9), transparent),
                 radial-gradient(1px 1px at 40% 70%, rgba(118, 75, 162, 0.9), transparent),
                 radial-gradient(2px 2px at 15% 80%, rgba(255, 255, 255, 0.9), transparent);
             background-size: 250px 250px;
@@ -114,7 +114,7 @@
             background-image:
                 radial-gradient(3px 3px at 35% 25%, rgba(255, 255, 255, 1), transparent),
                 radial-gradient(4px 4px at 75% 60%, rgba(159, 122, 234, 1), transparent),
-                radial-gradient(3px 3px at 50% 80%, rgba(246, 173, 85, 1), transparent),
+                radial-gradient(3px 3px at 50% 80%, rgba(159, 122, 234, 1), transparent),
                 radial-gradient(2px 2px at 90% 30%, rgba(118, 75, 162, 1), transparent);
             background-size: 200px 200px;
             background-repeat: repeat;
@@ -145,7 +145,7 @@
                 radial-gradient(ellipse at 20% 30%, rgba(107, 70, 193, 0.4) 0%, transparent 40%),
                 radial-gradient(ellipse at 80% 70%, rgba(118, 75, 162, 0.35) 0%, transparent 45%),
                 radial-gradient(ellipse at 50% 50%, rgba(159, 122, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 20%, rgba(246, 173, 85, 0.25) 0%, transparent 35%);
+                radial-gradient(ellipse at 70% 20%, rgba(159, 122, 234, 0.25) 0%, transparent 35%);
             animation: cosmic-drift 60s ease-in-out infinite;
             z-index: 1;
             pointer-events: none;
@@ -166,7 +166,7 @@
             box-shadow:
                 0 8px 32px rgba(107, 70, 193, 0.4),
                 0 0 60px rgba(118, 75, 162, 0.2),
-                inset 0 -1px 0 rgba(246, 173, 85, 0.3);
+                inset 0 -1px 0 rgba(159, 122, 234, 0.3);
             z-index: 1000;
             transition: all 0.3s ease;
             border-bottom: 2px solid transparent;
@@ -277,77 +277,41 @@
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
-                0 0 30px rgba(246, 173, 85, 0.5),
+                0 0 30px rgba(102, 126, 234, 0.5),
                 0 0 60px rgba(118, 75, 162, 0.4),
                 0 20px 40px rgba(107, 70, 193, 0.3);
             position: relative;
             overflow: hidden;
-            border: 2px solid transparent;
-            background-clip: padding-box;
+            border: none;
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: var(--gradient);
-            border-radius: 50px;
-            z-index: -1;
-            animation: border-flow 3s linear infinite;
-        }
-
-        @keyframes border-flow {
-            0% { filter: hue-rotate(0deg) brightness(1); }
-            50% { filter: hue-rotate(180deg) brightness(1.2); }
-            100% { filter: hue-rotate(360deg) brightness(1); }
-        }
-
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            animation: stellar-shine 2.5s infinite;
-        }
-
-        @keyframes stellar-shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
 
         .btn-primary:hover {
-            transform: translateY(-5px) scale(1.08);
+            transform: translateY(-5px) scale(1.05);
             box-shadow:
-                0 0 50px rgba(246, 173, 85, 0.8),
-                0 0 100px rgba(118, 75, 162, 0.6),
-                0 30px 60px rgba(107, 70, 193, 0.5);
+                0 0 50px rgba(102, 126, 234, 0.8),
+                0 0 100px rgba(118, 75, 162, 0.7),
+                0 30px 60px rgba(107, 70, 193, 0.6);
         }
 
         .btn-secondary {
             padding: 1.1rem 2.8rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            border: 2px solid transparent;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), var(--gradient);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 0 0 30px rgba(159, 122, 234, 0.3);
-            position: relative;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
         }
 
         .btn-secondary:hover {
-            background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), var(--gradient);
-            box-shadow: 0 0 50px rgba(159, 122, 234, 0.6), 0 0 80px rgba(118, 75, 162, 0.4);
-            transform: translateY(-5px) scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
         }
 
         .hero-image {
@@ -375,8 +339,8 @@
         }
 
         @keyframes border-rotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
         }
 
         .hero-image img {
@@ -453,8 +417,8 @@
         }
 
         @keyframes border-spin {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
         }
 
         .service-card:hover::before {
@@ -468,7 +432,7 @@
             right: -50%;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(246, 173, 85, 0.3) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(159, 122, 234, 0.3) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s;
         }
@@ -506,7 +470,7 @@
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 1.5rem;
-            text-shadow: 0 0 15px rgba(246, 173, 85, 0.5);
+            text-shadow: 0 0 15px rgba(159, 122, 234, 0.5);
         }
 
         .service-card ul {
@@ -752,8 +716,8 @@
         }
 
         @keyframes info-border-glow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
         }
 
         .info-card:hover::before {
@@ -765,7 +729,7 @@
             box-shadow:
                 0 20px 60px rgba(159, 122, 234, 0.4),
                 0 0 100px rgba(118, 75, 162, 0.3),
-                0 0 120px rgba(246, 173, 85, 0.2),
+                0 0 120px rgba(159, 122, 234, 0.2),
                 inset 0 0 80px rgba(255, 255, 255, 0.1);
         }
 
@@ -780,7 +744,7 @@
             justify-content: center;
             font-size: 2.8rem;
             box-shadow:
-                0 10px 40px rgba(246, 173, 85, 0.5),
+                0 10px 40px rgba(159, 122, 234, 0.5),
                 0 0 60px rgba(118, 75, 162, 0.4);
             animation: icon-float 3s ease-in-out infinite;
             border: 3px solid rgba(255, 255, 255, 0.3);
@@ -1729,8 +1693,8 @@
         }
 
         @keyframes center-border-spin {
-            0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
-            100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes center-glow-premium {

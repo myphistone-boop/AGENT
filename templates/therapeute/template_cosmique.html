@@ -1018,6 +1018,200 @@
             transform: translateX(5px);
         }
 
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: rgba(48, 43, 99, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            color: rgba(102, 126, 234, 0.2);
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.25);
+        }
+
+        .testimonial-text {
+            color: #4A5568;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .testimonial-info h4 {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-stars {
+            color: #F6AD55;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 2rem;
+            background: rgba(15, 12, 41, 0.7);
+            position: relative;
+            z-index: 1;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.98);
+            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .faq-question {
+            padding: 1.75rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .faq-question h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 2rem 2rem 2rem;
+            color: #4A5568;
+            line-height: 1.8;
+        }
+
+        .faq-answer-content p {
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-content ul {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .faq-answer-content ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .faq-answer-content ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -1036,7 +1230,8 @@
 
             .services-grid,
             .info-cards-grid,
-            .gallery-grid {
+            .gallery-grid,
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1187,6 +1382,51 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>Témoignages</h2>
+            <p>Ce que disent ceux qui ont fait le voyage intérieur</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">La consultation avec {{name}} a été un véritable tournant dans ma vie. L'analyse de mes nœuds lunaires m'a permis de comprendre pourquoi je répétais certains schémas. Aujourd'hui, je me sens alignée avec ma mission de vie.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">S</div>
+                    <div class="testimonial-info">
+                        <h4>Sophie M.</h4>
+                        <p>Lyon • Consultante</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">Après 3 mois de parcours transformation, j'ai enfin osé quitter mon poste de cadre pour créer mon entreprise. Les transits astrologiques m'ont guidé sur le timing parfait. Merci pour cet accompagnement profond et bienveillant.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">M</div>
+                    <div class="testimonial-info">
+                        <h4>Marc B.</h4>
+                        <p>Paris • Entrepreneur</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">La guidance intuitive m'a reconnectée à ma créativité que j'avais enfouie depuis l'enfance. Les messages canalisés étaient d'une justesse troublante. Je recommande vivement à tous les artistes en quête de sens.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">C</div>
+                    <div class="testimonial-info">
+                        <h4>Camille D.</h4>
+                        <p>Bordeaux • Artiste peintre</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery -->
     <section class="gallery">
         <div class="section-header">
@@ -1211,6 +1451,102 @@
             </div>
             <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=600&h=400&fit=crop" alt="Guidance spirituelle">
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="section-header">
+            <h2>Questions Fréquentes</h2>
+            <p>Tout ce que vous devez savoir avant de commencer</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Comment se déroule une consultation ?</h3>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>La consultation se déroule en trois étapes :</p>
+                        <ul>
+                            <li>Entretien préalable de 10 minutes pour comprendre vos attentes</li>
+                            <li>Analyse de votre thème astral avec partage d'écran</li>
+                            <li>Échanges et questions-réponses</li>
+                        </ul>
+                        <p>La séance dure entre 1h et 1h30. Vous recevez ensuite un document PDF récapitulatif sous 48h.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Les consultations sont-elles disponibles en ligne ?</h3>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Oui, 90% de mes consultations se font en visioconférence (Zoom ou Google Meet). C'est aussi efficace qu'en présentiel et vous permet de consulter depuis n'importe où.</p>
+                        <p>Pour ceux qui préfèrent le présentiel, je reçois également dans mon cabinet à {{address}}.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Ai-je besoin de connaître mon heure de naissance exacte ?</h3>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Idéalement oui, car l'heure de naissance permet de calculer votre Ascendant et les Maisons astrologiques, essentiels pour une analyse précise.</p>
+                        <p>Si vous ne connaissez pas votre heure exacte, nous pouvons :</p>
+                        <ul>
+                            <li>Faire une consultation basée sur les planètes uniquement</li>
+                            <li>Utiliser des techniques de rectification d'heure (processus plus long)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Les consultations sont-elles remboursées ?</h3>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>L'astrologie n'étant pas reconnue comme une pratique médicale, les consultations ne sont pas remboursées par la Sécurité Sociale.</p>
+                        <p>Cependant, certaines mutuelles proposent des forfaits "médecines douces" qui peuvent couvrir partiellement les séances. Vérifiez auprès de votre mutuelle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quelle est votre politique d'annulation ?</h3>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Vous pouvez annuler ou reporter votre rendez-vous gratuitement jusqu'à 48h avant la séance.</p>
+                        <p>En cas d'annulation avec moins de 48h de préavis, 50% du montant reste dû. En cas d'absence sans prévenir, la totalité est due.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Proposez-vous des consultations pour les enfants ou adolescents ?</h3>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Oui, j'accompagne les jeunes à partir de 12 ans, avec l'accord d'un parent.</p>
+                        <p>L'astrologie peut aider les adolescents à mieux comprendre leur personnalité, leurs talents et leur chemin de vie, notamment lors de choix d'orientation scolaire ou professionnelle.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1346,5 +1682,25 @@
             <a href="#cgv">CGV</a>
         </p>
     </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

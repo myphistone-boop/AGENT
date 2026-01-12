@@ -30,7 +30,7 @@
             position: relative;
         }
 
-        /* Starry background cosmique */
+        /* Starry background cosmique - Enhanced with Twinkling */
         body::before {
             content: '';
             position: fixed;
@@ -39,21 +39,30 @@
             width: 100%;
             height: 100%;
             background-image:
-                radial-gradient(2px 2px at 20px 30px, white, transparent),
-                radial-gradient(2px 2px at 60px 70px, white, transparent),
-                radial-gradient(1px 1px at 50px 50px, white, transparent),
-                radial-gradient(1px 1px at 130px 80px, white, transparent),
-                radial-gradient(2px 2px at 90px 10px, white, transparent),
-                radial-gradient(1px 1px at 120px 120px, white, transparent),
-                radial-gradient(2px 2px at 165px 60px, white, transparent);
+                radial-gradient(3px 3px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 60px 70px, #e0e7ff, transparent),
+                radial-gradient(1px 1px at 50px 50px, #ffffff, transparent),
+                radial-gradient(2px 2px at 130px 80px, #c7d2fe, transparent),
+                radial-gradient(3px 3px at 90px 10px, #ffffff, transparent),
+                radial-gradient(1px 1px at 120px 120px, #e0e7ff, transparent),
+                radial-gradient(2px 2px at 165px 60px, #ffffff, transparent),
+                radial-gradient(1px 1px at 40px 140px, #c7d2fe, transparent),
+                radial-gradient(2px 2px at 180px 20px, #ffffff, transparent),
+                radial-gradient(1px 1px at 10px 90px, #e0e7ff, transparent);
             background-repeat: repeat;
             background-size: 200px 200px;
-            opacity: 0.5;
+            opacity: 0.8;
             z-index: 0;
             pointer-events: none;
+            animation: twinkle 3s ease-in-out infinite;
         }
 
-        /* Cosmic glow effect */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Cosmic nebula effect - Enhanced */
         body::after {
             content: '';
             position: fixed;
@@ -61,27 +70,33 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.15) 0%, transparent 50%);
-            animation: cosmic-rotate 30s linear infinite;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(102, 126, 234, 0.3) 0%, transparent 35%),
+                radial-gradient(ellipse at 70% 80%, rgba(118, 75, 162, 0.25) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+            animation: cosmic-drift 40s ease-in-out infinite;
             z-index: 0;
             pointer-events: none;
         }
 
-        @keyframes cosmic-rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes cosmic-drift {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
         }
 
-        /* Navigation sticky */
+        /* Navigation sticky with Cosmic Glow */
         header {
             position: sticky;
             top: 0;
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(102, 126, 234, 0.3), 0 0 20px rgba(118, 75, 162, 0.2);
+            box-shadow:
+                0 4px 30px rgba(102, 126, 234, 0.4),
+                0 0 40px rgba(118, 75, 162, 0.3),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.1);
             z-index: 1000;
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         nav {
@@ -98,7 +113,10 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(102, 126, 234, 0.3);
+            text-shadow:
+                0 0 20px rgba(255, 255, 255, 0.6),
+                0 0 40px rgba(102, 126, 234, 0.4),
+                0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .nav-links {
@@ -124,12 +142,13 @@
             width: 0;
             height: 2px;
             background: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
             transition: width 0.3s;
         }
 
         .nav-links a:hover {
             color: white;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
         }
 
         .nav-links a:hover::after {
@@ -156,14 +175,18 @@
             line-height: 1.2;
             margin-bottom: 1.5rem;
             color: white;
-            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            text-shadow:
+                0 0 30px rgba(102, 126, 234, 0.6),
+                0 0 60px rgba(118, 75, 162, 0.4),
+                0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .hero-content p {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             margin-bottom: 2.5rem;
             line-height: 1.8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .cta-buttons {
@@ -171,36 +194,66 @@
             gap: 1.5rem;
         }
 
+        /* Enhanced Cosmic Buttons */
         .btn-primary {
             padding: 1rem 2.5rem;
-            background: var(--gradient);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+            box-shadow:
+                0 0 20px rgba(102, 126, 234, 0.5),
+                0 0 40px rgba(118, 75, 162, 0.3),
+                0 10px 30px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: rotate(45deg);
+            animation: stellar-shine 3s infinite;
+        }
+
+        @keyframes stellar-shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow:
+                0 0 30px rgba(102, 126, 234, 0.7),
+                0 0 60px rgba(118, 75, 162, 0.5),
+                0 15px 40px rgba(102, 126, 234, 0.5);
         }
 
         .btn-secondary {
             padding: 1rem 2.5rem;
-            background: white;
-            color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            border: 2px solid var(--primary);
+            border: 2px solid rgba(255, 255, 255, 0.5);
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
         .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .hero-image {
@@ -208,7 +261,10 @@
             height: 500px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.3),
+                0 0 40px rgba(102, 126, 234, 0.2);
+            border: 2px solid rgba(102, 126, 234, 0.3);
         }
 
         .hero-image img {
@@ -220,7 +276,7 @@
         /* Services */
         .services {
             padding: 6rem 2rem;
-            background: rgba(15, 12, 41, 0.6);
+            background: rgba(15, 12, 41, 0.7);
             position: relative;
             z-index: 1;
         }
@@ -236,11 +292,12 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: white;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
         }
 
         .section-header p {
             font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .services-grid {
@@ -251,17 +308,55 @@
             gap: 2rem;
         }
 
+        /* Enhanced Service Cards with Cosmic Effect */
         .service-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 2.5rem;
             border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            transition: all 0.4s;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.15), transparent);
+            transition: left 0.6s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            transform: translateY(-12px);
+            box-shadow:
+                0 15px 50px rgba(102, 126, 234, 0.25),
+                0 0 40px rgba(118, 75, 162, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
         }
 
         .service-card h3 {
@@ -280,7 +375,10 @@
         .service-card .price {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1.5rem;
         }
 
@@ -307,7 +405,7 @@
         /* About */
         .about {
             padding: 6rem 2rem;
-            background: rgba(48, 43, 99, 0.4);
+            background: rgba(48, 43, 99, 0.5);
             position: relative;
             z-index: 1;
         }
@@ -326,7 +424,10 @@
             height: 500px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.3),
+                0 0 40px rgba(102, 126, 234, 0.2);
+            border: 2px solid rgba(102, 126, 234, 0.3);
         }
 
         .about-image img {
@@ -340,10 +441,11 @@
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: white;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
         }
 
         .about-content p {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             margin-bottom: 1.5rem;
             font-size: 1.05rem;
             line-height: 1.8;
@@ -352,7 +454,7 @@
         /* Contact */
         .contact {
             padding: 6rem 2rem;
-            background: rgba(15, 12, 41, 0.6);
+            background: rgba(15, 12, 41, 0.7);
             position: relative;
             z-index: 1;
         }
@@ -363,10 +465,13 @@
         }
 
         .contact form {
-            background: white;
+            background: rgba(255, 255, 255, 0.98);
             padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow:
+                0 10px 50px rgba(0,0,0,0.2),
+                0 0 40px rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
 
         .form-group {
@@ -388,13 +493,14 @@
             border-radius: 10px;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .form-group textarea {
@@ -405,20 +511,43 @@
         .submit-btn {
             width: 100%;
             padding: 1.2rem;
-            background: var(--gradient);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+            box-shadow:
+                0 10px 30px rgba(102, 126, 234, 0.4),
+                0 0 40px rgba(118, 75, 162, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            box-shadow:
+                0 15px 40px rgba(102, 126, 234, 0.5),
+                0 0 60px rgba(118, 75, 162, 0.4);
         }
 
         /* Footer */

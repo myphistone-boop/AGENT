@@ -20,6 +20,9 @@ python-dotenv==1.0.0
 # IA (optionnel - seulement pour clients sans site)
 anthropic==0.7.8
 
+# Gemini AI pour génération créative de templates
+google-generativeai==0.3.2
+
 # Base de données
 # sqlite3 est inclus dans Python standard library
 

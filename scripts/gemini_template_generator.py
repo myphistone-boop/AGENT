@@ -12,8 +12,24 @@ from scripts.modules.website_scraper import WebsiteScraper
 from scripts.utils.logger import setup_logger
 from scripts.utils.file_manager import FileManager
 
-# Désactiver la vérification SSL pour l'API Gemini (si proxy d'entreprise)
-# Ceci est nécessaire dans certains environnements avec certificats auto-signés
+# ============================================================================
+# CONFIGURATION SSL - Désactivée par défaut pour proxy d'entreprise
+# ============================================================================
+# Ceci permet de contourner les erreurs de certificats auto-signés
+# dans les environnements d'entreprise avec proxy HTTPS
+
+# Désactiver la vérification SSL pour Python
+os.environ['PYTHONHTTPSVERIFY'] = '0'
+os.environ['GRPC_ENABLE_FORK_SUPPORT'] = '1'
+os.environ['GRPC_VERBOSITY'] = 'ERROR'  # Réduire les logs gRPC
+
+# Forcer l'utilisation de contexte SSL non vérifié
+try:
+    ssl._create_default_https_context = ssl._create_unverified_context
+except:
+    pass
+
+# Tenter d'utiliser certifi si disponible, sinon ignorer
 try:
     import certifi
     os.environ['GRPC_DEFAULT_SSL_ROOTS_FILE_PATH'] = certifi.where()
@@ -21,8 +37,11 @@ except ImportError:
     pass
 
 # Désactiver les warnings SSL
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+try:
+    import urllib3
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+except:
+    pass
 
 logger = setup_logger("gemini_generator")
 
@@ -45,17 +64,10 @@ class GeminiTemplateGenerator:
             raise ValueError("❌ Clé API Gemini manquante (GEMINI_API_KEY env var)")
 
         # Configuration Gemini
-        # Note: Si vous avez des problèmes SSL (proxy d'entreprise),
-        # définissez VERIFY_SSL=false dans .env
+        # Note: La vérification SSL est désactivée par défaut (voir en-tête du fichier)
+        # pour permettre l'utilisation derrière des proxies d'entreprise
         genai.configure(api_key=self.api_key)
         self.model = genai.GenerativeModel('gemini-1.5-pro')
-
-        # Configurer les options de transport pour ignorer les erreurs SSL si nécessaire
-        verify_ssl = os.getenv('VERIFY_SSL', 'true').lower() == 'true'
-        if not verify_ssl:
-            logger.warning("⚠️  Vérification SSL désactivée pour l'API Gemini")
-            os.environ['GRPC_ENABLE_FORK_SUPPORT'] = '1'
-            os.environ['GRPC_SSL_CIPHER_SUITES'] = 'HIGH'
 
         # File manager
         self.file_manager = FileManager()

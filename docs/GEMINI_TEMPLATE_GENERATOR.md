@@ -21,19 +21,44 @@ Système automatisé qui scrape un site existant et génère un nouveau site web
 
 ## 🎨 Comment ça marche
 
-### Images et contenus
+### Préservation de la structure
 
-Le système utilise les **vraies URLs** des images du site source :
-- ✅ Logo du site original
-- ✅ Images du site original (URLs directes)
-- ✅ Textes extraits du site
-- ✅ Informations de contact (téléphone, email)
+**Le principe clé :** "Même squelette, nouveau visuel"
 
-**Avantages :**
-- Pas de stockage local nécessaire
-- Images en haute qualité depuis la source
-- Génération ultra-rapide
-- Coût minimal
+Le système extrait et **préserve EXACTEMENT** la structure du site original :
+- ✅ **Même ordre** des sections
+- ✅ **Mêmes titres** (texte identique)
+- ✅ **Mêmes paragraphes** (texte identique)
+- ✅ **Mêmes listes** (contenu identique)
+- ✅ **Vraies images** (URLs originales)
+- ✅ **Informations de contact** (téléphone, email, logo)
+
+**Ce qui change :** UNIQUEMENT le design visuel
+- Palette de couleurs moderne
+- Typographie professionnelle
+- Layout contemporain
+- Animations fluides
+- Responsive design
+
+**Résultat :** Le client dit *"C'est mon site mais en mieux !"*
+
+### Extraction complète
+
+Le scraper analyse le site et extrait :
+```
+Structure:
+  Section 1: "À propos"
+    - H2: "Mon parcours"
+    - Paragraphe: "Texte complet..."
+    - Paragraphe: "Suite..."
+  Section 2: "Services"
+    - H2: "Mes services"
+    - Liste: [Service 1, Service 2, ...]
+    - Paragraphe: "Description..."
+  etc.
+```
+
+Gemini recrée cette structure **à l'identique** avec un design moderne.
 
 ---
 
@@ -343,16 +368,59 @@ done
 
 ### Avant → Après
 
-**Site source:** Site WordPress basique de thérapeute
-**Généré:** One-page moderne avec:
-- Hero section avec dégradé
-- Animations au scroll
-- Design épuré et professionnel
-- Palette harmonieuse
-- Formulaire de contact intégré
+**Site source:** Site WordPress basique de thérapeute avec 5 sections
+
+**Structure préservée:**
+```
+1. Accueil - "Bienvenue" + paragraphe de présentation
+2. À propos - "Mon parcours" + 3 paragraphes
+3. Services - "Mes prestations" + liste de 5 services + description
+4. Témoignages - 3 citations de clients
+5. Contact - Formulaire + coordonnées
+```
+
+**Généré:** Site moderne one-page avec:
+- ✅ **MÊMES 5 sections** dans le même ordre
+- ✅ **MÊMES textes** (aucun changement de contenu)
+- ✅ **MÊMES images** du site original
+- 🎨 Palette de couleurs apaisante (thérapeute)
+- 🎨 Typographie élégante (Playfair Display + Raleway)
+- 🎨 Hero section avec dégradé subtil
+- 🎨 Cards avec ombres douces
+- 🎨 Animations smooth au scroll
+- 🎨 Design épuré et professionnel
+
+**Résultat:** Le client reconnaît immédiatement son contenu, mais le trouve magnifique.
 
 **Temps de génération:** ~30-60 secondes
 **Coût:** $0.03-0.05
+
+### Exemple concret
+
+**Avant (site original):**
+```html
+<div>
+  <h2>Mes services</h2>
+  <p>Je propose des séances individuelles...</p>
+  <ul>
+    <li>Thérapie cognitive</li>
+    <li>Hypnose</li>
+  </ul>
+</div>
+```
+
+**Après (site généré):**
+```html
+<section class="services">
+  <h2>Mes services</h2>
+  <p>Je propose des séances individuelles...</p>
+  <ul class="service-list">
+    <li>Thérapie cognitive</li>
+    <li>Hypnose</li>
+  </ul>
+</section>
+```
+**Mêmes textes, design moderne avec classes CSS professionnelles**
 
 ---
 

@@ -4,10 +4,25 @@ Système pour générer des sites web créatifs à partir de sites existants.
 
 ## 🎯 Comment ça marche
 
-1. **Scrape** un site existant → extrait textes, images (URLs), logo, contacts
-2. **Gemini** reçoit les données → génère un site créatif moderne
-3. **HTML/CSS/JS** généré → utilise les **vraies images** (URLs originales)
-4. **Validation** manuelle → déploiement si OK
+**"Même squelette, nouveau visuel"** - Le client reconnaît son site mais en mieux !
+
+1. **Scrape** → Extrait la structure COMPLÈTE du site (ordre, sections, tous les textes)
+2. **Gemini** → Recrée le MÊME squelette avec un design moderne
+3. **HTML généré** → Mêmes contenus + Vraies images + Design professionnel
+4. **Validation** → Le client voit "son site mais magnifique"
+
+**Préservé exactement :**
+- ✅ Ordre des sections
+- ✅ Tous les titres (texte identique)
+- ✅ Tous les paragraphes (texte identique)
+- ✅ Toutes les listes
+- ✅ Images originales (URLs)
+
+**Changé (design uniquement) :**
+- 🎨 Couleurs modernes
+- 🎨 Typographie élégante
+- 🎨 Layout contemporain
+- 🎨 Animations fluides
 
 ## Installation rapide
 

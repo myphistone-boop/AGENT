@@ -58,6 +58,7 @@ class WebsiteScraper:
             self.data['texts'] = self._extract_texts(soup)
             self.data['phone'] = self._extract_phone(soup)
             self.data['email'] = self._extract_email(soup)
+            self.data['structure'] = self._extract_structure(soup)
 
             logger.info(f"✅ Site scrappé avec succès")
             return self.data
@@ -340,6 +341,158 @@ class WebsiteScraper:
         match = re.search(email_pattern, text)
         if match:
             return match.group(0)
+
+        return None
+
+    def _extract_structure(self, soup):
+        """
+        Extrait la structure complète du site (ordre, sections, textes complets)
+        pour préserver le squelette exact du site
+        """
+        structure = []
+
+        # Chercher le contenu principal (main, body, ou tags de contenu)
+        main_content = soup.find('main') or soup.find('body')
+
+        if not main_content:
+            logger.warning("Aucun contenu principal trouvé")
+            return structure
+
+        # Parser récursivement les sections
+        current_section = None
+        section_counter = 0
+
+        for element in main_content.find_all(['section', 'div', 'article', 'h1', 'h2', 'h3', 'h4', 'p', 'ul', 'ol'], recursive=False):
+            # Ignorer les éléments de navigation, header, footer
+            if self._is_navigation_element(element):
+                continue
+
+            # Sections principales
+            if element.name in ['section', 'article'] or (element.name == 'div' and self._looks_like_section(element)):
+                section_counter += 1
+                section_data = self._parse_section(element, section_counter)
+                if section_data and section_data['content']:
+                    structure.append(section_data)
+
+            # Éléments isolés (hors section)
+            elif element.name in ['h1', 'h2', 'h3', 'h4', 'p', 'ul', 'ol']:
+                if not current_section:
+                    section_counter += 1
+                    current_section = {
+                        'type': 'section',
+                        'title': f'Section {section_counter}',
+                        'content': []
+                    }
+                    structure.append(current_section)
+
+                content_item = self._parse_element(element)
+                if content_item:
+                    current_section['content'].append(content_item)
+
+        logger.info(f"✓ Structure extraite: {len(structure)} sections")
+        return structure
+
+    def _is_navigation_element(self, element):
+        """Vérifie si un élément est de la navigation"""
+        # Navigation, header, footer, sidebar, menu
+        nav_keywords = ['nav', 'menu', 'header', 'footer', 'sidebar', 'aside']
+
+        # Vérifier les classes et IDs
+        classes = ' '.join(element.get('class', [])).lower()
+        elem_id = (element.get('id') or '').lower()
+
+        for keyword in nav_keywords:
+            if keyword in classes or keyword in elem_id:
+                return True
+
+        return element.name in ['nav', 'header', 'footer', 'aside']
+
+    def _looks_like_section(self, element):
+        """Détermine si un div ressemble à une section de contenu"""
+        # Div avec beaucoup de contenu texte
+        text_length = len(element.get_text(strip=True))
+        if text_length < 50:
+            return False
+
+        # Div avec des titres
+        if element.find(['h1', 'h2', 'h3']):
+            return True
+
+        # Div avec des paragraphes
+        if len(element.find_all('p')) >= 2:
+            return True
+
+        return False
+
+    def _parse_section(self, section_element, section_num):
+        """Parse une section complète"""
+        section_data = {
+            'type': 'section',
+            'title': None,
+            'content': []
+        }
+
+        # Chercher un titre pour la section
+        title_elem = section_element.find(['h1', 'h2', 'h3', 'h4'])
+        if title_elem:
+            section_data['title'] = title_elem.get_text(strip=True)
+        else:
+            section_data['title'] = f'Section {section_num}'
+
+        # Parser tous les éléments de contenu
+        for elem in section_element.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ul', 'ol', 'blockquote']):
+            content_item = self._parse_element(elem)
+            if content_item:
+                section_data['content'].append(content_item)
+
+        return section_data
+
+    def _parse_element(self, element):
+        """Parse un élément individuel (titre, paragraphe, liste)"""
+        elem_type = element.name
+
+        # Titres
+        if elem_type in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+            text = element.get_text(strip=True)
+            if text and len(text) > 0:
+                return {
+                    'type': 'heading',
+                    'level': elem_type,
+                    'text': text
+                }
+
+        # Paragraphes
+        elif elem_type == 'p':
+            text = element.get_text(strip=True)
+            if text and len(text) > 10:  # Ignorer les paragraphes trop courts
+                return {
+                    'type': 'paragraph',
+                    'text': text
+                }
+
+        # Listes
+        elif elem_type in ['ul', 'ol']:
+            items = []
+            for li in element.find_all('li', recursive=False):
+                item_text = li.get_text(strip=True)
+                if item_text:
+                    items.append(item_text)
+
+            if items:
+                return {
+                    'type': 'list',
+                    'ordered': elem_type == 'ol',
+                    'items': items
+                }
+
+        # Citations
+        elif elem_type == 'blockquote':
+            text = element.get_text(strip=True)
+            if text:
+                return {
+                    'type': 'quote',
+                    'text': text
+                }
 
         return None
 

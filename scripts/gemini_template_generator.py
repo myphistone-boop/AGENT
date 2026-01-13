@@ -86,9 +86,13 @@ class GeminiTemplateGenerator:
 
         if data:
             logger.info(f"✓ Site scrappé: {data.get('title', 'N/A')}")
+            logger.info(f"  - {len(data.get('structure', []))} sections extraites")
             logger.info(f"  - {len(data.get('image_urls', []))} images URLs")
-            logger.info(f"  - {len(data.get('texts', []))} paragraphes")
             logger.info(f"  - Logo URL: {'✓' if data.get('logo_url') else '✗'}")
+
+            # Compter le contenu total
+            total_items = sum(len(s.get('content', [])) for s in data.get('structure', []))
+            logger.info(f"  - {total_items} éléments de contenu (titres, paragraphes, listes)")
 
         return data
 
@@ -126,82 +130,134 @@ class GeminiTemplateGenerator:
         # Préparer les données
         title = scraped_data.get('title', 'Mon Site')
         description = scraped_data.get('description', '')
-        headings = scraped_data.get('headings', [])[:5]
-        texts = scraped_data.get('texts', [])[:8]
         phone = scraped_data.get('phone', '')
         email = scraped_data.get('email', '')
         logo_url = scraped_data.get('logo_url', '')
         image_urls = scraped_data.get('image_urls', [])
+        structure = scraped_data.get('structure', [])
+
+        # Formatter la structure pour le prompt
+        structure_text = self._format_structure_for_prompt(structure, image_urls)
 
         prompt = f"""Tu es un designer web créatif et talentueux.
 
-Je veux que tu crées un site web MODERNE, ÉLÉGANT et CRÉATIF pour un·e {self.theme}.
+MISSION: Recrée ce site web avec un DESIGN MODERNE et ÉLÉGANT, tout en préservant EXACTEMENT la même structure et les mêmes contenus.
 
-DONNÉES DU CLIENT (à utiliser dans le site):
+Le client veut reconnaître son site (même squelette, mêmes textes) mais avec un visuel PROFESSIONNEL et MODERNE.
+
+════════════════════════════════════════════════════════════════
+
+INFORMATIONS DU CLIENT:
+- Type: {self.theme}
 - Titre/Nom: {title}
 - Description: {description}
+- Logo: {logo_url if logo_url else 'Pas de logo'}
 - Téléphone: {phone}
 - Email: {email}
-- Logo: {logo_url if logo_url else 'Pas de logo trouvé'}
 
-SECTIONS/TITRES à intégrer:
-{chr(10).join(f'- {h}' for h in headings)}
+════════════════════════════════════════════════════════════════
 
-TEXTES à utiliser:
-{chr(10).join(f'- {t[:150]}...' for t in texts[:5])}
+STRUCTURE EXACTE À REPRODUIRE:
 
-INSTRUCTIONS CRÉATIVES:
+{structure_text}
 
-1. DESIGN VISUEL:
-   - Utilise une palette de couleurs PROFESSIONNELLE et HARMONIEUSE pour un·e {self.theme}
-   - Design moderne avec beaucoup d'espace blanc (whitespace)
-   - Typographie élégante (Google Fonts)
-   - Animations subtiles et fluides
-   - Dégradés et effets visuels modernes
+════════════════════════════════════════════════════════════════
 
-2. STRUCTURE:
-   - Hero section impactante avec titre accrocheur
-   - Section "À propos" / présentation
-   - Section services/offres
-   - Section témoignages (invente 2-3 témoignages crédibles pour un·e {self.theme})
-   - Section contact avec formulaire
-   - Footer professionnel
+INSTRUCTIONS STRICTES:
 
-3. INTERACTIVITÉ:
-   - Animations au scroll (fade-in, slide-in)
-   - Boutons avec hover effects
-   - Navigation smooth scroll
-   - Formulaire de contact fonctionnel (action vers formspree.io ou email)
+1. STRUCTURE & CONTENU (À PRÉSERVER EXACTEMENT):
+   ✓ Garde le MÊME ORDRE des sections
+   ✓ Garde les MÊMES TITRES (texte identique)
+   ✓ Garde les MÊMES PARAGRAPHES (texte identique)
+   ✓ Garde les MÊMES LISTES (texte identique)
+   ✓ NE MODIFIE PAS les textes du client
+   ✓ NE CHANGE PAS l'ordre des sections
+   ✓ NE SUPPRIME AUCUN contenu
 
-4. TECHNOLOGIE:
-   - Site ONE-PAGE en HTML pur (tout dans un seul fichier)
-   - CSS moderne (flexbox, grid, animations CSS)
-   - JavaScript vanilla pour interactions
-   - Responsive mobile-first
-   - Optimisé pour la performance
+2. DESIGN VISUEL (À MODERNISER):
+   ✓ Palette de couleurs MODERNE et HARMONIEUSE pour un·e {self.theme}
+   ✓ Typographie élégante (Google Fonts - choisis 2 fonts complémentaires)
+   ✓ Layout moderne avec whitespace généreux
+   ✓ Design cards/sections avec ombres subtiles et border-radius
+   ✓ Dégradés et effets visuels modernes
+   ✓ Hero section impactante en haut
 
-5. CONTENU:
-   - Utilise TOUS les textes fournis ci-dessus
-   - Réorganise-les de manière cohérente
-   - Améliore la présentation si nécessaire
-   - Garde le même message et les mêmes informations
+3. IMAGES:
+   ✓ Utilise les URLs d'images indiquées dans la structure
+   ✓ Si pas assez d'images, utilise des placeholders de unsplash.com pertinents pour {self.theme}
+   ✓ Intègre-les de manière élégante (object-fit: cover, aspect-ratio, lazy loading)
 
-6. IMAGES:
-   - IMPORTANT: Utilise UNIQUEMENT les URLs d'images suivantes (ce sont les vraies images du client):
-     {chr(10).join(f'     * {url}' for url in image_urls) if image_urls else '     * Aucune image trouvée, utilise des placeholders de unsplash.com'}
-   - Intègre ces images de manière élégante et créative dans le design
-   - Optimise leur affichage (lazy loading, aspect-ratio, object-fit)
+4. INTERACTIVITÉ:
+   ✓ Animations au scroll (fade-in, slide-up avec Intersection Observer)
+   ✓ Hover effects sur boutons et cards
+   ✓ Navigation smooth scroll
+   ✓ Formulaire de contact si section contact (action: formspree.io ou mailto:{email})
 
-IMPORTANT:
-- Génère UN SEUL FICHIER HTML complet (avec CSS et JS inline)
-- Code propre et bien commenté
-- Prêt à être déployé immédiatement
-- Design qui WOW
+5. TECHNOLOGIE:
+   ✓ UN SEUL FICHIER HTML (CSS et JS inline dans <style> et <script>)
+   ✓ CSS moderne (flexbox, grid, variables CSS, animations)
+   ✓ JavaScript vanilla (pas de frameworks)
+   ✓ Responsive mobile-first
+   ✓ Performance optimisée
 
-Génère le code HTML complet maintenant:
+6. NAVIGATION:
+   ✓ Ajoute une navigation fixe en haut avec liens vers chaque section
+   ✓ Liens basés sur les titres de sections
+
+════════════════════════════════════════════════════════════════
+
+RÉSULTAT ATTENDU:
+Le client doit dire "C'est mon site mais en mieux !" - même contenu, design professionnel.
+
+Génère maintenant le code HTML complet:
 """
 
         return prompt
+
+    def _format_structure_for_prompt(self, structure, image_urls):
+        """Formate la structure extraite pour le prompt Gemini"""
+        if not structure:
+            return "Aucune structure trouvée - crée une structure basique"
+
+        formatted = []
+        image_index = 0
+
+        for section in structure:
+            section_title = section.get('title', 'Section sans titre')
+            formatted.append(f"\n--- {section_title.upper()} ---\n")
+
+            for item in section.get('content', []):
+                item_type = item.get('type')
+
+                if item_type == 'heading':
+                    level = item.get('level', 'h2')
+                    text = item.get('text', '')
+                    formatted.append(f"{level.upper()}: {text}")
+
+                elif item_type == 'paragraph':
+                    text = item.get('text', '')
+                    formatted.append(f"Paragraphe: {text}")
+
+                elif item_type == 'list':
+                    is_ordered = item.get('ordered', False)
+                    items = item.get('items', [])
+                    list_type = "Liste ordonnée" if is_ordered else "Liste à puces"
+                    formatted.append(f"{list_type}:")
+                    for list_item in items:
+                        formatted.append(f"  - {list_item}")
+
+                elif item_type == 'quote':
+                    text = item.get('text', '')
+                    formatted.append(f'Citation: "{text}"')
+
+            # Ajouter une image à cette section si disponible
+            if image_index < len(image_urls):
+                formatted.append(f"[IMAGE: {image_urls[image_index]}]")
+                image_index += 1
+
+            formatted.append("")  # Ligne vide entre sections
+
+        return "\n".join(formatted)
 
     def _extract_code_block(self, text, language='html'):
         """Extrait un bloc de code markdown"""

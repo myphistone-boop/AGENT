@@ -1,28 +1,43 @@
-# 🚀 Quick Start - Générateur Gemini
+# 🚀 Quick Start - Redesign de sites avec Gemini
 
-Système pour générer des sites web créatifs à partir de sites existants.
+**Transformez n'importe quel site en version moderne et esthétique**
 
 ## 🎯 Comment ça marche
 
-**"Même squelette, nouveau visuel"** - Le client reconnaît son site mais en mieux !
+**Input:** URL du site du client (ex: `https://site-client-actuel.com`)
+**Output:** Le MÊME site redesigné avec un visuel moderne et professionnel
 
-1. **Scrape** → Extrait la structure COMPLÈTE du site (ordre, sections, tous les textes)
-2. **Gemini** → Recrée le MÊME squelette avec un design moderne
-3. **HTML généré** → Mêmes contenus + Vraies images + Design professionnel
-4. **Validation** → Le client voit "son site mais magnifique"
+### Processus:
 
-**Préservé exactement :**
-- ✅ Ordre des sections
-- ✅ Tous les titres (texte identique)
-- ✅ Tous les paragraphes (texte identique)
-- ✅ Toutes les listes
-- ✅ Images originales (URLs)
+1. **Scrape** → Extrait TOUT le contenu du site existant
+   - Tous les textes (identiques)
+   - Toutes les images (mêmes URLs)
+   - La structure exacte (même ordre)
 
-**Changé (design uniquement) :**
-- 🎨 Couleurs modernes
-- 🎨 Typographie élégante
-- 🎨 Layout contemporain
-- 🎨 Animations fluides
+2. **Gemini Redesign** → Génère le site avec un nouveau visuel
+   - ✅ **Contenu identique** (textes du site original)
+   - ✅ **Structure identique** (sections dans le même ordre)
+   - ✅ **Images identiques** (URLs du site original)
+   - 🎨 **Design moderne et esthétique** (nouveau visuel)
+
+3. **Résultat** → Site redesigné prêt pour validation
+   - Le client reconnaît son site
+   - Mais avec un visuel professionnel et moderne
+
+### Ce qui est préservé (contenu original):
+- ✅ Tous les textes du site (identiques)
+- ✅ Toutes les images (mêmes URLs)
+- ✅ Structure et ordre des sections
+- ✅ Logos et éléments de marque
+
+### Ce qui change (nouveau design):
+- 🎨 Palette de couleurs moderne
+- 🎨 Typographie professionnelle
+- 🎨 Layout contemporain et aéré
+- 🎨 Animations et transitions fluides
+- 🎨 Design responsive (mobile/desktop)
+
+**Résultat:** Le client voit "C'est mon site, mais en magnifique !"
 
 ## Installation rapide
 
@@ -54,47 +69,51 @@ $env:HTTPS_PROXY="http://proxy.entreprise.com:8080"
 
 ## Utilisation
 
-### Commande basique (avec scraping)
+### Redesigner un site (mode complet)
 
 ```bash
+# Prendre le site du client et générer une version moderne
 python -m scripts.gemini_template_generator \
-  --url "https://site-a-scraper.com" \
-  --theme "thérapeute"
+  --url "https://site-du-client.com" \
+  --theme "moderne et élégant"
 ```
 
-### Régénération sans rescraper (skip phase 1)
+**Le paramètre `--theme`:** Guide le style visuel du redesign
+- `"moderne et élégant"` → Design épuré, contemporain
+- `"chaleureux et accueillant"` → Couleurs douces, ambiance conviviale
+- `"professionnel"` → Design corporate, sérieux
+- `"dynamique"` → Couleurs vives, énergique
 
-Si vous avez déjà scrappé un site, vous pouvez régénérer sans rescraper:
+### Régénérer avec un style différent (mode rapide)
+
+Si vous voulez tester plusieurs styles visuels sans rescraper:
 
 ```bash
-# Aller directement à la phase 2 (Gemini) avec les données existantes
+# Utiliser les données déjà extraites du site client
 python -m scripts.gemini_template_generator \
-  --data-file "temp_files/gemini_therapeute/scraped_data.json" \
-  --theme "thérapeute"
+  --data-file "temp_files/gemini_moderne_et_elegant/scraped_data.json" \
+  --theme "chaleureux et accueillant"
 ```
 
 **Avantages:**
-- ⚡ Plus rapide (pas de scraping)
-- 🔄 Régénérer plusieurs fois avec Gemini
-- 💰 Économise les requêtes de scraping
-
-**Cas d'usage:**
-- Tester différents thèmes avec les mêmes données
-- Régénérer après avoir ajusté le prompt Gemini
-- Éviter de scraper le même site plusieurs fois
+- ⚡ Plus rapide (skip le scraping)
+- 🔄 Tester plusieurs styles visuels rapidement
+- 💰 Économise les ressources
+- 🎨 Trouver le meilleur design pour le client
 
 ### Avec prévisualisation automatique
 
 ```bash
+# Ouvre automatiquement le site redesigné dans le navigateur
 python -m scripts.gemini_template_generator \
-  --url "https://site-a-scraper.com" \
-  --theme "thérapeute" \
+  --url "https://site-du-client.com" \
+  --theme "moderne et élégant" \
   --preview
 ```
 
 ## Résultat
 
-Fichiers générés dans: `outputs/gemini_templates/gemini_therapeute/`
+Fichiers générés dans: `outputs/gemini_templates/gemini_moderne_et_elegant/`
 
 ```
 gemini_therapeute/
@@ -105,75 +124,99 @@ gemini_therapeute/
 
 ## 📂 Stockage des fichiers
 
-### Fichiers temporaires de scraping
+### Fichiers temporaires (pendant le scraping)
 ```
-temp_files/gemini_therapeute/
-├── screenshot_original.png    # Capture d'écran du site original
-└── scraped_data.json          # Données brutes extraites
+temp_files/gemini_moderne_et_elegant/
+├── screenshot_original.png    # Capture du site original du client
+└── scraped_data.json          # Contenu extrait (textes, images, structure)
 ```
-**Note:** Ces fichiers temporaires sont créés pendant le scraping et peuvent être supprimés après génération.
+**Note:** Fichiers temporaires créés pendant le scraping, réutilisables pour tester d'autres styles.
 
-### Fichiers générés (sortie finale)
+### Fichiers générés (site redesigné final)
 ```
-outputs/gemini_templates/gemini_therapeute/
-├── index.html           # Site complet généré par Gemini
-├── scraped_data.json    # Données extraites (pour référence)
-└── README.md            # Guide de validation manuelle
+outputs/gemini_templates/gemini_moderne_et_elegant/
+├── index.html           # Site redesigné complet (HTML/CSS/JS inline)
+├── scraped_data.json    # Données du site original (pour référence)
+└── README.md            # Checklist de validation
 ```
-**Note:** C'est le dossier final contenant votre template généré prêt pour validation.
+**Note:** Le dossier final contient le site redesigné prêt pour validation client.
 
 ## Workflow
 
 ### Mode complet (avec scraping)
-1. **Scrape** un site existant (URL)
-2. **Gemini génère** un nouveau site créatif du même thème
-3. **Validation manuelle** du résultat
-4. **Déploiement** si validé
+1. **Input** → URL du site actuel du client
+2. **Scraping** → Extraction de tout le contenu (textes, images, structure)
+3. **Gemini Redesign** → Génération du site avec nouveau visuel
+4. **Validation** → Le client vérifie et approuve
+5. **Déploiement** → Mise en ligne du site redesigné
 
-### Mode rapide (sans rescraper)
-1. ~~**Scrape**~~ → **Utiliser les données existantes** (skip phase 1)
-2. **Gemini génère** un nouveau site créatif
-3. **Validation manuelle** du résultat
-4. **Déploiement** si validé
+### Mode rapide (tester plusieurs styles)
+1. **Scraping initial** → Fait une seule fois
+2. **Gemini Redesign** → Génère avec style A (ex: "moderne")
+3. **Gemini Redesign** → Génère avec style B (ex: "chaleureux")
+4. **Gemini Redesign** → Génère avec style C (ex: "professionnel")
+5. **Choix client** → Le client choisit son préféré
+6. **Déploiement** → Mise en ligne de la version choisie
 
-## Coûts
+## Coûts par redesign
 
-- **Gemini Pro**: ~$0.03-0.05 par site
-- **Gemini Flash**: ~$0.002-0.003 par site
+- **Gemini Pro** (recommandé): ~$0.03-0.05 par redesign
+- **Gemini Flash** (rapide): ~$0.002-0.003 par redesign
 
-Pour 100 sites: ~$0.20-0.30 avec Flash
+**Exemple:**
+- Redesigner 1 site avec 3 styles différents = ~$0.09-0.15 (Gemini Pro)
+- Redesigner 100 sites = ~$0.20-0.30 (Gemini Flash)
 
 ## Documentation complète
 
 Voir: [`docs/GEMINI_TEMPLATE_GENERATOR.md`](docs/GEMINI_TEMPLATE_GENERATOR.md)
 
-## Exemples
+## Exemples concrets
 
-### Première génération (avec scraping)
+### Cas 1: Redesigner le site d'un thérapeute
 
 ```bash
-# Thérapeute
-python -m scripts.gemini_template_generator --url "https://psy.com" --theme "thérapeute" --preview
-
-# Coach sportif
-python -m scripts.gemini_template_generator --url "https://coach.com" --theme "coach sportif" --preview
-
-# Yoga
-python -m scripts.gemini_template_generator --url "https://yoga.com" --theme "yoga" --preview
+# Le site actuel est vieux et pas esthétique
+# Générer une version moderne avec le même contenu
+python -m scripts.gemini_template_generator \
+  --url "https://cabinet-therapie-dupont.fr" \
+  --theme "apaisant et professionnel" \
+  --preview
 ```
 
-### Régénération rapide (sans rescraper)
+**Résultat:** Même contenu (textes, offres, photos) mais design moderne et esthétique
+
+### Cas 2: Redesigner le site d'un restaurant
 
 ```bash
-# Régénérer avec un thème différent
+# Le site du restaurant est basique
+# Générer une version appétissante et moderne
 python -m scripts.gemini_template_generator \
-  --data-file "outputs/gemini_templates/gemini_therapeute/scraped_data.json" \
-  --theme "coach de vie"
+  --url "https://restaurant-labelleassiette.fr" \
+  --theme "gastronomique et élégant" \
+  --preview
+```
 
-# Tester plusieurs thèmes rapidement
+**Résultat:** Menu identique, photos identiques, mais design qui donne faim !
+
+### Cas 3: Tester plusieurs styles pour le même client
+
+```bash
+# 1. Scraper le site une seule fois
 python -m scripts.gemini_template_generator \
-  --data-file "temp_files/gemini_yoga/scraped_data.json" \
-  --theme "méditation et bien-être"
+  --url "https://yoga-studio-paris.fr" \
+  --theme "zen et minimaliste"
+
+# 2. Tester d'autres styles sans rescraper
+python -m scripts.gemini_template_generator \
+  --data-file "outputs/gemini_templates/gemini_zen_et_minimaliste/scraped_data.json" \
+  --theme "énergique et coloré"
+
+python -m scripts.gemini_template_generator \
+  --data-file "outputs/gemini_templates/gemini_zen_et_minimaliste/scraped_data.json" \
+  --theme "naturel et apaisant"
+
+# 3. Montrer les 3 versions au client et il choisit son préféré
 ```
 
 ---

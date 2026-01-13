@@ -49,10 +49,12 @@ class WebsiteScraper:
             self.data['url'] = self.url
             self.data['screenshot_original'] = screenshot_path
             self.data['logo'] = self._extract_logo(soup)
+            self.data['logo_url'] = self._extract_logo_url(soup)
             self.data['title'] = self._extract_title(soup)
             self.data['description'] = self._extract_description(soup)
             self.data['headings'] = self._extract_headings(soup)
             self.data['images'] = self._extract_images(soup)
+            self.data['image_urls'] = self._extract_image_urls(soup)
             self.data['texts'] = self._extract_texts(soup)
             self.data['phone'] = self._extract_phone(soup)
             self.data['email'] = self._extract_email(soup)
@@ -165,6 +167,42 @@ class WebsiteScraper:
 
         return None
 
+    def _extract_logo_url(self, soup):
+        """Extrait l'URL du logo (sans télécharger)"""
+        logo_url = None
+
+        # Chercher le logo (plusieurs stratégies)
+        # 1. Balise avec "logo" dans class ou id
+        logo_elem = soup.find(['img', 'a'], class_=re.compile(r'logo', re.I))
+        if not logo_elem:
+            logo_elem = soup.find(['img', 'a'], id=re.compile(r'logo', re.I))
+
+        # 2. Premier img dans le header
+        if not logo_elem:
+            header = soup.find('header')
+            if header:
+                logo_elem = header.find('img')
+
+        # 3. Première image du site
+        if not logo_elem:
+            logo_elem = soup.find('img')
+
+        # Récupérer l'URL
+        if logo_elem:
+            if logo_elem.name == 'img':
+                logo_url = logo_elem.get('src')
+            elif logo_elem.name == 'a':
+                img = logo_elem.find('img')
+                if img:
+                    logo_url = img.get('src')
+
+        if logo_url:
+            # URL absolue
+            logo_url = urljoin(self.url, logo_url)
+            return logo_url
+
+        return None
+
     def _extract_title(self, soup):
         """Extrait le titre principal"""
         # H1
@@ -232,6 +270,32 @@ class WebsiteScraper:
                 images.append(str(img_path))
 
         return images[:5]  # Max 5 images
+
+    def _extract_image_urls(self, soup):
+        """Extrait les URLs des images (sans télécharger)"""
+        image_urls = []
+        img_tags = soup.find_all('img', limit=10)
+
+        for img in img_tags:
+            img_url = img.get('src') or img.get('data-src')
+            if not img_url:
+                continue
+
+            # Ignorer les petites images (icônes, etc.)
+            width = img.get('width')
+            height = img.get('height')
+            if width and height:
+                try:
+                    if int(width) < 100 or int(height) < 100:
+                        continue
+                except:
+                    pass
+
+            # URL absolue
+            img_url = urljoin(self.url, img_url)
+            image_urls.append(img_url)
+
+        return image_urls[:5]  # Max 5 images
 
     def _extract_texts(self, soup):
         """Extrait les paragraphes de texte"""

@@ -2,6 +2,13 @@
 
 Système pour générer des sites web créatifs à partir de sites existants.
 
+## 🎯 Comment ça marche
+
+1. **Scrape** un site existant → extrait textes, images (URLs), logo, contacts
+2. **Gemini** reçoit les données → génère un site créatif moderne
+3. **HTML/CSS/JS** généré → utilise les **vraies images** (URLs originales)
+4. **Validation** manuelle → déploiement si OK
+
 ## Installation rapide
 
 ```bash

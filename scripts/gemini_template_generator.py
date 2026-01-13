@@ -86,9 +86,9 @@ class GeminiTemplateGenerator:
 
         if data:
             logger.info(f"✓ Site scrappé: {data.get('title', 'N/A')}")
-            logger.info(f"  - {len(data.get('images', []))} images")
+            logger.info(f"  - {len(data.get('image_urls', []))} images URLs")
             logger.info(f"  - {len(data.get('texts', []))} paragraphes")
-            logger.info(f"  - Logo: {'✓' if data.get('logo') else '✗'}")
+            logger.info(f"  - Logo URL: {'✓' if data.get('logo_url') else '✗'}")
 
         return data
 
@@ -130,6 +130,8 @@ class GeminiTemplateGenerator:
         texts = scraped_data.get('texts', [])[:8]
         phone = scraped_data.get('phone', '')
         email = scraped_data.get('email', '')
+        logo_url = scraped_data.get('logo_url', '')
+        image_urls = scraped_data.get('image_urls', [])
 
         prompt = f"""Tu es un designer web créatif et talentueux.
 
@@ -140,6 +142,7 @@ DONNÉES DU CLIENT (à utiliser dans le site):
 - Description: {description}
 - Téléphone: {phone}
 - Email: {email}
+- Logo: {logo_url if logo_url else 'Pas de logo trouvé'}
 
 SECTIONS/TITRES à intégrer:
 {chr(10).join(f'- {h}' for h in headings)}
@@ -184,8 +187,10 @@ INSTRUCTIONS CRÉATIVES:
    - Garde le même message et les mêmes informations
 
 6. IMAGES:
-   - Utilise des placeholders élégants (via https://placehold.co/WIDTHxHEIGHT/BGCOLOR/TEXTCOLOR ou unsplash.com)
-   - Choisir des images pertinentes pour un·e {self.theme}
+   - IMPORTANT: Utilise UNIQUEMENT les URLs d'images suivantes (ce sont les vraies images du client):
+     {chr(10).join(f'     * {url}' for url in image_urls) if image_urls else '     * Aucune image trouvée, utilise des placeholders de unsplash.com'}
+   - Intègre ces images de manière élégante et créative dans le design
+   - Optimise leur affichage (lazy loading, aspect-ratio, object-fit)
 
 IMPORTANT:
 - Génère UN SEUL FICHIER HTML complet (avec CSS et JS inline)

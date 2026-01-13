@@ -19,6 +19,24 @@ Système automatisé qui scrape un site existant et génère un nouveau site web
 
 ---
 
+## 🎨 Comment ça marche
+
+### Images et contenus
+
+Le système utilise les **vraies URLs** des images du site source :
+- ✅ Logo du site original
+- ✅ Images du site original (URLs directes)
+- ✅ Textes extraits du site
+- ✅ Informations de contact (téléphone, email)
+
+**Avantages :**
+- Pas de stockage local nécessaire
+- Images en haute qualité depuis la source
+- Génération ultra-rapide
+- Coût minimal
+
+---
+
 ## 📦 Installation
 
 ### 1. Installer les dépendances

@@ -123,12 +123,38 @@ python -m scripts.gemini_template_generator \
 
 ## 📂 Structure de sortie
 
+### Fichiers temporaires de scraping
+
+Pendant le scraping, les fichiers temporaires sont stockés dans:
+```
+temp_files/gemini_therapeute/
+├── screenshot_original.png    # Capture d'écran du site original
+└── scraped_data.json          # Données brutes extraites
+```
+
+**Utilisation:**
+- Créés automatiquement pendant le scraping
+- Utilisés pour l'analyse et le débogage
+- Peuvent être supprimés après génération réussie
+- Ne sont PAS inclus dans le template final
+
+### Fichiers générés (sortie finale)
+
+Les templates générés sont stockés dans:
 ```
 outputs/gemini_templates/gemini_therapeute/
 ├── index.html              # Site complet (HTML/CSS/JS)
 ├── scraped_data.json       # Données extraites du site source
 └── README.md               # Guide de validation
 ```
+
+**Description:**
+- **index.html** - Template complet prêt pour déploiement (HTML/CSS/JS inline)
+- **scraped_data.json** - Données extraites pour référence (structure, images URLs, contacts)
+- **README.md** - Guide de validation manuelle avec checklist
+
+**Dossier de sortie:** `outputs/gemini_templates/gemini_{theme}/`
+- Où `{theme}` est le thème en minuscules avec underscores (ex: "coach sportif" → `gemini_coach_sportif`)
 
 ---
 

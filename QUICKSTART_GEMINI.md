@@ -65,6 +65,25 @@ gemini_therapeute/
 └── README.md            # Guide de validation
 ```
 
+## 📂 Stockage des fichiers
+
+### Fichiers temporaires de scraping
+```
+temp_files/gemini_therapeute/
+├── screenshot_original.png    # Capture d'écran du site original
+└── scraped_data.json          # Données brutes extraites
+```
+**Note:** Ces fichiers temporaires sont créés pendant le scraping et peuvent être supprimés après génération.
+
+### Fichiers générés (sortie finale)
+```
+outputs/gemini_templates/gemini_therapeute/
+├── index.html           # Site complet généré par Gemini
+├── scraped_data.json    # Données extraites (pour référence)
+└── README.md            # Guide de validation manuelle
+```
+**Note:** C'est le dossier final contenant votre template généré prêt pour validation.
+
 ## Workflow
 
 1. **Scrape** un site existant (URL)

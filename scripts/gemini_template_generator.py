@@ -49,11 +49,11 @@ logger = setup_logger("gemini_generator")
 class GeminiTemplateGenerator:
     """Générateur de templates avec Gemini"""
 
-    def __init__(self, theme: str, source_url: str, api_key: str = None):
+    def __init__(self, theme: str, source_url: str = None, api_key: str = None):
         """
         Args:
             theme: Type de template (ex: "thérapeute", "coach", "yoga")
-            source_url: URL du site à scraper
+            source_url: URL du site à scraper (optionnel si utilisation de données existantes)
             api_key: Clé API Gemini (ou via GEMINI_API_KEY env var)
         """
         self.theme = theme
@@ -86,31 +86,50 @@ class GeminiTemplateGenerator:
         self.project_id = f"gemini_{theme.lower().replace(' ', '_')}"
         self.output_dir = None
 
-    def generate(self):
+    def generate(self, existing_data=None):
         """
         Pipeline complet : Scrape → Gemini → HTML/CSS/JS
+
+        Args:
+            existing_data: Données déjà scrapées (optionnel, skip la phase de scraping)
 
         Returns:
             dict: Résultats avec paths des fichiers générés
         """
-        logger.info(f"🎨 Génération d'un template '{self.theme}' depuis {self.source_url}")
+        # Si données existantes fournies, skip le scraping
+        if existing_data:
+            logger.info(f"🎨 Génération d'un template '{self.theme}' depuis données existantes")
+            logger.info(f"⏭️  Phase de scraping ignorée (utilisation de données pré-scrapées)")
+            scraped_data = existing_data
 
-        # 1. Scraper le site source
-        logger.info("📥 Étape 1/3: Scraping du site source...")
-        scraped_data = self._scrape_source()
-        if not scraped_data:
-            logger.error("❌ Échec du scraping")
-            return None
+            # Afficher un résumé des données
+            logger.info(f"📊 Données chargées:")
+            logger.info(f"   - Titre: {scraped_data.get('title', 'N/A')}")
+            logger.info(f"   - {len(scraped_data.get('structure', []))} sections")
+            logger.info(f"   - {len(scraped_data.get('image_urls', []))} images URLs")
+
+        else:
+            # Pipeline normal avec scraping
+            logger.info(f"🎨 Génération d'un template '{self.theme}' depuis {self.source_url}")
+
+            # 1. Scraper le site source
+            logger.info("📥 Étape 1/3: Scraping du site source...")
+            scraped_data = self._scrape_source()
+            if not scraped_data:
+                logger.error("❌ Échec du scraping")
+                return None
 
         # 2. Générer avec Gemini
-        logger.info("🤖 Étape 2/3: Génération créative avec Gemini...")
+        step_num = "2/2" if existing_data else "2/3"
+        logger.info(f"🤖 Étape {step_num}: Génération créative avec Gemini...")
         generated_code = self._generate_with_gemini(scraped_data)
         if not generated_code:
             logger.error("❌ Échec de la génération Gemini")
             return None
 
         # 3. Sauvegarder les fichiers
-        logger.info("💾 Étape 3/3: Sauvegarde des fichiers...")
+        step_num = "3/3" if not existing_data else "2/2"
+        logger.info(f"💾 Étape {step_num}: Sauvegarde des fichiers...")
         output_paths = self._save_output(generated_code, scraped_data)
 
         logger.info(f"✅ Template généré avec succès !")
@@ -449,7 +468,6 @@ def main():
     parser.add_argument(
         '--url',
         type=str,
-        required=True,
         help='URL du site à scraper'
     )
 
@@ -467,6 +485,12 @@ def main():
     )
 
     parser.add_argument(
+        '--data-file',
+        type=str,
+        help='Chemin vers un fichier scraped_data.json existant (skip le scraping)'
+    )
+
+    parser.add_argument(
         '--preview',
         action='store_true',
         help='Ouvrir dans le navigateur après génération'
@@ -474,16 +498,41 @@ def main():
 
     args = parser.parse_args()
 
+    # Validation: soit --url soit --data-file doit être fourni
+    if not args.url and not args.data_file:
+        parser.error("❌ Vous devez fournir soit --url soit --data-file")
+
+    if args.url and args.data_file:
+        parser.error("❌ Utilisez soit --url soit --data-file, pas les deux")
+
     try:
+        # Charger les données existantes si --data-file fourni
+        existing_data = None
+        if args.data_file:
+            logger.info(f"📂 Chargement des données depuis: {args.data_file}")
+            try:
+                with open(args.data_file, 'r', encoding='utf-8') as f:
+                    existing_data = json.load(f)
+                logger.info(f"✓ Données chargées avec succès")
+            except FileNotFoundError:
+                logger.error(f"❌ Fichier introuvable: {args.data_file}")
+                print(f"\n💡 Vérifiez que le chemin est correct.")
+                print(f"💡 Exemple: temp_files/gemini_therapeute/scraped_data.json")
+                return
+            except json.JSONDecodeError as e:
+                logger.error(f"❌ Erreur JSON: {e}")
+                print(f"\n💡 Le fichier n'est pas un JSON valide")
+                return
+
         # Créer le générateur
         generator = GeminiTemplateGenerator(
             theme=args.theme,
-            source_url=args.url,
+            source_url=args.url,  # Peut être None si --data-file
             api_key=args.api_key
         )
 
-        # Générer
-        result = generator.generate()
+        # Générer avec ou sans données existantes
+        result = generator.generate(existing_data=existing_data)
 
         if result:
             print("\n" + "="*70)
@@ -503,7 +552,15 @@ def main():
             if args.preview:
                 generator.preview_in_browser()
             else:
-                print(f"\n💡 Pour prévisualiser: python -m scripts.gemini_template_generator --url {args.url} --theme \"{args.theme}\" --preview")
+                if args.data_file:
+                    print(f"\n💡 Pour prévisualiser: python -m scripts.gemini_template_generator --data-file {args.data_file} --theme \"{args.theme}\" --preview")
+                else:
+                    print(f"\n💡 Pour prévisualiser: python -m scripts.gemini_template_generator --url {args.url} --theme \"{args.theme}\" --preview")
+
+            # Info sur la régénération sans rescraping
+            if not args.data_file and result.get('data_file'):
+                print(f"\n♻️  Pour régénérer sans rescraper:")
+                print(f"   python -m scripts.gemini_template_generator --data-file {result['data_file']} --theme \"{args.theme}\"")
 
             print()
         else:

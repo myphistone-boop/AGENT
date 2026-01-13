@@ -119,6 +119,56 @@ python -m scripts.gemini_template_generator \
   --api-key "AIza..."
 ```
 
+### Régénération sans rescraper (mode rapide)
+
+**⚡ Skip la phase de scraping et aller directement à la génération Gemini**
+
+Si vous avez déjà scrappé un site, vous pouvez régénérer sans rescraper en utilisant le fichier `scraped_data.json` existant:
+
+```bash
+# Utiliser les données déjà scrapées
+python -m scripts.gemini_template_generator \
+  --data-file "temp_files/gemini_therapeute/scraped_data.json" \
+  --theme "thérapeute"
+
+# Ou utiliser les données sauvegardées dans outputs
+python -m scripts.gemini_template_generator \
+  --data-file "outputs/gemini_templates/gemini_therapeute/scraped_data.json" \
+  --theme "coach sportif"
+```
+
+**Avantages:**
+- ⚡ **Plus rapide** - Skip la phase de scraping (qui peut prendre 10-30 secondes)
+- 🔄 **Itérations rapides** - Régénérer plusieurs fois avec Gemini
+- 💰 **Économise les ressources** - Pas besoin de rescraper le même site
+- 🧪 **Tests de thèmes** - Tester différents thèmes avec les mêmes données
+
+**Cas d'usage:**
+1. **Tester différents thèmes** avec les mêmes données source
+2. **Ajuster le prompt Gemini** et régénérer rapidement
+3. **Éviter de scraper** le même site plusieurs fois (respecter le site source)
+4. **Développement du système** - itérer sans attendre le scraping
+
+**Workflow typique:**
+```bash
+# 1. Première fois: scraper + générer
+python -m scripts.gemini_template_generator \
+  --url "https://therapeute.com" \
+  --theme "thérapeute"
+
+# 2. Le système vous montre le chemin du fichier de données
+# Fichier sauvegardé: outputs/gemini_templates/gemini_therapeute/scraped_data.json
+
+# 3. Régénérations suivantes: utiliser les données existantes
+python -m scripts.gemini_template_generator \
+  --data-file "outputs/gemini_templates/gemini_therapeute/scraped_data.json" \
+  --theme "thérapeute moderne"  # Nouveau thème
+
+python -m scripts.gemini_template_generator \
+  --data-file "outputs/gemini_templates/gemini_therapeute/scraped_data.json" \
+  --theme "coach de vie"  # Autre thème
+```
+
 ---
 
 ## 📂 Structure de sortie

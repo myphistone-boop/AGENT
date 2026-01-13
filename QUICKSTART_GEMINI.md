@@ -54,13 +54,34 @@ $env:HTTPS_PROXY="http://proxy.entreprise.com:8080"
 
 ## Utilisation
 
-### Commande basique
+### Commande basique (avec scraping)
 
 ```bash
 python -m scripts.gemini_template_generator \
   --url "https://site-a-scraper.com" \
   --theme "thérapeute"
 ```
+
+### Régénération sans rescraper (skip phase 1)
+
+Si vous avez déjà scrappé un site, vous pouvez régénérer sans rescraper:
+
+```bash
+# Aller directement à la phase 2 (Gemini) avec les données existantes
+python -m scripts.gemini_template_generator \
+  --data-file "temp_files/gemini_therapeute/scraped_data.json" \
+  --theme "thérapeute"
+```
+
+**Avantages:**
+- ⚡ Plus rapide (pas de scraping)
+- 🔄 Régénérer plusieurs fois avec Gemini
+- 💰 Économise les requêtes de scraping
+
+**Cas d'usage:**
+- Tester différents thèmes avec les mêmes données
+- Régénérer après avoir ajusté le prompt Gemini
+- Éviter de scraper le même site plusieurs fois
 
 ### Avec prévisualisation automatique
 
@@ -103,8 +124,15 @@ outputs/gemini_templates/gemini_therapeute/
 
 ## Workflow
 
+### Mode complet (avec scraping)
 1. **Scrape** un site existant (URL)
 2. **Gemini génère** un nouveau site créatif du même thème
+3. **Validation manuelle** du résultat
+4. **Déploiement** si validé
+
+### Mode rapide (sans rescraper)
+1. ~~**Scrape**~~ → **Utiliser les données existantes** (skip phase 1)
+2. **Gemini génère** un nouveau site créatif
 3. **Validation manuelle** du résultat
 4. **Déploiement** si validé
 
@@ -121,6 +149,8 @@ Voir: [`docs/GEMINI_TEMPLATE_GENERATOR.md`](docs/GEMINI_TEMPLATE_GENERATOR.md)
 
 ## Exemples
 
+### Première génération (avec scraping)
+
 ```bash
 # Thérapeute
 python -m scripts.gemini_template_generator --url "https://psy.com" --theme "thérapeute" --preview
@@ -130,6 +160,20 @@ python -m scripts.gemini_template_generator --url "https://coach.com" --theme "c
 
 # Yoga
 python -m scripts.gemini_template_generator --url "https://yoga.com" --theme "yoga" --preview
+```
+
+### Régénération rapide (sans rescraper)
+
+```bash
+# Régénérer avec un thème différent
+python -m scripts.gemini_template_generator \
+  --data-file "outputs/gemini_templates/gemini_therapeute/scraped_data.json" \
+  --theme "coach de vie"
+
+# Tester plusieurs thèmes rapidement
+python -m scripts.gemini_template_generator \
+  --data-file "temp_files/gemini_yoga/scraped_data.json" \
+  --theme "méditation et bien-être"
 ```
 
 ---

@@ -79,8 +79,7 @@ def test_gemini_connection():
 
     # 5. Test de connexion simple
     print("5️⃣  Test de connexion (ping simple)...")
-    print("   Timeout: 120 secondes")
-    print("   Ceci peut prendre du temps avec un proxy...")
+    print("   Envoi d'une requête de test à Gemini...")
     print()
 
     try:
@@ -88,8 +87,7 @@ def test_gemini_connection():
 
         response = model.generate_content(
             "Réponds simplement 'OK'",
-            generation_config={'max_output_tokens': 10},
-            request_options={'timeout': 120}
+            generation_config={'max_output_tokens': 10}
         )
 
         print(f"✓ Connexion réussie!")

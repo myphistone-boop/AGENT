@@ -67,7 +67,17 @@ class GeminiTemplateGenerator:
         # Note: La vérification SSL est désactivée par défaut (voir en-tête du fichier)
         # pour permettre l'utilisation derrière des proxies d'entreprise
         genai.configure(api_key=self.api_key)
+
+        # Configuration du modèle avec timeout étendu pour environnements proxy
         self.model = genai.GenerativeModel('gemini-1.5-pro')
+
+        # Configuration de génération avec timeout étendu
+        self.generation_config = {
+            'temperature': 0.9,  # Créativité élevée pour le design
+            'top_p': 0.95,
+            'top_k': 40,
+            'max_output_tokens': 8192,  # Permet de générer un site complet
+        }
 
         # File manager
         self.file_manager = FileManager()
@@ -132,31 +142,64 @@ class GeminiTemplateGenerator:
 
     def _generate_with_gemini(self, scraped_data):
         """Génère le code HTML/CSS/JS avec Gemini"""
+        import time
 
         # Construire le prompt créatif
         prompt = self._build_creative_prompt(scraped_data)
 
-        try:
-            # Appel à Gemini
-            logger.info("🔮 Appel à Gemini Pro...")
-            response = self.model.generate_content(prompt)
+        # Retry logic pour gérer les problèmes de réseau/proxy
+        max_retries = 3
+        retry_delay = 5  # secondes
 
-            # Extraire le code
-            code = response.text
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    logger.info(f"🔄 Tentative {attempt + 1}/{max_retries}...")
+                    time.sleep(retry_delay)
 
-            # Parser les blocs de code
-            html_code = self._extract_code_block(code, 'html')
+                # Appel à Gemini avec configuration étendue
+                logger.info("🔮 Appel à Gemini Pro...")
+                logger.info(f"   Timeout étendu pour environnement proxy...")
 
-            if not html_code:
-                # Si pas de bloc markdown, prendre tout le contenu
-                html_code = code
+                # Appel avec configuration
+                response = self.model.generate_content(
+                    prompt,
+                    generation_config=self.generation_config,
+                    request_options={
+                        'timeout': 300  # 5 minutes de timeout pour proxy lent
+                    }
+                )
 
-            logger.info(f"✓ Code généré ({len(html_code)} caractères)")
-            return html_code
+                # Extraire le code
+                code = response.text
 
-        except Exception as e:
-            logger.error(f"❌ Erreur Gemini: {str(e)}")
-            return None
+                # Parser les blocs de code
+                html_code = self._extract_code_block(code, 'html')
+
+                if not html_code:
+                    # Si pas de bloc markdown, prendre tout le contenu
+                    html_code = code
+
+                logger.info(f"✓ Code généré ({len(html_code)} caractères)")
+                return html_code
+
+            except Exception as e:
+                error_msg = str(e)
+                logger.error(f"❌ Erreur Gemini (tentative {attempt + 1}/{max_retries}): {error_msg}")
+
+                # Si c'est la dernière tentative, abandonner
+                if attempt == max_retries - 1:
+                    logger.error("❌ Échec après toutes les tentatives")
+                    logger.error("💡 Vérifiez:")
+                    logger.error("   - Votre connexion internet")
+                    logger.error("   - Configuration du proxy (HTTP_PROXY, HTTPS_PROXY)")
+                    logger.error("   - Que l'API Gemini est accessible depuis votre réseau")
+                    return None
+
+                # Sinon, attendre avant de réessayer
+                logger.info(f"⏳ Nouvelle tentative dans {retry_delay} secondes...")
+
+        return None
 
     def _build_creative_prompt(self, scraped_data):
         """Construit un prompt créatif pour Gemini"""

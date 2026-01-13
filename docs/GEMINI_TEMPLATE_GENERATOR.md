@@ -321,6 +321,20 @@ Modifier le prompt pour référencer ces images.
 
 ## 🐛 Troubleshooting
 
+### Test de connexion Gemini
+
+Avant de générer des templates, testez votre connexion:
+
+```bash
+python -m scripts.test_gemini_connection
+```
+
+Ce script diagnostique automatiquement les problèmes de:
+- Clé API
+- Configuration proxy
+- Connexion réseau
+- Certificats SSL
+
 ### Erreur: "Clé API Gemini manquante"
 
 ```bash
@@ -328,11 +342,40 @@ export GEMINI_API_KEY="votre_clé"
 # Ou ajouter au .env
 ```
 
+### Erreur: "Timeout" ou "503 failed to connect"
+
+**Cause:** Proxy d'entreprise ou firewall bloquant l'API Gemini
+
+**Solution 1: Configurer le proxy**
+```bash
+# Linux/Mac
+export HTTP_PROXY=http://proxy.entreprise.com:8080
+export HTTPS_PROXY=http://proxy.entreprise.com:8080
+
+# Windows PowerShell
+$env:HTTP_PROXY="http://proxy.entreprise.com:8080"
+$env:HTTPS_PROXY="http://proxy.entreprise.com:8080"
+
+# Puis relancer
+python -m scripts.gemini_template_generator --url URL --theme THEME
+```
+
+**Solution 2: Tester depuis un autre réseau**
+- Essayer depuis un réseau sans proxy (téléphone 4G, réseau domestique)
+- Si ça fonctionne, c'est un problème de proxy d'entreprise
+
+**Solution 3: Vérifier le firewall**
+L'API Gemini nécessite l'accès à:
+- `generativelanguage.googleapis.com`
+- Port 443 (HTTPS)
+
+**Note:** Le système fait **3 tentatives automatiques** avec 5 secondes d'attente entre chaque.
+
 ### Erreur de scraping (site protégé)
 
 Certains sites bloquent les scrapers. Solutions:
 - Utiliser un proxy (configurer dans `config.py`)
-- Désactiver SSL verification si certificat invalide
+- Désactiver SSL verification (déjà fait par défaut)
 
 ### Génération trop lente
 

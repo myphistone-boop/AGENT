@@ -33,6 +33,23 @@ pip install -r requirements.txt
 # 2. Configurer la clé API Gemini
 export GEMINI_API_KEY="votre_clé_api"
 # Obtenir une clé: https://makersuite.google.com/app/apikey
+
+# 3. Tester la connexion (recommandé)
+python -m scripts.test_gemini_connection
+```
+
+### Configuration proxy (si nécessaire)
+
+Si vous êtes derrière un proxy d'entreprise:
+
+```bash
+# Linux/Mac
+export HTTP_PROXY=http://proxy.entreprise.com:8080
+export HTTPS_PROXY=http://proxy.entreprise.com:8080
+
+# Windows PowerShell
+$env:HTTP_PROXY="http://proxy.entreprise.com:8080"
+$env:HTTPS_PROXY="http://proxy.entreprise.com:8080"
 ```
 
 ## Utilisation

@@ -178,15 +178,11 @@ class GeminiTemplateGenerator:
 
                 # Appel à Gemini avec configuration étendue
                 logger.info("🔮 Appel à Gemini Pro...")
-                logger.info(f"   Timeout étendu pour environnement proxy...")
 
                 # Appel avec configuration
                 response = self.model.generate_content(
                     prompt,
-                    generation_config=self.generation_config,
-                    request_options={
-                        'timeout': 300  # 5 minutes de timeout pour proxy lent
-                    }
+                    generation_config=self.generation_config
                 )
 
                 # Extraire le code

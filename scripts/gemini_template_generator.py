@@ -96,7 +96,7 @@ class GeminiTemplateGenerator:
             'temperature': 0.9,  # Créativité élevée pour le design
             'top_p': 0.95,
             'top_k': 40,
-            'max_output_tokens': 8192,  # Permet de générer un site complet
+            'max_output_tokens': 13000,  # 13k tokens pour pages complètes statiques
         }
 
         # File manager
@@ -304,20 +304,20 @@ INSTRUCTIONS STRICTES:
 3. IMAGES:
    ✓ Utilise les URLs d'images indiquées dans la structure
    ✓ Si pas assez d'images, utilise des placeholders de unsplash.com pertinents pour {self.theme}
-   ✓ Intègre-les de manière élégante (object-fit: cover, aspect-ratio, lazy loading)
+   ✓ Intègre-les de manière élégante (object-fit: cover, aspect-ratio)
 
-4. INTERACTIVITÉ:
-   ✓ Animations au scroll (fade-in, slide-up avec Intersection Observer)
-   ✓ Hover effects sur boutons et cards
-   ✓ Navigation smooth scroll
-   ✓ Formulaire de contact si section contact (action: formspree.io ou mailto:{email})
+4. EFFETS VISUELS (CSS uniquement):
+   ✓ Hover effects subtils sur boutons et cards (CSS :hover)
+   ✓ Transitions CSS douces
+   ✓ Formulaire de contact si section contact (action: mailto:{email})
+   ✓ PAS de JavaScript - page 100% statique pour screenshots
 
 5. TECHNOLOGIE:
-   ✓ UN SEUL FICHIER HTML (CSS et JS inline dans <style> et <script>)
-   ✓ CSS moderne (flexbox, grid, variables CSS, animations)
-   ✓ JavaScript vanilla (pas de frameworks)
+   ✓ UN SEUL FICHIER HTML (CSS inline dans <style>)
+   ✓ CSS moderne (flexbox, grid, variables CSS, transitions, hover effects)
+   ✓ PAS de balise <script> - HTML/CSS uniquement
    ✓ Responsive mobile-first
-   ✓ Performance optimisée
+   ✓ Optimisé pour screenshots (rendu statique parfait)
 
 6. NAVIGATION:
    ✓ Ajoute une navigation fixe en haut avec liens vers chaque section

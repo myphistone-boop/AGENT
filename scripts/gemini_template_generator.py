@@ -199,9 +199,9 @@ class GeminiTemplateGenerator:
                 logger.info("🔮 Appel à Gemini Flash...")
 
                 # Use new SDK client
-                # Note: Use full model name with version for v1beta API
+                # Note: Use gemini-2.5-flash (latest Flash model available in v1beta API)
                 response = self.client.models.generate_content(
-                    model='gemini-1.5-flash-002',
+                    model='gemini-2.5-flash',
                     contents=prompt,
                     config={
                         'temperature': self.generation_config['temperature'],

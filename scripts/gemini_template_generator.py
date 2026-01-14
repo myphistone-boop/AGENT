@@ -214,6 +214,10 @@ class GeminiTemplateGenerator:
     def _generate_with_rest_api(self, prompt):
         """Appel direct à l'API REST Gemini (évite gRPC qui peut être bloqué)"""
         import requests
+        import urllib3
+
+        # Désactiver les warnings SSL (certificat auto-signé proxy)
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent"
 
@@ -239,13 +243,15 @@ class GeminiTemplateGenerator:
             'key': self.api_key
         }
 
-        # Timeout plus long pour les réseaux lents
+        # Désactiver la vérification SSL pour les proxies d'entreprise
+        # (même configuration que le scraping qui fonctionne)
         response = requests.post(
             url,
             headers=headers,
             json=payload,
             params=params,
-            timeout=180  # 3 minutes
+            timeout=180,  # 3 minutes
+            verify=False  # Désactiver la vérification SSL
         )
 
         response.raise_for_status()

@@ -223,8 +223,10 @@ class GeminiTemplateGenerator:
         # https://github.com/google/generative-ai-docs/blob/main/site/en/gemini-api/docs/get-started/rest.ipynb
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
 
+        # Passer la clé API dans le header (au lieu de l'URL query parameter)
         headers = {
             'Content-Type': 'application/json',
+            'x-goog-api-key': self.api_key  # Clé API dans le header
         }
 
         payload = {
@@ -241,17 +243,12 @@ class GeminiTemplateGenerator:
             }
         }
 
-        params = {
-            'key': self.api_key
-        }
-
         # Désactiver la vérification SSL pour les proxies d'entreprise
         # (même configuration que le scraping qui fonctionne)
         response = requests.post(
             url,
             headers=headers,
             json=payload,
-            params=params,
             timeout=180,  # 3 minutes
             verify=False  # Désactiver la vérification SSL
         )

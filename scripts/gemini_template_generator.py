@@ -177,8 +177,9 @@ class GeminiTemplateGenerator:
                 logger.info("🔮 Appel à Gemini Flash...")
 
                 # Utiliser le nouveau SDK qui gère tout automatiquement
+                # gemini-flash-latest pointe toujours vers la dernière version stable
                 response = self.client.models.generate_content(
-                    model='gemini-1.5-flash',
+                    model='gemini-flash-latest',
                     contents=prompt,
                     config=self.generation_config
                 )

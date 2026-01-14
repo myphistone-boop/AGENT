@@ -59,19 +59,20 @@ def test_gemini_connection():
     # 3. Importer le SDK Gemini
     print("3️⃣  Import du SDK Gemini...")
     try:
-        import google.generativeai as genai
-        print("✓ SDK Gemini importé")
+        from google import genai
+        print("✓ SDK Gemini importé (nouveau package google-genai)")
     except ImportError as e:
         print(f"❌ Erreur d'import: {e}")
-        print("💡 Installez le SDK: pip install google-generativeai")
+        print("💡 Installez le nouveau SDK: pip install google-genai")
         return False
     print()
 
     # 4. Configurer Gemini
-    print("4️⃣  Configuration de Gemini...")
+    print("4️⃣  Configuration du client Gemini...")
     try:
-        genai.configure(api_key=api_key)
-        print("✓ Gemini configuré")
+        os.environ['GEMINI_API_KEY'] = api_key
+        client = genai.Client()
+        print("✓ Client Gemini configuré")
     except Exception as e:
         print(f"❌ Erreur de configuration: {e}")
         return False
@@ -83,11 +84,10 @@ def test_gemini_connection():
     print()
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')  # Flash plus rapide pour le test
-
-        response = model.generate_content(
-            "Réponds simplement 'OK'",
-            generation_config={'max_output_tokens': 10}
+        response = client.models.generate_content(
+            model='gemini-flash-latest',  # Modèle qui existe vraiment
+            contents="Réponds simplement 'OK'",
+            config={'max_output_tokens': 10}
         )
 
         print(f"✓ Connexion réussie!")

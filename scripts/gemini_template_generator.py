@@ -66,9 +66,15 @@ class GeminiTemplateGenerator:
         # Set API key in environment for the new SDK
         os.environ['GEMINI_API_KEY'] = self.api_key
 
-        # Create Gemini client using new SDK
+        # Create Gemini client using new SDK with SSL verification disabled
         # The client automatically gets the API key from GEMINI_API_KEY env var
-        self.client = genai.Client()
+        # For corporate proxies with self-signed certificates, we need to disable SSL verification
+        import httpx
+
+        # Create HTTP client with SSL verification disabled
+        http_client = httpx.Client(verify=False)
+
+        self.client = genai.Client(http_options={'client': http_client})
 
         # Configuration de génération
         self.generation_config = {

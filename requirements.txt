@@ -21,7 +21,7 @@ python-dotenv==1.0.0
 anthropic==0.7.8
 
 # Gemini AI pour génération créative de templates
-google-generativeai==0.3.2
+google-genai>=0.2.0  # Nouveau SDK officiel (au lieu de google-generativeai)
 
 # Base de données
 # sqlite3 est inclus dans Python standard library

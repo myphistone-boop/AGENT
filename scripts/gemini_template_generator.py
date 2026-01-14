@@ -6,7 +6,7 @@ import os
 import json
 import argparse
 import ssl
-import google.generativeai as genai
+from google import genai  # Nouveau SDK officiel
 from pathlib import Path
 from scripts.modules.website_scraper import WebsiteScraper
 from scripts.utils.logger import setup_logger
@@ -63,15 +63,12 @@ class GeminiTemplateGenerator:
         if not self.api_key:
             raise ValueError("❌ Clé API Gemini manquante (GEMINI_API_KEY env var)")
 
-        # Configuration Gemini
+        # Configuration du client Gemini (nouveau SDK)
         # Note: La vérification SSL est désactivée par défaut (voir en-tête du fichier)
-        # pour permettre l'utilisation derrière des proxies d'entreprise
-        genai.configure(api_key=self.api_key)
+        os.environ['GEMINI_API_KEY'] = self.api_key
+        self.client = genai.Client()
 
-        # Configuration du modèle avec timeout étendu pour environnements proxy
-        self.model = genai.GenerativeModel('gemini-1.5-pro')
-
-        # Configuration de génération avec timeout étendu
+        # Configuration de génération
         self.generation_config = {
             'temperature': 0.9,  # Créativité élevée pour le design
             'top_p': 0.95,
@@ -176,22 +173,27 @@ class GeminiTemplateGenerator:
                     logger.info(f"🔄 Tentative {attempt + 1}/{max_retries}...")
                     time.sleep(retry_delay)
 
-                # Appel à Gemini avec API REST (au lieu de gRPC qui peut être bloqué)
-                logger.info("🔮 Appel à Gemini Pro (API REST)...")
+                # Appel à Gemini avec le nouveau SDK (simple et direct)
+                logger.info("🔮 Appel à Gemini Flash...")
 
-                # Essayer d'abord l'API REST (plus compatible avec firewalls)
-                code = self._generate_with_rest_api(prompt)
+                # Utiliser le nouveau SDK qui gère tout automatiquement
+                response = self.client.models.generate_content(
+                    model='gemini-1.5-flash',
+                    contents=prompt,
+                    config=self.generation_config
+                )
 
-                if code:
-                    # Parser les blocs de code
-                    html_code = self._extract_code_block(code, 'html')
+                code = response.text
 
-                    if not html_code:
-                        # Si pas de bloc markdown, prendre tout le contenu
-                        html_code = code
+                # Parser les blocs de code
+                html_code = self._extract_code_block(code, 'html')
 
-                    logger.info(f"✓ Code généré ({len(html_code)} caractères)")
-                    return html_code
+                if not html_code:
+                    # Si pas de bloc markdown, prendre tout le contenu
+                    html_code = code
+
+                logger.info(f"✓ Code généré ({len(html_code)} caractères)")
+                return html_code
 
             except Exception as e:
                 error_msg = str(e)
@@ -210,63 +212,6 @@ class GeminiTemplateGenerator:
                 logger.info(f"⏳ Nouvelle tentative dans {retry_delay} secondes...")
 
         return None
-
-    def _generate_with_rest_api(self, prompt):
-        """Appel direct à l'API REST Gemini (évite gRPC qui peut être bloqué)"""
-        import requests
-        import urllib3
-
-        # Désactiver les warnings SSL (certificat auto-signé proxy)
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-        # Utiliser v1 au lieu de v1beta (403 Forbidden avec v1beta pour certaines clés)
-        # v1 est l'API stable avec moins de restrictions
-        url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent"
-
-        # Passer la clé API dans le header (au lieu de l'URL query parameter)
-        headers = {
-            'Content-Type': 'application/json',
-            'x-goog-api-key': self.api_key  # Clé API dans le header
-        }
-
-        payload = {
-            'contents': [{
-                'parts': [{
-                    'text': prompt
-                }]
-            }],
-            'generationConfig': {
-                'temperature': self.generation_config['temperature'],
-                'topP': self.generation_config['top_p'],
-                'topK': self.generation_config['top_k'],
-                'maxOutputTokens': self.generation_config['max_output_tokens'],
-            }
-        }
-
-        # Désactiver la vérification SSL pour les proxies d'entreprise
-        # (même configuration que le scraping qui fonctionne)
-        response = requests.post(
-            url,
-            headers=headers,
-            json=payload,
-            timeout=180,  # 3 minutes
-            verify=False  # Désactiver la vérification SSL
-        )
-
-        response.raise_for_status()
-
-        result = response.json()
-
-        # Extraire le texte de la réponse
-        if 'candidates' in result and len(result['candidates']) > 0:
-            candidate = result['candidates'][0]
-            if 'content' in candidate and 'parts' in candidate['content']:
-                parts = candidate['content']['parts']
-                if len(parts) > 0 and 'text' in parts[0]:
-                    return parts[0]['text']
-
-        raise Exception("Réponse API invalide: pas de texte généré")
-
 
     def _build_creative_prompt(self, scraped_data):
         """Construit un prompt créatif pour Gemini"""

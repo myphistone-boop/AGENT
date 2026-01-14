@@ -6,6 +6,22 @@ import os
 import json
 import argparse
 import ssl
+
+# CRITICAL: Monkey-patch httpx BEFORE importing google.genai
+# This must happen at module level before any imports that use httpx
+import httpx
+_original_client_init = httpx.Client.__init__
+def _patched_client_init(self, *args, **kwargs):
+    kwargs['verify'] = False
+    return _original_client_init(self, *args, **kwargs)
+httpx.Client.__init__ = _patched_client_init
+
+_original_async_client_init = httpx.AsyncClient.__init__
+def _patched_async_client_init(self, *args, **kwargs):
+    kwargs['verify'] = False
+    return _original_async_client_init(self, *args, **kwargs)
+httpx.AsyncClient.__init__ = _patched_async_client_init
+
 from google import genai
 from pathlib import Path
 from scripts.modules.website_scraper import WebsiteScraper
@@ -66,28 +82,13 @@ class GeminiTemplateGenerator:
         # Set API key in environment for the new SDK
         os.environ['GEMINI_API_KEY'] = self.api_key
 
-        # For corporate proxies with self-signed certificates, we need to monkey-patch httpx
-        # to disable SSL verification globally
-        import httpx
+        # Disable SSL warnings
         import urllib3
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-        # Monkey patch httpx.Client to use verify=False by default
-        original_httpx_client = httpx.Client
-        def patched_httpx_client(*args, **kwargs):
-            kwargs['verify'] = False
-            return original_httpx_client(*args, **kwargs)
-        httpx.Client = patched_httpx_client
-
-        # Also patch AsyncClient for completeness
-        original_httpx_async_client = httpx.AsyncClient
-        def patched_httpx_async_client(*args, **kwargs):
-            kwargs['verify'] = False
-            return original_httpx_async_client(*args, **kwargs)
-        httpx.AsyncClient = patched_httpx_async_client
-
         # Create Gemini client using new SDK
         # The client automatically gets the API key from GEMINI_API_KEY env var
+        # httpx has already been patched at module level to disable SSL verification
         self.client = genai.Client()
 
         # Configuration de génération

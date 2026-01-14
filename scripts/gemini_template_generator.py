@@ -219,8 +219,8 @@ class GeminiTemplateGenerator:
         # Désactiver les warnings SSL (certificat auto-signé proxy)
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-        # Utiliser gemini-pro qui est le nom stable dans l'API REST
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
+        # Utiliser gemini-1.5-pro-latest qui est le nom correct dans l'API REST v1beta
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent"
 
         headers = {
             'Content-Type': 'application/json',

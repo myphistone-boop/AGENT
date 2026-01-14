@@ -219,9 +219,9 @@ class GeminiTemplateGenerator:
         # Désactiver les warnings SSL (certificat auto-signé proxy)
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-        # Utiliser gemini-1.5-flash (confirmé dans documentation officielle Google)
-        # https://github.com/google/generative-ai-docs/blob/main/site/en/gemini-api/docs/get-started/rest.ipynb
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+        # Utiliser v1 au lieu de v1beta (403 Forbidden avec v1beta pour certaines clés)
+        # v1 est l'API stable avec moins de restrictions
+        url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent"
 
         # Passer la clé API dans le header (au lieu de l'URL query parameter)
         headers = {

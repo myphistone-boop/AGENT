@@ -66,15 +66,29 @@ class GeminiTemplateGenerator:
         # Set API key in environment for the new SDK
         os.environ['GEMINI_API_KEY'] = self.api_key
 
-        # Create Gemini client using new SDK with SSL verification disabled
-        # The client automatically gets the API key from GEMINI_API_KEY env var
-        # For corporate proxies with self-signed certificates, we need to disable SSL verification
+        # For corporate proxies with self-signed certificates, we need to monkey-patch httpx
+        # to disable SSL verification globally
         import httpx
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-        # Create HTTP client with SSL verification disabled
-        http_client = httpx.Client(verify=False)
+        # Monkey patch httpx.Client to use verify=False by default
+        original_httpx_client = httpx.Client
+        def patched_httpx_client(*args, **kwargs):
+            kwargs['verify'] = False
+            return original_httpx_client(*args, **kwargs)
+        httpx.Client = patched_httpx_client
 
-        self.client = genai.Client(http_options={'client': http_client})
+        # Also patch AsyncClient for completeness
+        original_httpx_async_client = httpx.AsyncClient
+        def patched_httpx_async_client(*args, **kwargs):
+            kwargs['verify'] = False
+            return original_httpx_async_client(*args, **kwargs)
+        httpx.AsyncClient = patched_httpx_async_client
+
+        # Create Gemini client using new SDK
+        # The client automatically gets the API key from GEMINI_API_KEY env var
+        self.client = genai.Client()
 
         # Configuration de génération
         self.generation_config = {

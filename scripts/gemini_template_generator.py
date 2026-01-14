@@ -176,27 +176,22 @@ class GeminiTemplateGenerator:
                     logger.info(f"🔄 Tentative {attempt + 1}/{max_retries}...")
                     time.sleep(retry_delay)
 
-                # Appel à Gemini avec configuration étendue
-                logger.info("🔮 Appel à Gemini Pro...")
+                # Appel à Gemini avec API REST (au lieu de gRPC qui peut être bloqué)
+                logger.info("🔮 Appel à Gemini Pro (API REST)...")
 
-                # Appel avec configuration
-                response = self.model.generate_content(
-                    prompt,
-                    generation_config=self.generation_config
-                )
+                # Essayer d'abord l'API REST (plus compatible avec firewalls)
+                code = self._generate_with_rest_api(prompt)
 
-                # Extraire le code
-                code = response.text
+                if code:
+                    # Parser les blocs de code
+                    html_code = self._extract_code_block(code, 'html')
 
-                # Parser les blocs de code
-                html_code = self._extract_code_block(code, 'html')
+                    if not html_code:
+                        # Si pas de bloc markdown, prendre tout le contenu
+                        html_code = code
 
-                if not html_code:
-                    # Si pas de bloc markdown, prendre tout le contenu
-                    html_code = code
-
-                logger.info(f"✓ Code généré ({len(html_code)} caractères)")
-                return html_code
+                    logger.info(f"✓ Code généré ({len(html_code)} caractères)")
+                    return html_code
 
             except Exception as e:
                 error_msg = str(e)
@@ -215,6 +210,58 @@ class GeminiTemplateGenerator:
                 logger.info(f"⏳ Nouvelle tentative dans {retry_delay} secondes...")
 
         return None
+
+    def _generate_with_rest_api(self, prompt):
+        """Appel direct à l'API REST Gemini (évite gRPC qui peut être bloqué)"""
+        import requests
+
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent"
+
+        headers = {
+            'Content-Type': 'application/json',
+        }
+
+        payload = {
+            'contents': [{
+                'parts': [{
+                    'text': prompt
+                }]
+            }],
+            'generationConfig': {
+                'temperature': self.generation_config['temperature'],
+                'topP': self.generation_config['top_p'],
+                'topK': self.generation_config['top_k'],
+                'maxOutputTokens': self.generation_config['max_output_tokens'],
+            }
+        }
+
+        params = {
+            'key': self.api_key
+        }
+
+        # Timeout plus long pour les réseaux lents
+        response = requests.post(
+            url,
+            headers=headers,
+            json=payload,
+            params=params,
+            timeout=180  # 3 minutes
+        )
+
+        response.raise_for_status()
+
+        result = response.json()
+
+        # Extraire le texte de la réponse
+        if 'candidates' in result and len(result['candidates']) > 0:
+            candidate = result['candidates'][0]
+            if 'content' in candidate and 'parts' in candidate['content']:
+                parts = candidate['content']['parts']
+                if len(parts) > 0 and 'text' in parts[0]:
+                    return parts[0]['text']
+
+        raise Exception("Réponse API invalide: pas de texte généré")
+
 
     def _build_creative_prompt(self, scraped_data):
         """Construit un prompt créatif pour Gemini"""

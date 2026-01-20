@@ -95,6 +95,17 @@ class WebsiteScraper:
 
         try:
             page.goto(self.url, wait_until="networkidle", timeout=30000)
+
+            # AMÉLIORATION: Scroll pour charger les images lazy-loaded
+            logger.debug("🔄 Scroll pour charger les images lazy-loaded...")
+            for i in range(5):
+                page.evaluate('window.scrollBy(0, window.innerHeight)')
+                page.wait_for_timeout(800)  # Attendre le chargement
+
+            # Remonter en haut
+            page.evaluate('window.scrollTo(0, 0)')
+            page.wait_for_timeout(500)
+
             html_content = page.content()
 
             # Screenshot du site original (pour le AVANT)
@@ -169,53 +180,151 @@ class WebsiteScraper:
         return None
 
     def _extract_logo_url(self, soup):
-        """Extrait l'URL du logo (sans télécharger)"""
+        """Extrait l'URL du logo (sans télécharger) - STRATÉGIES MULTIPLES"""
         logo_url = None
 
-        # Chercher le logo (plusieurs stratégies)
-        # 1. Balise avec "logo" dans class ou id
-        logo_elem = soup.find(['img', 'a'], class_=re.compile(r'logo', re.I))
-        if not logo_elem:
-            logo_elem = soup.find(['img', 'a'], id=re.compile(r'logo', re.I))
+        # STRATÉGIE 1: Open Graph image (souvent le logo)
+        og_image = soup.find('meta', property='og:image')
+        if og_image and og_image.get('content'):
+            logo_url = og_image.get('content')
+            logger.debug("✓ Logo trouvé via Open Graph")
 
-        # 2. Premier img dans le header
-        if not logo_elem:
+        # STRATÉGIE 2: Schema.org JSON-LD
+        if not logo_url:
+            try:
+                import json as json_lib
+                scripts = soup.find_all('script', type='application/ld+json')
+                for script in scripts:
+                    try:
+                        data = json_lib.loads(script.string)
+                        # Chercher dans Organization ou LocalBusiness
+                        if isinstance(data, dict):
+                            if data.get('@type') in ['Organization', 'LocalBusiness', 'Corporation']:
+                                if data.get('logo'):
+                                    logo_url = data['logo']
+                                    logger.debug("✓ Logo trouvé via Schema.org JSON-LD")
+                                    break
+                    except:
+                        pass
+            except:
+                pass
+
+        # STRATÉGIE 3: Balise avec "logo" dans class ou id
+        if not logo_url:
+            logo_elem = soup.find(['img', 'a'], class_=re.compile(r'logo', re.I))
+            if not logo_elem:
+                logo_elem = soup.find(['img', 'a'], id=re.compile(r'logo', re.I))
+
+            if logo_elem:
+                if logo_elem.name == 'img':
+                    logo_url = logo_elem.get('src') or logo_elem.get('data-src')
+                elif logo_elem.name == 'a':
+                    img = logo_elem.find('img')
+                    if img:
+                        logo_url = img.get('src') or img.get('data-src')
+                logger.debug("✓ Logo trouvé via class/id 'logo'")
+
+        # STRATÉGIE 4: SVG inline avec "logo" dans class
+        if not logo_url:
+            svg_logo = soup.find('svg', class_=re.compile(r'logo', re.I))
+            if svg_logo:
+                # Pour SVG inline, on pourrait extraire le SVG complet
+                # Mais pour simplifier, cherchons une image dans le SVG
+                img_in_svg = svg_logo.find('image')
+                if img_in_svg:
+                    logo_url = img_in_svg.get('href') or img_in_svg.get('xlink:href')
+                    logger.debug("✓ Logo trouvé via SVG inline")
+
+        # STRATÉGIE 5: Premier img dans le header
+        if not logo_url:
             header = soup.find('header')
             if header:
                 logo_elem = header.find('img')
+                if logo_elem:
+                    logo_url = logo_elem.get('src') or logo_elem.get('data-src')
+                    logger.debug("✓ Logo trouvé dans header")
 
-        # 3. Première image du site
-        if not logo_elem:
-            logo_elem = soup.find('img')
+        # STRATÉGIE 6: Favicon (fallback)
+        if not logo_url:
+            favicon = soup.find('link', rel=re.compile(r'icon', re.I))
+            if favicon:
+                logo_url = favicon.get('href')
+                logger.debug("✓ Logo trouvé via favicon")
 
-        # Récupérer l'URL
-        if logo_elem:
-            if logo_elem.name == 'img':
-                logo_url = logo_elem.get('src')
-            elif logo_elem.name == 'a':
-                img = logo_elem.find('img')
-                if img:
-                    logo_url = img.get('src')
+        # STRATÉGIE 7: Première image du site (dernier recours)
+        if not logo_url:
+            first_img = soup.find('img')
+            if first_img:
+                logo_url = first_img.get('src') or first_img.get('data-src')
+                logger.debug("⚠️  Logo = première image du site (fallback)")
 
+        # Convertir en URL absolue
         if logo_url:
-            # URL absolue
             logo_url = urljoin(self.url, logo_url)
+            logger.info(f"✓ Logo URL: {logo_url[:80]}...")
             return logo_url
 
+        logger.warning("⚠️  Aucun logo trouvé")
         return None
 
     def _extract_title(self, soup):
-        """Extrait le titre principal"""
-        # H1
+        """Extrait le titre principal / nom d'entreprise - STRATÉGIES MULTIPLES"""
+        company_name = None
+
+        # STRATÉGIE 1: Open Graph site name
+        og_site_name = soup.find('meta', property='og:site_name')
+        if og_site_name and og_site_name.get('content'):
+            company_name = og_site_name.get('content')
+            logger.debug("✓ Nom trouvé via Open Graph site_name")
+            return company_name.strip()
+
+        # STRATÉGIE 2: Schema.org JSON-LD Organization name
+        try:
+            import json as json_lib
+            scripts = soup.find_all('script', type='application/ld+json')
+            for script in scripts:
+                try:
+                    data = json_lib.loads(script.string)
+                    if isinstance(data, dict):
+                        if data.get('@type') in ['Organization', 'LocalBusiness', 'Corporation']:
+                            if data.get('name'):
+                                company_name = data['name']
+                                logger.debug("✓ Nom trouvé via Schema.org JSON-LD")
+                                return company_name.strip()
+                except:
+                    pass
+        except:
+            pass
+
+        # STRATÉGIE 3: Copyright dans footer
+        footer = soup.find('footer')
+        if footer:
+            copyright_text = footer.find(text=re.compile(r'©.*202[0-9]'))
+            if copyright_text:
+                # Extraire le nom après ©
+                match = re.search(r'©\s*(?:202[0-9]\s+)?([^.|\n]+)', copyright_text)
+                if match:
+                    company_name = match.group(1).strip()
+                    logger.debug("✓ Nom trouvé via copyright footer")
+                    return company_name
+
+        # STRATÉGIE 4: H1
         h1 = soup.find('h1')
         if h1:
-            return h1.get_text(strip=True)
+            company_name = h1.get_text(strip=True)
+            logger.debug("✓ Nom trouvé via H1")
+            return company_name
 
-        # Title tag
+        # STRATÉGIE 5: Title tag (sans suffixes communs)
         title = soup.find('title')
         if title:
-            return title.get_text(strip=True)
+            title_text = title.get_text(strip=True)
+            # Enlever les suffixes communs comme " - Accueil", " | Home", etc.
+            company_name = re.split(r'\s*[-|–]\s*', title_text)[0]
+            logger.debug("✓ Nom trouvé via <title>")
+            return company_name.strip()
 
+        logger.warning("⚠️  Nom d'entreprise non trouvé - utilisation fallback")
         return "Site web"
 
     def _extract_description(self, soup):
@@ -275,11 +384,34 @@ class WebsiteScraper:
     def _extract_image_urls(self, soup):
         """Extrait les URLs des images (sans télécharger)"""
         image_urls = []
-        img_tags = soup.find_all('img', limit=10)
+        seen_urls = set()  # Éviter les doublons
+
+        # 1. IMAGES <img> avec lazy loading et srcset
+        img_tags = soup.find_all('img')
+        logger.debug(f"📸 Trouvé {len(img_tags)} balises <img>")
 
         for img in img_tags:
-            img_url = img.get('src') or img.get('data-src')
+            # Essayer plusieurs attributs pour lazy loading
+            img_url = (img.get('src') or
+                      img.get('data-src') or
+                      img.get('data-lazy') or
+                      img.get('data-original') or
+                      img.get('data-url'))
+
+            # Gérer srcset (prendre la plus grande image)
+            if not img_url and img.get('srcset'):
+                srcset = img.get('srcset')
+                # Format: "image1.jpg 300w, image2.jpg 600w"
+                parts = srcset.split(',')
+                if parts:
+                    # Prendre la dernière (généralement la plus grande)
+                    img_url = parts[-1].strip().split()[0]
+
             if not img_url:
+                continue
+
+            # Ignorer les placeholders et data URIs
+            if img_url.startswith('data:') or 'placeholder' in img_url.lower():
                 continue
 
             # Ignorer les petites images (icônes, etc.)
@@ -294,9 +426,37 @@ class WebsiteScraper:
 
             # URL absolue
             img_url = urljoin(self.url, img_url)
-            image_urls.append(img_url)
 
-        return image_urls[:5]  # Max 5 images
+            # Éviter doublons
+            if img_url not in seen_urls:
+                seen_urls.add(img_url)
+                image_urls.append(img_url)
+
+        # 2. IMAGES CSS BACKGROUND (inline styles)
+        logger.debug("🎨 Recherche d'images CSS background...")
+        elements_with_style = soup.find_all(attrs={'style': True})
+
+        for element in elements_with_style:
+            style = element.get('style', '')
+            # Regex pour background-image: url(...)
+            bg_urls = re.findall(r'background-image:\s*url\(["\']?([^"\'()]+)["\']?\)', style)
+
+            for bg_url in bg_urls:
+                # Ignorer data URIs
+                if bg_url.startswith('data:'):
+                    continue
+
+                # URL absolue
+                bg_url = urljoin(self.url, bg_url)
+
+                # Éviter doublons
+                if bg_url not in seen_urls:
+                    seen_urls.add(bg_url)
+                    image_urls.append(bg_url)
+
+        logger.info(f"✓ Extrait {len(image_urls)} images URLs (dont {len([u for u in image_urls if 'background' in str(u)])} CSS backgrounds)")
+
+        return image_urls  # PLUS DE LIMITE - retourner TOUTES les images
 
     def _extract_texts(self, soup):
         """Extrait les paragraphes de texte"""
@@ -425,11 +585,13 @@ class WebsiteScraper:
         return False
 
     def _parse_section(self, section_element, section_num):
-        """Parse une section complète"""
+        """Parse une section complète - AMÉLIORATION: inclut images et boutons"""
         section_data = {
             'type': 'section',
             'title': None,
-            'content': []
+            'content': [],
+            'images': [],      # NOUVEAU: images de cette section
+            'cta_buttons': []  # NOUVEAU: boutons CTA
         }
 
         # Chercher un titre pour la section
@@ -438,6 +600,43 @@ class WebsiteScraper:
             section_data['title'] = title_elem.get_text(strip=True)
         else:
             section_data['title'] = f'Section {section_num}'
+
+        # NOUVEAU: Extraire les images de cette section
+        section_images = section_element.find_all('img')
+        for img in section_images:
+            img_url = (img.get('src') or img.get('data-src') or
+                      img.get('data-lazy') or img.get('data-original'))
+            if img_url and not img_url.startswith('data:'):
+                img_url = urljoin(self.url, img_url)
+                section_data['images'].append({
+                    'url': img_url,
+                    'alt': img.get('alt', ''),
+                    'title': img.get('title', '')
+                })
+
+        # NOUVEAU: Extraire les images CSS background de cette section
+        elements_with_bg = section_element.find_all(attrs={'style': True})
+        for elem in elements_with_bg:
+            style = elem.get('style', '')
+            bg_urls = re.findall(r'background-image:\s*url\(["\']?([^"\'()]+)["\']?\)', style)
+            for bg_url in bg_urls:
+                if not bg_url.startswith('data:'):
+                    bg_url = urljoin(self.url, bg_url)
+                    section_data['images'].append({
+                        'url': bg_url,
+                        'alt': 'Background image',
+                        'title': ''
+                    })
+
+        # NOUVEAU: Extraire les boutons/CTA
+        buttons = section_element.find_all(['button', 'a'], class_=re.compile(r'btn|button|cta', re.I))
+        for btn in buttons[:3]:  # Max 3 boutons par section
+            btn_text = btn.get_text(strip=True)
+            if btn_text:
+                section_data['cta_buttons'].append({
+                    'text': btn_text,
+                    'href': btn.get('href', '#') if btn.name == 'a' else '#'
+                })
 
         # Parser tous les éléments de contenu
         for elem in section_element.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ul', 'ol', 'blockquote']):
